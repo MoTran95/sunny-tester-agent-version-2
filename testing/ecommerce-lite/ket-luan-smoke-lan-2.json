@@ -1,0 +1,41 @@
+{
+  "headline": "Nhận build: 4 case smoke đăng nhập Đạt và 1 case Đạt kèm ý phụ sai khi chạy bằng script ngày 2026-11-20, mỗi case có ảnh làm bằng chứng. Smoke chỉ bảo đảm đăng nhập dùng được.",
+  "passed": [
+    "Mở trang khi chưa đăng nhập: hiện form đăng nhập có ô email, ô mật khẩu và nút Sign in, không vào thẳng cửa hàng.",
+    "Mật khẩu sai (một lần): máy chủ trả 401, hiện \"Email or password is incorrect.\", vẫn ở form. Ý phụ sai: ô mật khẩu bị xóa sau lần sai (script thấy 0 ký tự), trong khi lượt chạy tay trước đó thấy còn 12 ký tự.",
+    "Đăng nhập đúng bằng tài khoản SHOPPER: vào cửa hàng, có lời chào WELCOME, SUNNY và các mục Shop, My orders, Profile, Bag.",
+    "Tải lại trang khi đã đăng nhập: không hiện form, vào lại cửa hàng; /api/me trả 200.",
+    "Đăng xuất: hiện \"You have been signed out.\", quay về form với ô email và mật khẩu trống, logout trả 200, /api/me trả 401."
+  ],
+  "not_tested": [
+    {
+      "cases": "Các hành trình ngoài đăng nhập: duyệt cửa hàng, giỏ và đặt hàng, xem đơn, hồ sơ, cổng quản trị",
+      "status": "Chưa có test case",
+      "reason": "Mới khám phá và viết test case cho tính năng Đăng nhập; các hành trình này chưa khám phá nên smoke không kiểm được."
+    },
+    {
+      "cases": "14 test case đăng nhập ngoài smoke (TC-003, 005, 006, 009 đến 019)",
+      "status": "Chưa chạy",
+      "reason": "Không thuộc smoke, để test sâu sau khi nhận build."
+    }
+  ],
+  "risks": [
+    {
+      "title": "Phạm vi smoke hẹp",
+      "detail": "Smoke Đạt chỉ cho biết người dùng đăng nhập, giữ phiên và đăng xuất được. Nếu mua hàng hoặc xem đơn hỏng thì lượt này không phát hiện; chưa kiểm."
+    },
+    {
+      "title": "Test case chưa được BA xác nhận",
+      "detail": "Test case đăng nhập dựa trên SRS nháp viết từ quan sát hệ thống, nên kết quả mong đợi là hành vi hiện tại, chưa phải yêu cầu chính thức. Đây là lượt chạy script đầu tiên; 4 trên 5 case khớp lượt chạy tay trước đó, riêng ô mật khẩu của TC-004 khác (xem rủi ro tiếp theo)."
+    },
+    {
+      "title": "Ảnh bằng chứng che khung tài khoản mẫu",
+      "detail": "Trang đăng nhập hiện mật khẩu mẫu, nên script làm mờ khung đó trước khi chụp. Video không quay cho case Đạt, bằng chứng của case Đạt là ảnh."
+    },
+    {
+      "title": "Ô mật khẩu sau lần đăng nhập sai: hai lần quan sát khác nhau",
+      "detail": "Lượt chạy tay thấy ô mật khẩu còn nguyên 12 ký tự sau khi báo sai; hai lần chạy script đều thấy ô trống (lần sau đo 0, 1, 2, 3 giây đều trống). Chưa rõ do cách nhập (gõ phím thật hay điền bằng script) hay hệ thống đổi hành vi. Đây chỉ là ý phụ của TC-004, không chặn build; cần người test kiểm lại bằng tay một lần."
+    }
+  ],
+  "suggestion": "Đề xuất nhận build để test sâu đăng nhập. Quyết định nhận hay trả build là của người test hoặc PO."
+}

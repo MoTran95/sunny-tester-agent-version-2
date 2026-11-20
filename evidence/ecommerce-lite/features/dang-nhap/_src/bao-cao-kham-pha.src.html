@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Báo cáo khám phá Đăng nhập</title>
+<title>Báo cáo khám phá — Đăng nhập (Ecommerce Lite)</title>
 <style id="giao-dien-chuan">/* build-embed.py chèn CSS + font chuẩn */</style>
 </head>
 <body>
 
 <header class="hero"><div class="wrapper">
   <h1>Báo cáo khám phá — Đăng nhập (Ecommerce Lite)</h1>
-  <p>Mô tả màn hình đăng nhập của cửa hàng Ecommerce Lite: vai trò, luồng đăng nhập và đăng xuất, thông báo nguyên văn, và những chỗ chưa rõ cần hỏi. Dành cho người mới chưa biết hệ thống.</p>
+  <p>Chức năng đăng nhập của Sunny Commerce, hệ thống bán hàng dùng để luyện kiểm thử. Báo cáo ghi lại điều đã thấy: màn hình, thông báo, luồng đăng nhập và đăng xuất, và những chỗ còn chưa rõ.</p>
   <div class="chips">
     <span class="chip">Cập nhật 2026-11-20</span>
-    <span class="chip">staging-ecommerce-lite.vercel.app · không thấy số phiên bản</span>
-    <span class="chip">1 tài khoản đã đăng nhập: SHOPPER</span>
-    <span class="chip">9 ảnh bằng chứng</span>
+    <span class="chip">staging-ecommerce-lite.vercel.app · chưa thấy số phiên bản</span>
+    <span class="chip">1 tài khoản đã đăng nhập: SHOPPER (Customer)</span>
+    <span class="chip">7 ảnh bằng chứng</span>
   </div>
 </div></header>
 
@@ -35,8 +35,8 @@
   <h2>Cách đọc báo cáo này</h2>
   <div class="grid2">
     <div class="card"><h4>Nguyên tắc</h4>
-      <p style="margin:0">Chỉ ghi điều <b>đã nhìn thấy trên màn hình</b> (nguồn: nhật ký khám phá <code>bao-cao.md</code> và các ảnh trong thư mục <code>screenshots/</code>). Điều chưa kiểm chứng đánh dấu <span class="t unk">❓ chưa xác nhận</span>. Không thêm giả định.</p>
-      <p class="small" style="margin:8px 0 0">Khung gạch đứt “Ví dụ so sánh” chỉ để minh họa cho người mới, không phải mô tả chính thức. Mật khẩu của tài khoản mẫu hiện trên trang gốc đã được che trong ảnh.</p></div>
+      <p style="margin:0">Chỉ ghi điều <b>đã nhìn thấy trên màn hình</b> (nguồn: nhật ký <code>bao-cao.md</code> và các ảnh trong thư mục <code>screenshots/</code>). Điều chưa kiểm chứng đánh dấu <span class="t unk">❓ chưa xác nhận</span>. Không thêm giả định.</p>
+      <p class="small" style="margin:8px 0 0">Khung gạch đứt “Ví dụ so sánh” chỉ để minh họa cho người mới, không phải mô tả chính thức. Mật khẩu mẫu hiện trên trang đã được che trong ảnh.</p></div>
     <div class="card"><h4>Ý nghĩa ký hiệu trên ảnh</h4>
       <ol class="lg" style="margin-top:0">
         <li data-n="1">Khung đỏ + số: nút/vùng được nói tới (số = thứ tự đọc).</li>
@@ -48,181 +48,215 @@
 
 <section id="tong-quan"><div class="wrapper">
   <h2><span class="num">1</span> Hệ thống là gì</h2>
-  <p class="lead">Ecommerce Lite (tên trên màn hình: “Sunny Commerce”) là một cửa hàng trực tuyến mô phỏng, dùng để luyện kiểm thử; chân trang ghi “training environment”. Báo cáo này chỉ nói về <b>đăng nhập và đăng xuất</b>: người dùng vào bằng email và mật khẩu, thấy cửa hàng, rồi thoát ra.</p>
-  <div class="note"><b>Ví dụ so sánh</b> <span class="small">(minh họa, không phải mô tả chính thức)</span><br>Giống quầy lễ tân ở cửa tòa nhà: khách đưa email và mật khẩu, nếu đúng thì được vào; ra về thì trả thẻ (đăng xuất).</div>
-  <h3>Đăng nhập / điểm vào</h3>
+  <p class="lead">Sunny Commerce là một cửa hàng trực tuyến mẫu, có cả cổng quản trị (Dashboard, Products, Orders…) lẫn cửa hàng cho khách (Sunny Store). Màn hình đầu tiên là <b>đăng nhập</b>; sau khi đăng nhập, tài khoản Customer vào cửa hàng.</p>
+  <div class="note"><b>Ví dụ so sánh</b> <span class="small">(minh họa, không phải mô tả chính thức)</span><br>Giống cổng vào của một cửa hàng thành viên: đưa đúng email và mật khẩu thì được vào quầy hàng; đưa sai thì bảo vệ báo “email hoặc mật khẩu chưa đúng” và không nói cái nào sai.</div>
 
+  <h3>Đăng nhập / điểm vào</h3>
   <div class="step wide" style="--c:var(--p1)">
     <div>
-      <h4><span class="sn">B0</span>Màn hình đăng nhập (đang hiện thông báo lỗi)</h4>
-      <p class="goal">Điểm vào duy nhất của hệ thống khi chưa đăng nhập; trang gốc luôn hiện form này.</p>
+      <h4><span class="sn">A1</span>Màn hình đăng nhập (chưa đăng nhập)</h4>
+      <p class="goal">Cho người dùng nhập email và mật khẩu để vào hệ thống, hoặc chuyển sang tạo tài khoản.</p>
       <ol class="lg">
-        <li data-n="1">Hai tab <b>Sign in</b> và <b>Create account</b> (Create account là đăng ký, ngoài phạm vi báo cáo này).</li>
-        <li data-n="2">Khung <b>Customer training login</b> với nút <b>Use customer</b>: tài khoản mẫu của môi trường thử (mật khẩu mẫu đã che trong ảnh).</li>
-        <li data-n="3">Ô <b>Email address</b>.</li>
-        <li data-n="4">Ô <b>Password</b> (có nút <b>Show</b>).</li>
-        <li data-n="5">Nút <b>Forgot password?</b>.</li>
-        <li data-n="6">Ô đánh dấu <b>Remember me on this device</b>.</li>
-        <li data-n="7">Nút <b>Sign in</b>.</li>
-        <li data-n="8">Khung lỗi đỏ: “Email or password is incorrect.” (cắt ở mép ảnh).</li>
+        <li data-n="1">Hai tab <b>Sign in</b> / <b>Create account</b>.</li>
+        <li data-n="2">Khung <b>Customer training login</b>: hiện sẵn email mẫu, mật khẩu mẫu và nút <b>Use customer</b> (bấm thì tự điền hai trường).</li>
+        <li data-n="3">Trường <b>Email address</b>.</li>
+        <li data-n="4">Trường <b>Password</b>, nút <b>Show</b> (hiện/ẩn) và liên kết <b>Forgot password?</b>.</li>
+        <li data-n="5">Ô đánh dấu <b>Remember me on this device</b>.</li>
+        <li data-n="6">Nút <b>Sign in</b>.</li>
       </ol>
-      <div class="res"><b>Kết quả đã thấy:</b> sau khi đăng nhập sai, email còn nguyên trong ô, ô mật khẩu bị xóa trống, trang không đổi.</div>
-      <p class="src">Ảnh 01 · nhật ký khám phá, hàng 1 và 7</p>
+      <div class="res"><b>Kết quả đã thấy:</b> khi mở trang, hệ thống gọi <code>GET /api/me</code> và nhận 401 (chưa có phiên) nên hiện form này.</div>
+      <p class="src">Ảnh 01 · nhật ký hàng 1</p>
     </div>
     <div class="figs">
-      <figure class="shot" style="--W:1024;--H:768"><div class="wrap">
-        <img src="screenshots/01-sai-mat-khau.png" alt="Màn hình đăng nhập sau khi nhập sai mật khẩu">
-        <i class="mk" data-n="1" style="--x:598;--y:45;--w:380;--h:46"></i>
-        <i class="mk" data-n="2" style="--x:598;--y:318;--w:380;--h:68"></i>
-        <i class="mk" data-n="3" style="--x:598;--y:437;--w:380;--h:50"></i>
-        <i class="mk" data-n="4" style="--x:598;--y:551;--w:380;--h:48"></i>
-        <i class="mk" data-n="5" style="--x:864;--y:528;--w:116;--h:20"></i>
-        <i class="mk" data-n="6" style="--x:598;--y:638;--w:210;--h:22"></i>
-        <i class="mk" data-n="7" style="--x:598;--y:678;--w:380;--h:45"></i>
-        <i class="mk" data-n="8" style="--x:598;--y:737;--w:380;--h:31"></i>
-      </div><figcaption>Ảnh 01 · form đăng nhập sau khi nhập sai mật khẩu</figcaption></figure>
+      <figure class="shot" style="--W:800;--H:500"><div class="wrap">
+        <img src="screenshots/01-man-hinh-dang-nhap.jpg" alt="Màn hình đăng nhập">
+        <i class="mk" data-n="1" style="--x:481;--y:60;--w:272;--h:25"></i>
+        <i class="mk" data-n="2" style="--x:479;--y:190;--w:275;--h:42"></i>
+        <i class="mk" data-n="3" style="--x:479;--y:264;--w:275;--h:31"></i>
+        <i class="mk" data-n="4" style="--x:479;--y:319;--w:275;--h:47"></i>
+        <i class="mk" data-n="5" style="--x:479;--y:388;--w:130;--h:14"></i>
+        <i class="mk" data-n="6" style="--x:479;--y:415;--w:275;--h:27"></i>
+      </div><figcaption>Ảnh 01 · Màn hình đăng nhập</figcaption></figure>
     </div>
   </div>
 
   <h3>Bảng thuật ngữ — các thuật ngữ xuất hiện trên màn hình</h3>
   <div class="tblwrap"><table>
     <tr><th>Thuật ngữ</th><th>Trên màn hình nghĩa là</th><th>Ví dụ thật đã thấy</th></tr>
-    <tr><td><b>Sign in</b></td><td>Đăng nhập: nút gửi email và mật khẩu.</td><td>Ảnh 01</td></tr>
-    <tr><td><b>Sign out</b></td><td>Đăng xuất: biểu tượng mũi tên ở góc phải thanh trên sau khi đăng nhập.</td><td>Ảnh 05</td></tr>
-    <tr><td><b>Customer</b></td><td>Vai trò của tài khoản mẫu (khách hàng); trả về từ hệ thống khi đăng nhập đúng.</td><td>Tên hiển thị “Sunny Shopper”</td></tr>
-    <tr><td><b>Phiên</b></td><td>Khoảng thời gian người dùng còn đăng nhập; trình duyệt giữ bằng cookie <code>sunny_session</code>.</td><td>Tải lại trang vẫn đăng nhập (ảnh 06)</td></tr>
-    <tr><td><b>Remember me on this device</b></td><td>Ô đánh dấu trên form. ❓ Chưa rõ tác dụng: bật hay không bật, cookie phiên đều giống nhau.</td><td>Ảnh 01</td></tr>
-    <tr><td><b>Thông báo tạm (toast)</b></td><td>Hộp thông báo hiện vài giây ở góc dưới phải rồi tự biến mất.</td><td>“Welcome back, Sunny!” (ảnh 05)</td></tr>
+    <tr><td><b>Customer</b></td><td>Vai trò khách mua hàng; vào <b>Sunny Store</b>, không vào được cổng quản trị.</td><td>API trả <code>role: "Customer"</code> cho SHOPPER</td></tr>
+    <tr><td><b>Sunny Store</b></td><td>Cửa hàng cho khách: Shop, My orders, Profile, Bag (giỏ hàng).</td><td>Ảnh 06</td></tr>
+    <tr><td><b>Operations portal</b></td><td>Cổng quản trị (Dashboard, Products, Orders, Customers). Customer bị từ chối ❓ vai nào vào được chưa xác nhận (chưa có tài khoản).</td><td>API 403 “Operations portal access is required.”</td></tr>
+    <tr><td><b>Remember me on this device</b></td><td>Ô đánh dấu ghi nhớ thiết bị ❓ chưa thấy tác dụng.</td><td>Mã giao diện không dùng ô này</td></tr>
+    <tr><td><b>Training environment</b></td><td>Môi trường luyện tập: dữ liệu mẫu, có thể reset.</td><td>Chân trang “Sunny Commerce · Training environment”</td></tr>
   </table></div>
 
-  <h3>Phân tích màn hình chính sau khi đăng nhập</h3>
+  <h3>Phân tích màn hình sau khi đăng nhập (Customer)</h3>
   <div class="step wide" style="--c:var(--p1)">
     <div>
-      <h4><span class="sn">B1</span>Cửa hàng sau khi đăng nhập</h4>
-      <p class="goal">Trang người dùng thấy ngay sau khi đăng nhập thành công.</p>
+      <h4><span class="sn">A2</span>Cửa hàng sau khi đăng nhập</h4>
+      <p class="goal">Cho thấy tài khoản Customer đã vào được cửa hàng.</p>
       <ol class="lg">
-        <li data-n="1">Thanh điều hướng: <b>Shop</b>, <b>My orders</b>, <b>Profile</b>.</li>
-        <li data-n="2">Nút giỏ hàng <b>Bag</b> (số 0).</li>
-        <li data-n="3">Ảnh đại diện <b>SS</b> (viết tắt của tên người dùng).</li>
-        <li data-n="4">Nút <b>Sign out</b> (biểu tượng mũi tên).</li>
-        <li data-n="5">Thông báo tạm <b>Welcome back, Sunny!</b>.</li>
+        <li data-n="1">Thanh điều hướng cửa hàng: <b>Shop</b>, <b>My orders</b>, <b>Profile</b>.</li>
+        <li data-n="2">Giỏ hàng <b>Bag</b>, ảnh đại diện và nút đăng xuất.</li>
+        <li data-n="3">Lời chào <b>WELCOME, SUNNY</b>.</li>
       </ol>
-      <div class="res"><b>Kết quả đã thấy:</b> lời chào “WELCOME, SUNNY” trên banner và danh sách 5 sản phẩm.</div>
-      <p class="src">Ảnh 05 · nhật ký khám phá, hàng 12</p>
+      <div class="res"><b>Kết quả đã thấy:</b> sau <code>POST /api/auth/login</code> → 200, hệ thống gọi <code>/api/store/products</code> và <code>/api/store/cart</code> (đều 200).</div>
+      <p class="src">Ảnh 06 · nhật ký hàng 6</p>
     </div>
     <div class="figs">
-      <figure class="shot" style="--W:1024;--H:768"><div class="wrap">
-        <img src="screenshots/05-dang-nhap-dung.png" alt="Cửa hàng sau khi đăng nhập đúng">
-        <i class="mk" data-n="1" style="--x:400;--y:26;--w:226;--h:48"></i>
-        <i class="mk" data-n="2" style="--x:803;--y:18;--w:80;--h:40"></i>
-        <i class="mk" data-n="3" style="--x:891;--y:20;--w:38;--h:38"></i>
-        <i class="mk" data-n="4" style="--x:940;--y:24;--w:30;--h:30"></i>
-        <i class="mk" data-n="5" style="--x:712;--y:703;--w:262;--h:44"></i>
-      </div><figcaption>Ảnh 05 · cửa hàng sau khi đăng nhập đúng</figcaption></figure>
+      <figure class="shot" style="--W:480;--H:300"><div class="wrap">
+        <img src="screenshots/06-sau-dang-nhap-cua-hang.jpg" alt="Cửa hàng sau đăng nhập">
+        <i class="mk" data-n="1" style="--x:195;--y:6;--w:90;--h:16"></i>
+        <i class="mk" data-n="2" style="--x:385;--y:5;--w:70;--h:18"></i>
+        <i class="mk" data-n="3" style="--x:36;--y:30;--w:70;--h:10"></i>
+      </div><figcaption>Ảnh 06 · Cửa hàng sau đăng nhập</figcaption></figure>
     </div>
   </div>
 </div></section>
 
 <section id="ban-do"><div class="wrapper">
   <h2><span class="num">2</span> Sơ đồ tổng quan và kết nối hệ thống</h2>
-  <p class="lead">Ai nói chuyện với ai, theo thứ tự nào; số 1 → 4 là thứ tự các bước. Trong luồng đăng nhập đã thấy, hệ thống không gọi dịch vụ bên ngoài nào.</p>
+  <p class="lead">Chỉ có một vai trò đã thấy (SHOPPER) và hệ thống; không thấy hệ thống bên thứ ba trong chức năng đăng nhập.</p>
   <div class="diag" data-so-do="so-do/tong-quan.json"></div>
   <h3>Giải thích từng số</h3>
   <ol class="steplist">
-    <li data-n="1" style="--c:var(--p1)"><span class="tag p1">SHOPPER</span> mở trang gốc; trình duyệt tự kiểm phiên, chưa đăng nhập nên nhận 401 và hiện form. <span class="small">Ảnh 07</span></li>
-    <li data-n="2" style="--c:var(--p1)"><span class="tag p1">SHOPPER</span> nhập email, mật khẩu và bấm <b>Sign in</b> (hoặc nhấn Enter). <span class="small">Ảnh 01, 04</span></li>
-    <li data-n="3" style="--c:var(--p1)">Hệ thống trả kết quả: đúng thì vào cửa hàng kèm “Welcome back, Sunny!”; sai thì “Email or password is incorrect.” và ở lại form. <span class="small">Ảnh 01, 05</span></li>
-    <li data-n="4" style="--c:var(--p1)"><span class="tag p1">SHOPPER</span> bấm <b>Sign out</b>; hiện “You have been signed out.” và về form đăng nhập. <span class="small">Ảnh 07</span></li>
+    <li data-n="1" style="--c:var(--p1)"><span class="tag p1">SHOPPER</span> Mở trang chủ; hệ thống kiểm phiên (401) rồi hiện form. Có thể bấm <b>Use customer</b> để tự điền. <span class="small">Ảnh 01</span></li>
+    <li data-n="2" style="--c:var(--p1)"><span class="tag p1">SHOPPER</span> Bấm <b>Sign in</b>; nút đổi thành “Signing in…” vài giây. <span class="small">nhật ký hàng 6</span></li>
+    <li data-n="3" style="--c:#334"><span class="tag sys">Hệ thống</span> Đúng thì vào cửa hàng (Ảnh 06); sai thì hiện “Email or password is incorrect.” (Ảnh 05).</li>
+    <li data-n="4" style="--c:var(--p1)"><span class="tag p1">SHOPPER</span> Bấm <b>Sign out</b>: thông báo “You have been signed out.” và về form trống.</li>
   </ol>
 </div></section>
 
 <section id="vai-tro"><div class="wrapper">
   <h2><span class="num">3</span> Các vai trò tài khoản</h2>
-  <p class="lead">Mới đăng nhập được một tài khoản: <b>SHOPPER</b>, vai trò hiển thị “Customer”. Chưa có tài khoản vai trò khác nên chưa so sánh được quyền.</p>
+  <p class="lead">Chỉ có một tài khoản (SHOPPER, Customer). Vai quản trị chưa có tài khoản nên chưa khám phá.</p>
   <div class="tblwrap"><table>
     <tr><th>Chức năng</th><th class="c"><span class="tag p1">SHOPPER</span></th></tr>
-    <tr><td>Đăng nhập bằng email và mật khẩu</td><td class="c">✅</td></tr>
-    <tr><td>Đăng xuất</td><td class="c">✅</td></tr>
-    <tr><td>Vai trò khác (ví dụ quản trị)</td><td class="c">❓ chưa có tài khoản</td></tr>
+    <tr><td>Đăng nhập vào cửa hàng</td><td class="c">✅</td></tr>
+    <tr><td>Xem trang Profile</td><td class="c">✅</td></tr>
+    <tr><td>Vào cổng quản trị (Dashboard, Products…)</td><td class="c">❌ (API 403; địa chỉ quản trị đưa về trang chủ cửa hàng)</td></tr>
   </table></div>
 
   <article class="role p1" style="--c:var(--p1)">
-    <header><h3>SHOPPER — Customer</h3><div class="one">Khách hàng: đăng nhập vào cửa hàng, xem sản phẩm, rồi đăng xuất.</div></header>
+    <header><h3>SHOPPER — Customer</h3><div class="one">Khách mua hàng, đăng nhập vào Sunny Store.</div></header>
     <div class="body">
-      <div class="analogy"><b>Ví dụ so sánh</b> <span class="small">(minh họa, không phải mô tả chính thức)</span>: người khách vào cửa hàng bằng thẻ thành viên.</div>
+      <div class="analogy"><b>Ví dụ so sánh</b> <span class="small">(minh họa, không phải mô tả chính thức)</span>: khách có thẻ thành viên, vào được quầy hàng nhưng không vào được văn phòng quản lý.</div>
       <div class="can">
         <div class="yes"><h4>Làm được (đã thấy)</h4><ul>
-          <li>Đăng nhập bằng email và mật khẩu; email viết hoa hoặc có dấu cách đầu cuối vẫn vào được.</li>
-          <li>Thấy menu Shop, My orders, Profile và giỏ hàng.</li>
+          <li>Đăng nhập bằng email và mật khẩu; email viết hoa vẫn đăng nhập được.</li>
+          <li>Tải lại trang vẫn còn phiên.</li>
           <li>Đăng xuất bằng nút Sign out.</li>
-        </ul></div>
+          <li>Tự điền tài khoản mẫu bằng nút Use customer; hiện/ẩn mật khẩu bằng Show/Hide.</li>
+          <li>Bấm Sign in nhiều lần liên tiếp: chỉ gửi 1 yêu cầu.</li></ul></div>
         <div class="no"><h4>Không làm được (đã thấy)</h4><ul>
-          <li>Vào trang bên trong khi chưa đăng nhập: mở thẳng <code>/#profile</code> chỉ hiện form đăng nhập (ảnh 08).</li>
-          <li>Đăng nhập khi sai email hoặc sai mật khẩu, kể cả sai hoa, thường (ảnh 01–03).</li>
-        </ul></div>
+          <li>Vào API quản trị: <code>/api/dashboard</code>, <code>/api/products</code>, <code>/api/orders</code> đều 403.</li>
+          <li>Xem trang quản trị: <code>#dashboard</code>, <code>#products</code>, <code>#api-lab</code> chỉ hiện trang chủ cửa hàng.</li></ul></div>
       </div>
       <h3 style="margin-top:20px">Các thao tác của SHOPPER theo từng bước</h3>
 
       <div class="step wide" style="--c:var(--p1)">
         <div>
-          <h4><span class="sn">B1</span>Đăng nhập sai</h4>
-          <p class="goal">Biết điều gì xảy ra khi thông tin không đúng.</p>
+          <h4><span class="sn">B1</span>Bỏ trống hai trường rồi bấm Sign in</h4>
+          <p class="goal">Xem hệ thống báo gì khi chưa nhập gì.</p>
           <ol class="lg">
-            <li data-n="1">Ô <b>Email address</b> vẫn giữ email đã nhập.</li>
-            <li data-n="2">Ô <b>Password</b> bị xóa trống.</li>
-            <li data-n="3">Khung lỗi: “Email or password is incorrect.”</li>
+            <li data-n="1">Thông báo dưới <b>Email address</b>.</li>
+            <li data-n="2">Thông báo dưới <b>Password</b>.</li>
           </ol>
-          <div class="res"><b>Kết quả đã thấy:</b> ba tình huống sai (mật khẩu sai, email không tồn tại, mật khẩu đúng nhưng đổi hoa/thường một chữ) cho cùng một câu lỗi, mã 401 <code>INVALID_CREDENTIALS</code>. Hệ thống không cho biết email sai hay mật khẩu sai.</div>
-          <p class="src">Ảnh 01, 02, 03 · nhật ký khám phá, hàng 7–9</p>
+          <div class="res"><b>Kết quả đã thấy:</b> “Enter your email address.” và “Enter your password.”, hai trường viền đỏ. Không có yêu cầu <code>POST /api/auth/login</code> nào được gửi.</div>
+          <p class="src">Ảnh 02 · nhật ký hàng 2</p>
         </div>
         <div class="figs">
-          <figure class="shot" style="--W:1024;--H:768"><div class="wrap">
-            <img src="screenshots/02-email-khong-ton-tai.png" alt="Đăng nhập với email không tồn tại">
-            <i class="mk" data-n="1" style="--x:598;--y:437;--w:380;--h:50"></i>
-            <i class="mk" data-n="2" style="--x:598;--y:551;--w:380;--h:48"></i>
-            <i class="mk" data-n="3" style="--x:598;--y:737;--w:380;--h:31"></i>
-          </div><figcaption>Ảnh 02 · email không tồn tại (cùng câu lỗi với mật khẩu sai)</figcaption></figure>
+          <figure class="shot" style="--W:800;--H:500"><div class="wrap">
+            <img src="screenshots/02-bo-trong-hai-o.jpg" alt="Bỏ trống hai trường">
+            <i class="mk" data-n="1" style="--x:479;--y:296;--w:130;--h:13"></i>
+            <i class="mk" data-n="2" style="--x:479;--y:367;--w:100;--h:13"></i>
+          </div><figcaption>Ảnh 02 · Báo lỗi trên trang</figcaption></figure>
         </div>
       </div>
 
       <div class="step wide" style="--c:var(--p1)">
         <div>
-          <h4><span class="sn">B2</span>Đăng nhập đúng</h4>
-          <p class="goal">Vào cửa hàng bằng tài khoản khách.</p>
+          <h4><span class="sn">B2</span>Nhập “abc” vào email, bỏ trống mật khẩu</h4>
+          <p class="goal">Xem hệ thống có kiểm định dạng email không.</p>
           <ol class="lg">
-            <li data-n="1">Thanh điều hướng: <b>Shop</b>, <b>My orders</b>, <b>Profile</b>.</li>
-            <li data-n="2">Nút <b>Sign out</b>.</li>
-            <li data-n="3">Thông báo tạm <b>Welcome back, Sunny!</b>.</li>
+            <li data-n="1">Trường email đang chứa <b>abc</b>.</li>
+            <li data-n="2">Thông báo dưới <b>Password</b>.</li>
+            <li class="neg" data-n="3"><b>Không có</b> thông báo lỗi định dạng ở trường email.</li>
           </ol>
-          <div class="res"><b>Kết quả đã thấy:</b> mã 200; hệ thống trả tên “Sunny Shopper”, vai trò “Customer”. Cookie <code>sunny_session</code> có <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite=Lax</code>; không lưu gì trong <code>localStorage</code> hay <code>sessionStorage</code>. Tải lại trang vẫn đăng nhập (ảnh 06).</div>
-          <p class="src">Ảnh 05, 06 · nhật ký khám phá, hàng 10–13</p>
+          <div class="res"><b>Kết quả đã thấy:</b> chỉ có “Enter your password.”. Không gửi yêu cầu đăng nhập. ❓ Chưa kiểm xem máy chủ trả gì với email sai định dạng kèm mật khẩu.</div>
+          <p class="src">Ảnh 03 · nhật ký hàng 3</p>
         </div>
         <div class="figs">
-          <figure class="shot" style="--W:1024;--H:768"><div class="wrap">
-            <img src="screenshots/06-sau-tai-lai.png" alt="Cửa hàng sau khi tải lại trang">
-            <i class="mk" data-n="1" style="--x:400;--y:26;--w:226;--h:48"></i>
-            <i class="mk" data-n="2" style="--x:940;--y:24;--w:30;--h:30"></i>
-          </div><figcaption>Ảnh 06 · sau khi tải lại, vẫn đăng nhập</figcaption></figure>
+          <figure class="shot" style="--W:480;--H:300"><div class="wrap">
+            <img src="screenshots/03-email-abc-bo-trong-mat-khau.jpg" alt="Email abc, mật khẩu trống">
+            <i class="mk" data-n="1" style="--x:288;--y:158;--w:166;--h:20"></i>
+            <i class="mk" data-n="2" style="--x:288;--y:221;--w:70;--h:10"></i>
+            <i class="mk neg" data-n="3" style="--x:288;--y:179;--w:166;--h:12"></i>
+          </div><figcaption>Ảnh 03 · Chỉ báo thiếu mật khẩu</figcaption></figure>
         </div>
       </div>
 
       <div class="step wide" style="--c:var(--p1)">
         <div>
-          <h4><span class="sn">B3</span>Đăng xuất</h4>
-          <p class="goal">Kết thúc phiên đăng nhập.</p>
+          <h4><span class="sn">B3</span>Email không tồn tại, mật khẩu mẫu</h4>
+          <p class="goal">Xem thông báo khi đăng nhập không đúng.</p>
           <ol class="lg">
-            <li data-n="1">Tab <b>Sign in</b> hiện lại: về form đăng nhập.</li>
-            <li data-n="2">Thông báo tạm <b>You have been signed out.</b>.</li>
+            <li data-n="1">Email đã nhập: <b>khongtontai@sunny.test</b>.</li>
+            <li data-n="2">Mật khẩu giữ nguyên (không bị xóa).</li>
+            <li data-n="3">Khung đỏ dưới nút <b>Sign in</b>.</li>
           </ol>
-          <div class="res"><b>Kết quả đã thấy:</b> mã 200 khi bấm Sign out; sau đó kiểm phiên trả 401. Một tab khác trong cùng trình duyệt cũng mất phiên: kiểm phiên trả 401, tải lại thì hiện form.</div>
-          <p class="src">Ảnh 07 · nhật ký khám phá, hàng 16–17</p>
+          <div class="res"><b>Kết quả đã thấy:</b> <code>POST /api/auth/login</code> → 401; thông báo “Email or password is incorrect.”; vẫn ở màn hình đăng nhập.</div>
+          <p class="src">Ảnh 05 · nhật ký hàng 12</p>
         </div>
         <div class="figs">
-          <figure class="shot" style="--W:1024;--H:768"><div class="wrap">
-            <img src="screenshots/07-sau-dang-xuat.png" alt="Form đăng nhập sau khi đăng xuất">
-            <i class="mk" data-n="1" style="--x:598;--y:45;--w:380;--h:46"></i>
-            <i class="mk" data-n="2" style="--x:712;--y:703;--w:262;--h:44"></i>
-          </div><figcaption>Ảnh 07 · sau khi bấm Sign out</figcaption></figure>
+          <figure class="shot" style="--W:480;--H:300"><div class="wrap">
+            <img src="screenshots/05-email-khong-ton-tai.jpg" alt="Báo lỗi email hoặc mật khẩu sai">
+            <i class="mk" data-n="1" style="--x:288;--y:145;--w:166;--h:20"></i>
+            <i class="mk" data-n="2" style="--x:288;--y:190;--w:166;--h:20"></i>
+            <i class="mk" data-n="3" style="--x:288;--y:257;--w:166;--h:18"></i>
+          </div><figcaption>Ảnh 05 · Thông báo đăng nhập sai</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="step wide" style="--c:var(--p1)">
+        <div>
+          <h4><span class="sn">B4</span>Bấm “Forgot password?”</h4>
+          <p class="goal">Xem chức năng quên mật khẩu.</p>
+          <ol class="lg">
+            <li data-n="1">Liên kết <b>Forgot password?</b>.</li>
+            <li data-n="2">Thông báo nhỏ góc dưới phải.</li>
+          </ol>
+          <div class="res"><b>Kết quả đã thấy:</b> “Password recovery is disabled in the training environment.” Không chuyển trang.</div>
+          <p class="src">Ảnh 04 · nhật ký hàng 4</p>
+        </div>
+        <div class="figs">
+          <figure class="shot" style="--W:800;--H:500"><div class="wrap">
+            <img src="screenshots/04-quen-mat-khau.jpg" alt="Quên mật khẩu bị tắt">
+            <i class="mk" data-n="1" style="--x:682;--y:320;--w:73;--h:14"></i>
+            <i class="mk" data-n="2" style="--x:558;--y:458;--w:238;--h:29"></i>
+          </div><figcaption>Ảnh 04 · Quên mật khẩu bị tắt</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="step wide" style="--c:var(--p1)">
+        <div>
+          <h4><span class="sn">B5</span>Email đúng, mật khẩu sai</h4>
+          <p class="goal">Xem thông báo khi sai mật khẩu và có cắt khoảng trắng không (mình gõ theo nhờ vả của bạn).</p>
+          <ol class="lg">
+            <li data-n="1">Email <b>shopper@sunny.test</b> (đúng).</li>
+            <li data-n="2">Mật khẩu sai (14 ký tự, mình đặt) vẫn còn trong trường.</li>
+            <li data-n="3">Khung đỏ dưới nút <b>Sign in</b>.</li>
+          </ol>
+          <div class="res"><b>Kết quả đã thấy:</b> <code>POST /api/auth/login</code> → 401, “Email or password is incorrect.” — <b>giống hệt</b> thông báo khi email không tồn tại (không cho biết email có tồn tại). Mật khẩu mẫu thêm một khoảng trắng ở cuối cũng bị 401 (không bị cắt khoảng trắng, không ảnh). Sau 3 lần sai, đăng nhập đúng vẫn vào được.</div>
+          <p class="src">Ảnh 07 · nhật ký hàng 17–19</p>
+        </div>
+        <div class="figs">
+          <figure class="shot" style="--W:800;--H:600"><div class="wrap">
+            <img src="screenshots/07-sai-mat-khau.jpg" alt="Sai mật khẩu">
+            <i class="mk" data-n="1" style="--x:598;--y:303;--w:202;--h:38"></i>
+            <i class="mk" data-n="2" style="--x:598;--y:391;--w:202;--h:38"></i>
+            <i class="mk" data-n="3" style="--x:598;--y:535;--w:202;--h:36"></i>
+          </div><figcaption>Ảnh 07 · Sai mật khẩu (khung bị cắt bên phải)</figcaption></figure>
         </div>
       </div>
     </div>
@@ -231,135 +265,129 @@
 
 <section id="e2e"><div class="wrapper">
   <h2><span class="num">4</span> Các luồng end-to-end (E2E)</h2>
-  <p class="lead">Chỉ ghi luồng <b>đã chạy thật</b>. Màu: <span class="tag p1">SHOPPER</span> <span class="tag sys">hệ thống chính</span>.</p>
+  <p class="lead">Chỉ ghi luồng <b>đã chạy thật</b>. Màu: <span class="tag p1">SHOPPER</span> <span class="tag sys">Trang web</span> <span class="tag ext">API hệ thống</span>.</p>
   <h3>4.1 Sơ đồ tuần tự luồng chính</h3>
   <p class="small">Đọc từ trên xuống; số trong vòng tròn là thứ tự. Nét liền = yêu cầu, nét đứt = kết quả trả về.</p>
   <div class="diag" data-so-do="so-do/tuan-tu.json"></div>
-  <h3>4.2 Vòng đời phiên đăng nhập</h3>
+  <h3>4.2 Vòng đời trạng thái</h3>
   <div class="diag" data-so-do="so-do/trang-thai.json"></div>
   <ol class="steplist">
-    <li data-n="1" style="--c:#334"><span class="tag p1">SHOPPER</span> đăng nhập đúng thì từ “Chưa đăng nhập” sang “Đã đăng nhập”. <span class="small">Ảnh 05</span></li>
-    <li data-n="2" style="--c:#334"><span class="tag p1">SHOPPER</span> bấm Sign out thì về “Chưa đăng nhập”. <span class="small">Ảnh 07</span></li>
-    <li data-n="3" style="--c:#334">❓ Đăng nhập sai nhiều lần có bị chặn tạm không: chưa thấy (mới thử 3 lần), chưa xác nhận. Xem M-01.</li>
+    <li data-n="1" style="--c:#334"><span class="tag p1">SHOPPER</span> Bấm Sign in khi cả hai trường đã có chữ; nút đổi thành “Signing in…”.</li>
+    <li data-n="2" style="--c:#334"><span class="tag ext">API</span> Trả 200: vào cửa hàng.</li>
+    <li data-n="3" style="--c:#334"><span class="tag ext">API</span> Trả 401: hiện “Email or password is incorrect.” và ở lại form.</li>
+    <li data-n="4" style="--c:#334"><span class="tag p1">SHOPPER</span> Bấm Sign out: về form trống.</li>
   </ol>
   <h3>4.3 Các luồng cụ thể</h3>
   <div class="path">
-    <h4>Luồng A · Đăng nhập đúng — luồng chính (happy path)</h4>
+    <h4>Luồng A · Đăng nhập thành công, tải lại, đăng xuất — luồng chính (happy path)</h4>
     <ol class="flow">
-      <li style="--c:var(--p1)"><span class="n">1</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Mở trang gốc khi chưa đăng nhập → hiện form đăng nhập. <a class="ev" data-img="07">ảnh 07</a></span></li>
-      <li style="--c:var(--p1)"><span class="n">2</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Nhập email và mật khẩu đúng, bấm <b>Sign in</b> → mã 200, “Welcome back, Sunny!”, thấy cửa hàng. <a class="ev" data-img="05">ảnh 05</a></span></li>
-      <li style="--c:var(--p1)"><span class="n">3</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Biến thể: email viết hoa hết, nhấn Enter trong ô mật khẩu → vẫn đăng nhập được. <a class="ev" data-img="04">ảnh 04</a></span></li>
-      <li style="--c:var(--p1)"><span class="n">4</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Biến thể: email có dấu cách đầu và cuối → vẫn đăng nhập được (không có ảnh, ghi nhận trong báo cáo).</span></li>
+      <li style="--c:var(--p1)"><span class="n">1</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Bấm <b>Use customer</b> rồi <b>Sign in</b> → vài giây sau vào cửa hàng (<code>POST /api/auth/login</code> 200). <a class="ev" data-img="06">ảnh 06</a></span></li>
+      <li style="--c:var(--p1)"><span class="n">2</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Tải lại trang → vẫn đăng nhập, hiện “Loading your store…” rồi vào cửa hàng (không ảnh, nhật ký hàng 8).</span></li>
+      <li style="--c:var(--p1)"><span class="n">3</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Bấm <b>Sign out</b> → “You have been signed out.”, form trống, <code>GET /api/me</code> 401 (không ảnh, nhật ký hàng 11).</span></li>
     </ol>
   </div>
   <div class="path">
-    <h4>Luồng B · Đăng nhập sai</h4>
+    <h4>Luồng B · Email viết hoa vẫn đăng nhập được</h4>
     <ol class="flow">
-      <li style="--c:var(--p1)"><span class="n">1</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Email đúng + mật khẩu sai → “Email or password is incorrect.”, mã 401. <a class="ev" data-img="01">ảnh 01</a></span></li>
-      <li style="--c:var(--p1)"><span class="n">2</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Email không tồn tại + mật khẩu bất kỳ → cùng câu lỗi. <a class="ev" data-img="02">ảnh 02</a></span></li>
-      <li style="--c:var(--p1)"><span class="n">3</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Mật khẩu đúng nhưng đổi hoa/thường một chữ → cùng câu lỗi. <a class="ev" data-img="03">ảnh 03</a></span></li>
+      <li style="--c:var(--p1)"><span class="n">1</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Điền mật khẩu mẫu bằng <b>Use customer</b>, đổi email thành <code>SHOPPER@SUNNY.TEST</code>, nhấn Enter → <code>POST /api/auth/login</code> 200, vào cửa hàng (không ảnh, nhật ký hàng 13).</span></li>
     </ol>
   </div>
   <div class="path">
-    <h4>Luồng C · Phiên và đăng xuất</h4>
+    <h4>Luồng C · Hai tab và phiên</h4>
     <ol class="flow">
-      <li style="--c:var(--p1)"><span class="n">1</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Tải lại trang sau khi đăng nhập → vẫn đăng nhập. <a class="ev" data-img="06">ảnh 06</a></span></li>
-      <li style="--c:var(--p1)"><span class="n">2</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Mở tab thứ hai → cũng đã đăng nhập (không có ảnh, ghi nhận trong báo cáo).</span></li>
-      <li style="--c:var(--p1)"><span class="n">3</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Bấm <b>Sign out</b> ở tab 1 → “You have been signed out.”, về form. <a class="ev" data-img="07">ảnh 07</a></span></li>
-      <li style="--c:var(--p1)"><span class="n">4</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Tab 2 sau đó: kiểm phiên trả 401, tải lại thì hiện form (không có ảnh, ghi nhận trong báo cáo).</span></li>
+      <li style="--c:var(--p1)"><span class="n">1</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Đăng xuất ở tab 2; tab 1 vẫn hiện cửa hàng cho tới khi chuyển trang (<code>#my-orders</code>), lúc đó hiện form đăng nhập và <code>/api/me</code> trả 401 (nhật ký hàng 15).</span></li>
+      <li style="--c:var(--p1)"><span class="n">2</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Sau đăng xuất, bấm Back về <code>#profile</code> nhưng vẫn là form đăng nhập; mở <code>#profile</code>, <code>#my-orders</code>, <code>#dashboard</code> đều ra form đăng nhập (nhật ký hàng 14).</span></li>
     </ol>
   </div>
   <div class="path">
-    <h4>Luồng D · Các ràng buộc chặn thao tác (không đi tiếp được)</h4>
+    <h4>Luồng C2 · Bấm Sign in nhiều lần liên tiếp</h4>
+    <ol class="flow">
+      <li style="--c:var(--p1)"><span class="n">1</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Bấm Sign in 3 lần rất nhanh với thông tin đúng → chỉ 1 yêu cầu <code>POST /api/auth/login</code> được gửi (nút bị vô hiệu hóa sau lần đầu), đăng nhập thành công (không ảnh, nhật ký hàng 20).</span></li>
+    </ol>
+  </div>
+  <div class="path">
+    <h4>Luồng C3 · Nút phụ và địa chỉ trực tiếp</h4>
+    <ol class="flow">
+      <li style="--c:var(--p1)"><span class="n">1</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Bấm <b>Use customer</b> → điền email mẫu và mật khẩu mẫu (11 ký tự) (nhật ký hàng 5).</span></li>
+      <li style="--c:var(--p1)"><span class="n">2</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Bấm <b>Show</b> → mật khẩu hiện chữ, nút đổi thành <b>Hide</b>; bấm lần nữa trở lại ẩn (kiểm bằng thuộc tính, không chụp ảnh vì lộ mật khẩu).</span></li>
+      <li style="--c:var(--p1)"><span class="n">3</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Khi chưa đăng nhập, mở <code>#profile</code>, <code>#my-orders</code>, <code>#dashboard</code> → đều hiện form đăng nhập; <code>/api/dashboard</code> và <code>/api/store/products</code> trả 401 (nhật ký hàng 14).</span></li>
+      <li style="--c:var(--p1)"><span class="n">4</span><span class="w"><span class="tag p1">SHOPPER</span></span><span class="tx">Mã giao diện (<code>/app.js</code>) cắt khoảng trắng đầu/cuối của email, không cắt mật khẩu (nhật ký hàng 16, 18).</span></li>
+    </ol>
+  </div>
+  <div class="path">
+    <h4>Luồng D · Các tình huống bị chặn hoặc báo lỗi</h4>
     <div class="tblwrap"><table>
       <tr><th>Tình huống</th><th>Hệ thống làm gì</th><th>Ảnh</th></tr>
-      <tr><td>Để trống cả hai ô, bấm Sign in</td><td>“Enter your email address.” và “Enter your password.”; không gửi lên máy chủ</td><td>Không có ảnh</td></tr>
-      <tr><td>Email <code>abc</code>, mật khẩu trống</td><td>Chỉ “Enter your password.”; email không bị báo lỗi định dạng</td><td>Không có ảnh</td></tr>
-      <tr><td>Chưa đăng nhập, mở <code>/#profile</code></td><td>Hiện form đăng nhập, không thấy hồ sơ</td><td><a class="ev" data-img="08">08</a></td></tr>
-      <tr><td>Chưa đăng nhập, mở địa chỉ không tồn tại</td><td>Mã 200 và hiện form đăng nhập</td><td><a class="ev" data-img="09">09</a></td></tr>
-      <tr><td>Bấm “Forgot password?”</td><td>“Password recovery is disabled in the training environment.”</td><td>Không có ảnh</td></tr>
+      <tr><td>Bỏ trống email</td><td>“Enter your email address.” (không gửi yêu cầu)</td><td><a class="ev" data-img="02">02</a></td></tr>
+      <tr><td>Bỏ trống mật khẩu</td><td>“Enter your password.” (không gửi yêu cầu)</td><td><a class="ev" data-img="02">02</a></td></tr>
+      <tr><td>Email đúng, mật khẩu sai (hoặc thêm khoảng trắng cuối)</td><td>“Email or password is incorrect.” (401), cùng thông báo với email không tồn tại</td><td><a class="ev" data-img="07">07</a></td></tr>
+      <tr><td>Email không tồn tại</td><td>“Email or password is incorrect.” (401)</td><td><a class="ev" data-img="05">05</a></td></tr>
+      <tr><td>Bấm Forgot password?</td><td>“Password recovery is disabled in the training environment.”</td><td><a class="ev" data-img="04">04</a></td></tr>
+      <tr><td>Customer đọc API quản trị</td><td>403 “Operations portal access is required.”</td><td>không có ảnh (F12 → Network)</td></tr>
     </table></div>
   </div>
 </div></section>
 
 <section id="mo-ho"><div class="wrapper">
-  <h2><span class="num">5</span> Điểm mơ hồ cần bạn làm rõ</h2>
-  <p class="lead">Mỗi mục: <b>đã thấy gì</b> (có chứng cứ), <b>vì sao chưa kết luận được</b>, <b>cần làm rõ điều gì</b>. Không kết luận “lỗi” hay “đúng thiết kế” khi chưa có tài liệu. Chi tiết câu hỏi cho BA: <code>cau-hoi-cho-ba.md</code>.</p>
-
+  <h2><span class="num">5</span> Điểm mơ hồ (đã chốt: dự án chưa làm)</h2>
+  <p class="lead">Mỗi mục: <b>đã thấy gì</b>, <b>vì sao chưa kết luận được</b>, <b>cần làm rõ điều gì</b>. Không kết luận “lỗi” hay “đúng thiết kế” khi chưa có tài liệu.</p>
   <div class="amb">
     <div>
-      <h4><span class="id">M-01</span>Đăng nhập sai bao nhiêu lần thì bị chặn? <span class="t hi">Nên hỏi trước</span></h4>
+      <h4><span class="id">M-01</span>Email “abc” không bị báo sai định dạng <span class="t unk">Dự án chưa làm</span></h4>
       <dl>
-        <dt>Đã thấy</dt><dd>Sai ba lần liên tiếp (ảnh 01, 02, 03) đều chỉ hiện “Email or password is incorrect.”; đăng nhập đúng sau đó vẫn được (ảnh 04).</dd>
-        <dt>Vì sao chưa rõ</dt><dd>Chỉ thử đúng 3 lần để khỏi khóa môi trường thử; chưa có tài liệu nói về giới hạn.</dd>
-        <dt>Cần làm rõ</dt><dd>Có giới hạn không? Sai mấy lần thì chặn, chặn bao lâu?</dd>
+        <dt>Đã thấy</dt><dd>Nhập “abc” vào email, bỏ trống mật khẩu: chỉ báo thiếu mật khẩu, trường email không báo gì (Ảnh 03).</dd>
+        <dt>Vì sao chưa rõ</dt><dd>Chưa có tài liệu nói có kiểm định dạng email hay không; chưa gửi email sai định dạng kèm mật khẩu để xem máy chủ trả gì.</dd>
+        <dt>Cần làm rõ</dt><dd>Yêu cầu có kiểm định dạng email trước khi gửi không, và thông báo là gì?</dd>
+      <dt>Quyết định của dự án</dt><dd><b>2026-11-20: dự án chưa làm phần này</b> (Kiểm định dạng email ở trường email). Chưa làm nên không viết test case kỳ vọng và không báo bug cho chỗ này; xem lại khi dự án làm.</dd>
       </dl>
     </div>
-    <div class="figs"><figure class="shot" style="--W:1024;--H:768"><div class="wrap">
-      <img src="screenshots/03-mat-khau-doi-hoa-thuong.png" alt="Lần sai thứ ba vẫn chỉ báo lỗi thường">
-      <i class="mk" data-n="1" style="--x:598;--y:737;--w:380;--h:31"></i>
-    </div><figcaption>Ảnh 03 · ① lần sai thứ ba vẫn chỉ hiện lỗi thường</figcaption></figure></div>
+    <div class="figs"><figure class="shot" style="--W:480;--H:300"><div class="wrap">
+      <img src="screenshots/03-email-abc-bo-trong-mat-khau.jpg" alt="Email abc">
+      <i class="mk" data-n="1" style="--x:288;--y:158;--w:166;--h:20"></i>
+      <i class="mk neg" data-n="2" style="--x:288;--y:179;--w:166;--h:12"></i>
+    </div><figcaption>Ảnh 03 · ① email “abc” ② không có thông báo</figcaption></figure></div>
   </div>
-
-  <div class="amb">
+  <div class="amb noimg">
     <div>
-      <h4><span class="id">M-02</span>Ô “Remember me on this device” để làm gì? <span class="t hi">Nên hỏi trước</span></h4>
+      <h4><span class="id">M-02</span>Ô “Remember me on this device” chưa thấy tác dụng <span class="t unk">Dự án chưa làm</span></h4>
       <dl>
-        <dt>Đã thấy</dt><dd>Đăng nhập một lần có đánh dấu và một lần không: cùng cookie phiên, thời hạn cookie giống nhau (ảnh 01 cho vị trí ô; kết quả đo bằng công cụ, không có ảnh).</dd>
-        <dt>Vì sao chưa rõ</dt><dd>Không thấy ô này làm khác đi điều gì; chưa có tài liệu.</dd>
-        <dt>Cần làm rõ</dt><dd>Đánh dấu thì hệ thống phải làm gì khác?</dd>
-      </dl>
-    </div>
-    <div class="figs"><figure class="shot" style="--W:1024;--H:768"><div class="wrap">
-      <img src="screenshots/01-sai-mat-khau.png" alt="Ô Remember me trên form đăng nhập">
-      <i class="mk" data-n="1" style="--x:598;--y:638;--w:210;--h:22"></i>
-    </div><figcaption>Ảnh 01 · ① ô Remember me on this device</figcaption></figure></div>
-  </div>
-
-  <div class="amb">
-    <div>
-      <h4><span class="id">M-03</span>Phiên giữ được bao lâu? <span class="t hi">Nên hỏi trước</span></h4>
-      <dl>
-        <dt>Đã thấy</dt><dd>Cookie <code>sunny_session</code> có ngày hết hạn (không có ảnh; F12 → Application → Cookies).</dd>
-        <dt>Vì sao chưa rõ</dt><dd>Chưa đo con số chính xác, chưa chờ đến lúc hết hạn, chưa có tài liệu.</dd>
-        <dt>Cần làm rõ</dt><dd>Yêu cầu là bao lâu, và hết hạn thì người dùng thấy gì?</dd>
+        <dt>Đã thấy</dt><dd>Mã giao diện chỉ gửi email và mật khẩu khi đăng nhập, không dùng ô này (không có ảnh, kiểm lại bằng mở <code>/app.js</code>).</dd>
+        <dt>Vì sao chưa rõ</dt><dd>Chưa đọc được cookie phiên để biết thời gian sống có đổi theo ô này không.</dd>
+        <dt>Cần làm rõ</dt><dd>Ô này có tác dụng gì theo yêu cầu?</dd>
+      <dt>Quyết định của dự án</dt><dd><b>2026-11-20: dự án chưa làm phần này</b> (Tác dụng của ô Remember me on this device). Chưa làm nên không viết test case kỳ vọng và không báo bug cho chỗ này; xem lại khi dự án làm.</dd>
       </dl>
     </div>
   </div>
-
-  <div class="amb">
+  <div class="amb noimg">
     <div>
-      <h4><span class="id">M-04</span>Mở địa chỉ không tồn tại thì nên hiện gì? <span class="t lo">Hỏi sau</span></h4>
+      <h4><span class="id">M-03</span>Mật khẩu mẫu hiện sẵn trên màn hình đăng nhập <span class="t unk">Dự án chưa làm</span></h4>
       <dl>
-        <dt>Đã thấy</dt><dd>Mở <code>/khong-ton-tai</code> khi chưa đăng nhập: mã 200 và hiện form đăng nhập, không có trang “không tìm thấy” (ảnh 09).</dd>
-        <dt>Vì sao chưa rõ</dt><dd>Không biết do cả cửa hàng là một trang duy nhất hay thiếu trang báo không tìm thấy.</dd>
-        <dt>Cần làm rõ</dt><dd>Yêu cầu có trang “không tìm thấy” riêng không?</dd>
-      </dl>
-    </div>
-    <div class="figs"><figure class="shot" style="--W:1024;--H:768"><div class="wrap">
-      <img src="screenshots/09-dia-chi-khong-ton-tai.png" alt="Địa chỉ không tồn tại vẫn hiện form đăng nhập">
-      <i class="mk neg" data-n="1" style="--x:598;--y:150;--w:300;--h:90"></i>
-    </div><figcaption>Ảnh 09 · ① đáng lẽ có thể là trang “không tìm thấy”, nhưng hiện form đăng nhập</figcaption></figure></div>
-  </div>
-
-  <div class="amb">
-    <div>
-      <h4><span class="id">M-05</span>Email viết hoa có tính là cùng một email không? <span class="t lo">Hỏi sau</span></h4>
-      <dl>
-        <dt>Đã thấy</dt><dd>Nhập “SHOPPER@SUNNY.TEST” cùng mật khẩu đúng vẫn đăng nhập được; hệ thống trả email chữ thường (ảnh 04).</dd>
-        <dt>Vì sao chưa rõ</dt><dd>Mới thử một ví dụ; chưa có yêu cầu nói rõ.</dd>
-        <dt>Cần làm rõ</dt><dd>Email có được coi là không phân biệt chữ hoa, thường không?</dd>
+        <dt>Đã thấy</dt><dd>Khung “Customer training login” hiện email và mật khẩu mẫu, kèm nút “Use customer” (Ảnh 01, đã che mật khẩu).</dd>
+        <dt>Vì sao chưa rõ</dt><dd>Đây là môi trường luyện tập; chưa biết khung này có chỉ ở môi trường này không.</dd>
+        <dt>Cần làm rõ</dt><dd>Khung này có thuộc phạm vi cần kiểm thử, và có ở môi trường thật không?</dd>
+      <dt>Quyết định của dự án</dt><dd><b>2026-11-20: dự án chưa làm phần này</b> (Khung tài khoản mẫu trên màn hình đăng nhập (xử lý ở môi trường thật)). Chưa làm nên không viết test case kỳ vọng và không báo bug cho chỗ này; xem lại khi dự án làm.</dd>
       </dl>
     </div>
   </div>
-
-  <div class="amb">
+  <div class="amb noimg">
     <div>
-      <h4><span class="id">M-06</span>“Forgot password?” ở bản thật làm gì? <span class="t lo">Hỏi sau</span></h4>
+      <h4><span class="id">M-04</span>Customer mở địa chỉ quản trị chỉ về trang chủ cửa hàng <span class="t unk">Dự án chưa làm</span></h4>
       <dl>
-        <dt>Đã thấy</dt><dd>Bấm chỉ hiện thông báo tạm “Password recovery is disabled in the training environment.” (không có ảnh vì thông báo tự biến mất).</dd>
-        <dt>Vì sao chưa rõ</dt><dd>Môi trường thử tắt tính năng này.</dd>
-        <dt>Cần làm rõ</dt><dd>Khi mở, người dùng làm gì tiếp (nhập email, nhận thư…)? Hay phần này nằm ngoài phạm vi test?</dd>
+        <dt>Đã thấy</dt><dd><code>#dashboard</code>, <code>#products</code>, <code>#api-lab</code> và địa chỉ không tồn tại đều hiện trang chủ cửa hàng, không báo lỗi quyền; API trả 403 (không ảnh).</dd>
+        <dt>Vì sao chưa rõ</dt><dd>Chưa có tài liệu về hành vi mong muốn khi thiếu quyền.</dd>
+        <dt>Cần làm rõ</dt><dd>Khi thiếu quyền cần báo gì, hay đưa về trang chủ là đúng ý?</dd>
+      <dt>Quyết định của dự án</dt><dd><b>2026-11-20: dự án chưa làm phần này</b> (Thông báo khi Customer mở địa chỉ quản trị). Chưa làm nên không viết test case kỳ vọng và không báo bug cho chỗ này; xem lại khi dự án làm.</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="amb noimg">
+    <div>
+      <h4><span class="id">M-05</span>Đăng xuất ở tab khác: tab đầu không thoát ngay <span class="t unk">Dự án chưa làm</span></h4>
+      <dl>
+        <dt>Đã thấy</dt><dd>Tab 1 vẫn hiện cửa hàng sau khi tab 2 đăng xuất; khi tab 1 chuyển trang mới hiện form đăng nhập (không ảnh).</dd>
+        <dt>Vì sao chưa rõ</dt><dd>Chưa biết yêu cầu về phiên nhiều tab.</dd>
+        <dt>Cần làm rõ</dt><dd>Có cần tab đầu tự thoát ngay không?</dd>
+      <dt>Quyết định của dự án</dt><dd><b>2026-11-20: dự án chưa làm phần này</b> (Tab đầu tự thoát ngay khi đăng xuất ở tab khác). Chưa làm nên không viết test case kỳ vọng và không báo bug cho chỗ này; xem lại khi dự án làm.</dd>
       </dl>
     </div>
   </div>
@@ -368,29 +396,26 @@
 <section id="chua-thu"><div class="wrapper">
   <h2><span class="num">6</span> Những gì chưa thử / chưa có ảnh</h2>
   <div class="grid2">
-    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-1</span>Đăng nhập sai quá 3 lần</h4><p style="margin:4px 0">Có thể khóa môi trường thử; bạn dặn tối đa 3 lần và chưa biết ngưỡng thật. Cần BA trả lời M-01.</p></div></div>
-    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-2</span>Hết hạn phiên</h4><p style="margin:4px 0">Cần chờ thời gian dài; chưa đo thời hạn cookie (M-03).</p></div></div>
-    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-3</span>Vai trò khác ngoài khách</h4><p style="margin:4px 0">Chưa có tài khoản nào khác; tài khoản mẫu trên trang chỉ là khách.</p></div></div>
-    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-4</span>Nút Back sau khi đăng xuất</h4><p style="margin:4px 0">Lần thử đầu mở từ trang trắng nên không ra kết quả có nghĩa; cần thử lại (không tốn lần đăng nhập sai).</p></div></div>
-    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-5</span>Email rất dài, ký tự đặc biệt, email sai định dạng gửi lên máy chủ</h4><p style="margin:4px 0">Mỗi ca là một lần đăng nhập sai; đã dùng hết 3 lần cho phép.</p></div></div>
-    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-6</span>Nút Show, bấm Sign in hai lần liên tiếp, tab Create account</h4><p style="margin:4px 0">Chưa bấm thử. Create account là tính năng đăng ký, ngoài phạm vi báo cáo này.</p></div></div>
-    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-7</span>Ảnh còn thiếu</h4><p style="margin:4px 0">Không có ảnh cho: để trống hai ô, email <code>abc</code>, thông báo “Forgot password?”, email có dấu cách, tab thứ hai. Các ca này ghi nhận trong nhật ký bằng công cụ.</p></div></div>
+    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-2</span>Giới hạn số lần đăng nhập sai</h4><p style="margin:4px 0">Dự án chưa làm giới hạn này (bạn chốt 2026-11-20) nên không thử và không có số lần tối đa. Mình đã gửi 3 lần đăng nhập sai, không thấy khóa, rồi dừng.</p></div></div>
+    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-3</span>Trường rất dài, ký tự đặc biệt (gửi lên máy chủ)</h4><p style="margin:4px 0">Gửi lên máy chủ tính là lần đăng nhập sai; dự án chưa làm giới hạn (C-2) nên không thử thêm.</p></div></div>
+    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-4</span>Hết hạn phiên</h4><p style="margin:4px 0">Dự án chưa làm phần hết hạn phiên (bạn chốt 2026-11-20), chưa có thời gian sống của phiên.</p></div></div>
+    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-5</span>Vai quản trị</h4><p style="margin:4px 0">Chưa có tài khoản quản trị từ bạn nên chưa vào cổng quản trị.</p></div></div>
+    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-6</span>Tab Create account</h4><p style="margin:4px 0">Thuộc chức năng đăng ký, cần tạo dữ liệu thật; hỏi bạn trước khi làm.</p></div></div>
   </div>
 </div></section>
 
 <section id="cau-hoi"><div class="wrapper">
   <h2><span class="num">7</span> Việc cần bạn quyết định / trả lời</h2>
   <ul class="ask">
-    <li><b>Có giới hạn đăng nhập sai không, bao nhiêu lần, chặn bao lâu?</b> (M-01, C-1) — quyết định có cần ca test lần sai thứ N hay không.</li>
-    <li><b>Phiên giữ bao lâu?</b> (M-03, C-2) — để biết ca hết hạn phiên chờ bao lâu.</li>
-    <li><b>Ô “Remember me on this device” phải làm gì?</b> (M-02) — nếu phải kéo dài phiên mà hệ thống không làm thì đó là lỗi cần báo.</li>
-    <li><b>Có tài khoản vai trò khác không?</b> (C-3) — cần tài khoản để so sánh quyền.</li>
-    <li><b>Bạn có đồng ý cho mình thử thêm ca đăng nhập sai không?</b> (C-1, C-5) — chỉ khi chắc môi trường không bị khóa.</li>
+    <li><b>Giới hạn số lần đăng nhập sai và hết hạn phiên:</b> dự án chưa làm (C-2, C-4), không còn câu cần trả lời; khi dự án làm thì khám phá thêm.</li>
+    <li><b>Có tài khoản quản trị để khám phá cổng quản trị không?</b> (C-5)</li>
+    <li><b>Tab Create account có khám phá không?</b> (C-6) — sẽ tạo dữ liệu thật.</li>
+    <li><b>Các điểm M-01 đến M-05:</b> bạn đã chốt dự án chưa làm (2026-11-20), nên không còn câu cần hỏi BA. Khi dự án làm thì khám phá lại phần đó.</li>
   </ul>
 </div></section>
 </main>
 
-<footer><div class="wrapper">Nguồn: nhật ký khám phá <code>bao-cao.md</code> và thư mục <code>screenshots/</code>. File HTML đã nhúng sẵn ảnh nên mở độc lập được.</div></footer>
+<footer><div class="wrapper">Nguồn: nhật ký <code>bao-cao.md</code> và thư mục <code>screenshots/</code>. File HTML đã nhúng sẵn ảnh nên mở độc lập được.</div></footer>
 <script>/* build-embed.py sẽ thay khối này */</script>
 </body>
 </html>

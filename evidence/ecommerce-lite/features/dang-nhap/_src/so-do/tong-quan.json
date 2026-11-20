@@ -1,22 +1,22 @@
 {
   "loai": "tong-quan",
-  "mo-ta": "Sơ đồ tổng quan: khách đăng nhập vào cửa hàng",
+  "mo-ta": "Sơ đồ tổng quan đăng nhập",
   "he-thong": {
-    "ten": "Sunny Commerce", "phu": "Đăng nhập (môi trường thử)",
-    "tieu-de-muc": "Màn hình liên quan:",
-    "muc": ["Form đăng nhập", "Kiểm tra email và mật khẩu", "Cửa hàng: Shop, My orders, Profile", "Đăng xuất"],
-    "tieu-de-trang-thai": "Trạng thái người dùng",
-    "trang-thai": ["Chưa đăng nhập →", "Đã đăng nhập"]
+    "ten": "Sunny Commerce", "phu": "Đăng nhập",
+    "tieu-de-muc": "Màn hình và trạng thái:",
+    "muc": ["Form đăng nhập", "Cửa hàng (Sunny Store)", "Đăng xuất"],
+    "tieu-de-trang-thai": "Kiểm phiên",
+    "trang-thai": ["Mở trang → hỏi /api/me", "401: hiện form · 200: vào cửa hàng"]
   },
   "vai-tro": [
-    {"id": "SH", "mau": "p1", "ten": "SHOPPER", "vai": "Customer (khách hàng)", "mo-ta": ["Đăng nhập, mua sắm, đăng xuất"]}
+    {"id": "SHOPPER", "mau": "p1", "ten": "SHOPPER", "vai": "Customer (khách mua hàng)", "mo-ta": ["Đăng nhập vào cửa hàng", "Xem cửa hàng, đơn, hồ sơ"]}
   ],
   "ben-ngoai": [],
   "buoc": [
-    {"so": 1, "tu": "SH", "nhan": "Mở trang gốc"},
-    {"so": 2, "tu": "SH", "nhan": "Gửi email + mật khẩu"},
-    {"so": 3, "tu": "SH", "chieu": "ve", "tra-ve": true, "nhan": "Vào cửa hàng hoặc báo lỗi"},
-    {"so": 4, "tu": "SH", "nhan": "Bấm Sign out"}
+    {"so": 1, "tu": "SHOPPER", "nhan": "Mở trang, nhập email và mật khẩu"},
+    {"so": 2, "tu": "SHOPPER", "nhan": "Bấm Sign in"},
+    {"so": 3, "chieu": "ve", "tu": "SHOPPER", "nhan": "Vào cửa hàng, hoặc báo lỗi"},
+    {"so": 4, "tu": "SHOPPER", "nhan": "Bấm Sign out"}
   ],
-  "ghi-chu": {"dong": ["Hệ thống không gọi dịch vụ bên ngoài nào trong luồng đăng nhập đã thấy.", "“Forgot password?” chỉ hiện thông báo tạm, chưa có luồng khôi phục mật khẩu."]}
+  "ghi-chu": {"so": 5, "mau": "p1", "dong": ["Sai email hoặc mật khẩu: hệ thống hiện “Email or password is incorrect.” và ở lại form (quay lại bước 1)."]}
 }

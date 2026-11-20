@@ -1,0 +1,36 @@
+{
+  "headline": "Đạt toàn bộ: 19 trên 19 test case đăng nhập đều Đạt khi chạy bằng script ngày 2026-11-20, mỗi case có ảnh làm bằng chứng. Không có lỗi nào cần báo.",
+  "passed": [
+    "Luồng chính: mở trang chưa đăng nhập hiện form; đăng nhập đúng vào cửa hàng; tải lại vẫn đăng nhập; đăng xuất về form với ô email và mật khẩu trống; /api/me trả đúng Customer \"Sunny Shopper\".",
+    "Đăng nhập sai: email không tồn tại, mật khẩu sai và mật khẩu thừa một dấu cách cuối đều trả 401 và cùng thông báo \"Email or password is incorrect.\"; ô mật khẩu giữ nội dung.",
+    "Ô bỏ trống: bỏ trống cả hai ô hiện \"Enter your email address.\" và \"Enter your password.\"; bỏ trống mật khẩu hiện \"Enter your password.\"; cả hai trường hợp không gửi yêu cầu đăng nhập.",
+    "Email: viết hoa hoặc có khoảng trắng đầu và cuối vẫn đăng nhập được (trả 200).",
+    "Sau 3 lần sai liên tiếp (3 lần trả 401), đăng nhập đúng vẫn được (trả 200), tài khoản chưa bị khóa.",
+    "Bấm Sign in ba lần liên tiếp rất nhanh chỉ gửi 1 yêu cầu đăng nhập.",
+    "Sau đăng xuất: nút Back, #my-orders và #dashboard đều hiện form; đăng xuất ở tab 2 thì tab 1 hiện form khi chuyển trang.",
+    "Customer gọi /api/dashboard bị 403 với \"Operations portal access is required.\".",
+    "Show và Hide đổi kiểu ô mật khẩu đúng; Forgot password? hiện \"Password recovery is disabled in the training environment.\" và không chuyển trang."
+  ],
+  "not_tested": [
+    {
+      "cases": "Vai Admin, tab Create account, hạn phiên, giới hạn số lần sai, thời gian chờ đăng nhập",
+      "status": "Chưa có test case",
+      "reason": "Dự án chưa làm giới hạn lần sai, hạn phiên (người dùng chốt 2026-11-20); vai Admin thiếu tài khoản; Create account thuộc tính năng đăng ký chưa khám phá."
+    }
+  ],
+  "risks": [
+    {
+      "title": "Test case chưa được BA xác nhận",
+      "detail": "Test case dựa trên SRS nháp viết từ quan sát hệ thống, nên \"Đạt\" nghĩa là hệ thống khớp hành vi đã quan sát, chưa phải khớp yêu cầu chính thức. Nếu BA có yêu cầu khác (ví dụ báo lỗi định dạng email, Remember me) thì phải bổ sung test case."
+    },
+    {
+      "title": "Tác động của cách chạy script",
+      "detail": "Script phải chờ trang kiểm phiên xong rồi mới gõ; gõ sớm hơn làm ô mật khẩu bị xóa. Người dùng thật không gõ nhanh đến vậy nên không coi là lỗi, nhưng nếu hệ thống đổi cách kiểm phiên thì kết quả script có thể đổi."
+    },
+    {
+      "title": "Hệ thống chưa giới hạn số lần sai",
+      "detail": "Đã gửi tổng cộng khoảng 9 lần đăng nhập sai bằng script (trần người dùng chốt là 10), không thấy khóa. Nếu sau này dự án làm giới hạn thì test case về lần sai cần viết lại."
+    }
+  ],
+  "suggestion": "Đề xuất coi tính năng Đăng nhập đạt ở mức hành vi đã quan sát; bước tiếp theo là regression hoặc khám phá các tính năng khác (cửa hàng, giỏ, đơn). Quyết định nhận hay trả build là của người test hoặc PO."
+}

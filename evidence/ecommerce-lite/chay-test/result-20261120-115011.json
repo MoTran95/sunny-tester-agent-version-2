@@ -1,0 +1,64 @@
+{
+  "project": "ecommerce-lite",
+  "timestamp": "2026-11-20 11:50:11",
+  "results": [
+    {
+      "case_id": "dang-nhap/tc-004",
+      "code": "TC-004",
+      "title": "Hiện thông báo lỗi khi email đúng nhưng mật khẩu sai",
+      "smoke_number": "",
+      "verdict": "Đạt kèm ý phụ sai",
+      "reason": "Sai ý phụ: Bước 5: ô mật khẩu giữ nguyên nội dung",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 5: POST /api/auth/login trả 401",
+          "passed": true,
+          "note": "Mã trả về: 401",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 5: hiện Email or password is incorrect.",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "Email or password is incorrect."
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 5 (nhấn Enter): không thấy thông báo Email or password is incorrect."
+        },
+        {
+          "kind": "main",
+          "title": "Bước 5: vẫn ở form đăng nhập",
+          "passed": true,
+          "note": "",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "minor",
+          "title": "Bước 5: ô mật khẩu giữ nguyên nội dung",
+          "passed": false,
+          "note": "Độ dài ô mật khẩu sau 0, 1, 2, 3 giây: [0, 0, 0, 0]",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-004-sai-mat-khau-20261120-115007.png",
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-004-kiem-20261120-115011.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [
+        "evidence/ecommerce-lite/chay-test/video/dang-nhap-tc-004-20261120-115011.webm"
+      ],
+      "seconds": 8.9
+    }
+  ]
+}

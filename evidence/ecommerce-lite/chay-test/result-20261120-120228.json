@@ -1,0 +1,346 @@
+{
+  "project": "ecommerce-lite",
+  "timestamp": "2026-11-20 12:02:28",
+  "results": [
+    {
+      "case_id": "dang-nhap/tc-005",
+      "code": "TC-005",
+      "title": "Báo lỗi ở cả hai ô và không gửi yêu cầu khi bỏ trống email và mật khẩu",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 3: hiện Enter your email address. dưới ô email",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "Enter your email address."
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 3 (bấm Sign in): không thấy Enter your email address."
+        },
+        {
+          "kind": "main",
+          "title": "Bước 3: hiện Enter your password. dưới ô mật khẩu",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "Enter your password."
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 3 (bấm Sign in): không thấy Enter your password."
+        },
+        {
+          "kind": "main",
+          "title": "Bước 4: Network không có yêu cầu POST /api/auth/login",
+          "passed": true,
+          "note": "Các mã trả về: []",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-005-bo-trong-hai-o-20261120-120140.png",
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-005-kiem-20261120-120140.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 12.5
+    },
+    {
+      "case_id": "dang-nhap/tc-006",
+      "code": "TC-006",
+      "title": "Báo lỗi ở ô mật khẩu và không gửi yêu cầu khi bỏ trống mật khẩu",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 5: hiện Enter your password. dưới ô mật khẩu",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "Enter your password."
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 5 (nhấn Enter): không thấy Enter your password."
+        },
+        {
+          "kind": "main",
+          "title": "Bước 5: Network không có yêu cầu POST /api/auth/login",
+          "passed": true,
+          "note": "Các mã trả về: []",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-006-bo-trong-mat-khau-20261120-120145.png",
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-006-kiem-20261120-120145.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 5.6
+    },
+    {
+      "case_id": "dang-nhap/tc-010",
+      "code": "TC-010",
+      "title": "Trả lỗi 403 khi Customer gọi API quản trị /api/dashboard",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 4: mã trạng thái 403",
+          "passed": true,
+          "note": "Mã trả về: 403",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 4: nội dung có error FORBIDDEN và message Operations portal access is required.",
+          "passed": true,
+          "note": "{\"error\":\"FORBIDDEN\",\"message\":\"Operations portal access is required.\"}",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-010-cua-hang-truoc-khi-goi-api-20261120-120153.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 7.7
+    },
+    {
+      "case_id": "dang-nhap/tc-016",
+      "code": "TC-016",
+      "title": "Hệ thống trả đúng thông tin người đang đăng nhập khi xem /api/me sau đăng nhập",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 4: mã trạng thái 200",
+          "passed": true,
+          "note": "Mã trả về: 200",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 4: user có email shopper@sunny.test, name Sunny Shopper, role Customer",
+          "passed": true,
+          "note": "email=shopper@sunny.test, name=Sunny Shopper, role=Customer",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "minor",
+          "title": "Bước 4: user có id và workspaceId",
+          "passed": true,
+          "note": "",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-016-cua-hang-truoc-khi-goi-api-20261120-120203.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 10.2
+    },
+    {
+      "case_id": "dang-nhap/tc-018",
+      "code": "TC-018",
+      "title": "Hiện mật khẩu thành chữ khi bấm Show và ẩn lại khi bấm Hide",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 3: ô mật khẩu hiện chữ nhìn thấy được",
+          "passed": true,
+          "note": "type = text",
+          "mark_text": [],
+          "account": "",
+          "error_note": "Lỗi ở bước 3 (bấm Show): ô mật khẩu vẫn ẩn."
+        },
+        {
+          "kind": "main",
+          "title": "Bước 4: ô mật khẩu ẩn lại",
+          "passed": true,
+          "note": "type = password",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "minor",
+          "title": "Bước 3: nút đổi thành Hide",
+          "passed": true,
+          "note": "Chữ trên nút: Hide",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "minor",
+          "title": "Bước 4: nút trở về Show",
+          "passed": true,
+          "note": "Chữ trên nút: Show",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-018-mat-khau-da-an-lai-20261120-120208.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 5.0
+    },
+    {
+      "case_id": "dang-nhap/tc-019",
+      "code": "TC-019",
+      "title": "Hiện thông báo khôi phục mật khẩu bị tắt khi bấm Forgot password?",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 3: hiện thông báo Password recovery is disabled in the training environment.",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "Password recovery is disabled in the training environment."
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 3 (bấm Forgot password?): không thấy thông báo khôi phục bị tắt."
+        },
+        {
+          "kind": "main",
+          "title": "Bước 3: không chuyển trang",
+          "passed": true,
+          "note": "Địa chỉ trước: https://staging-ecommerce-lite.vercel.app/, sau: https://staging-ecommerce-lite.vercel.app/",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-019-quen-mat-khau-20261120-120212.png",
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-019-kiem-20261120-120212.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 3.8
+    },
+    {
+      "case_id": "dang-nhap/tc-014",
+      "code": "TC-014",
+      "title": "Chỉ gửi một yêu cầu đăng nhập khi bấm Sign in nhiều lần liên tiếp rất nhanh",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 4: chỉ có 1 yêu cầu POST /api/auth/login",
+          "passed": true,
+          "note": "Các mã trả về: [200]",
+          "mark_text": [],
+          "account": "",
+          "error_note": "Lỗi ở bước 4: gửi nhiều hơn một yêu cầu đăng nhập khi bấm nhiều lần."
+        },
+        {
+          "kind": "main",
+          "title": "Bước 4: đăng nhập thành công, vào cửa hàng",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "WELCOME"
+          ],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "minor",
+          "title": "Bước 3: nút bị vô hiệu hóa ngay sau lần bấm đầu",
+          "passed": true,
+          "note": "",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-014-sau-khi-bam-nhieu-lan-20261120-120221.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 8.6
+    },
+    {
+      "case_id": "dang-nhap/tc-012",
+      "code": "TC-012",
+      "title": "Đăng nhập thành công khi nhập email viết hoa",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 5: POST /api/auth/login trả 200",
+          "passed": true,
+          "note": "Các mã trả về: [200]",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 5: vào cửa hàng",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "WELCOME"
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 5: email viết hoa không đăng nhập được."
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-012-dang-nhap-email-viet-hoa-20261120-120227.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 6.7
+    }
+  ]
+}

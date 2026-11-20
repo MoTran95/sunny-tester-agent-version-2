@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-11-20 12:00:00",
+  "results": [
+    {
+      "case_id": "dang-nhap/tc-001",
+      "verdict": "Đạt",
+      "reason": "",
+      "images": [],
+      "checks": [
+        {"kind": "main", "title": "Bước 2: hiện form đăng nhập có ô email, ô mật khẩu, nút Sign in; không vào thẳng cửa hàng", "passed": true, "note": "Đọc văn bản trang: có Sign in, Create account, Email address, Password, Forgot password?, Show, Remember me on this device, Sign in"}
+      ]
+    },
+    {
+      "case_id": "dang-nhap/tc-004",
+      "verdict": "Đạt",
+      "reason": "",
+      "images": [],
+      "checks": [
+        {"kind": "main", "title": "Bước 5: POST /api/auth/login trả 401", "passed": true, "note": "Quan sát 401"},
+        {"kind": "main", "title": "Bước 5: hiện \"Email or password is incorrect.\"", "passed": true, "note": ""},
+        {"kind": "main", "title": "Bước 5: vẫn ở form đăng nhập", "passed": true, "note": ""},
+        {"kind": "minor", "title": "Ô mật khẩu giữ nguyên nội dung", "passed": true, "note": "Còn 12 ký tự"}
+      ]
+    },
+    {
+      "case_id": "dang-nhap/tc-002",
+      "verdict": "Đạt",
+      "reason": "",
+      "images": [],
+      "checks": [
+        {"kind": "main", "title": "Bước 4: POST /api/auth/login trả 200", "passed": true, "note": ""},
+        {"kind": "main", "title": "Bước 4: vào cửa hàng Sunny Store", "passed": true, "note": "Form đăng nhập ẩn; sau khoảng 4,6 giây"},
+        {"kind": "minor", "title": "Bước 3: nút đổi thành Signing in…", "passed": true, "note": ""},
+        {"kind": "minor", "title": "Lời chào WELCOME, SUNNY và các mục Shop, My orders, Profile, Bag", "passed": true, "note": ""}
+      ]
+    },
+    {
+      "case_id": "dang-nhap/tc-007",
+      "verdict": "Đạt",
+      "reason": "",
+      "images": [],
+      "checks": [
+        {"kind": "main", "title": "Bước 3: không hiện form đăng nhập, vào lại cửa hàng sau khi tải lại", "passed": true, "note": "/api/me trả 200"},
+        {"kind": "minor", "title": "Hiện \"Loading your store…\" trong lúc tải", "passed": true, "note": ""}
+      ]
+    },
+    {
+      "case_id": "dang-nhap/tc-008",
+      "verdict": "Đạt",
+      "reason": "",
+      "images": [],
+      "checks": [
+        {"kind": "main", "title": "Bước 4: quay về form đăng nhập, ô email và mật khẩu trống", "passed": true, "note": ""},
+        {"kind": "main", "title": "Bước 4: POST /api/auth/logout trả 200", "passed": true, "note": "Sau đó /api/me trả 401"},
+        {"kind": "minor", "title": "Bước 3: thông báo \"You have been signed out.\"", "passed": true, "note": ""}
+      ]
+    }
+  ]
+}

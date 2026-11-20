@@ -5,155 +5,141 @@
 | | |
 |---|---|
 | Mã feature | `LOGIN` |
-| Phiên bản hệ thống đã quan sát | không thấy số phiên bản trên trang; môi trường staging ngày 2026-11-20 |
+| Phiên bản hệ thống đã quan sát | Không thấy số bản ở chân trang (chỉ có chữ "Sunny Commerce · Training environment"), staging https://staging-ecommerce-lite.vercel.app/ |
 | Cập nhật lần cuối | 2026-11-20 |
-| Tình trạng | nháp (chưa xác nhận với team) |
+| Tình trạng | nháp (viết từ nhật ký khám phá, chưa có tài liệu nghiệp vụ hay BA xác nhận) |
 | Nhật ký khám phá gốc | [bao-cao.md](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) |
 
 ## 1. Mục đích, phạm vi, vai trò
-- **Mục đích:** cho người dùng vào khu vực cửa hàng bằng email và mật khẩu, giữ phiên đăng nhập trong lúc dùng, và cho đăng xuất.
-- **Ngoài phạm vi / chưa thấy trên màn hình:** đăng ký tài khoản (tab "Create account"), khôi phục mật khẩu (đang tắt ở môi trường thử), các màn hình sau đăng nhập (cửa hàng, đơn hàng, hồ sơ).
-- **Vai trò:** trang cho biết đây là môi trường thử có tài khoản khách mẫu; mới thử với một tài khoản.
+- **Mục đích:** cho người dùng nhập email và mật khẩu để vào cửa hàng Sunny Store; giữ phiên khi tải lại trang; cho đăng xuất; chặn truy cập khi chưa đăng nhập.
+- **Ngoài phạm vi (dự án chưa làm, người dùng chốt 2026-11-20; không hỏi BA, không viết test case kỳ vọng, không báo bug; xem lại khi dự án làm):** kiểm định định dạng email (nhập `abc` không báo lỗi), tác dụng của ô "Remember me on this device", khung tài khoản mẫu trên màn hình đăng nhập, thông báo khi Customer mở địa chỉ quản trị (hiện trang chủ cửa hàng), tab đầu tự thoát khi đăng xuất ở tab khác, giới hạn số lần đăng nhập sai, thời gian sống/hết hạn phiên, yêu cầu thời gian chờ đăng nhập. Xem mục 5.
+- **Chưa thấy trên màn hình:** tab "Create account" (thuộc tính năng đăng ký), vai Admin (mục 6.2).
+- **Vai trò:**
 
 | Tài khoản | Vai trò hiển thị | Đã thử với feature này |
 |---|---|---|
-| Tài khoản khách mẫu của môi trường thử (mã `SHOPPER` trong `.env`) | `Customer` (tên hiển thị "Sunny Shopper") | Đăng nhập đúng, sai, đăng xuất |
-| Vai trò khác | chưa biết | Chưa thử, xem mục 6.2 |
+| `SHOPPER` (shopper@sunny.test) | Customer ("Sunny Shopper") | Có |
+| Tài khoản quản trị | Admin | Chưa có tài khoản |
 
 ## 2. Điều kiện tiên quyết
-- Mở `https://staging-ecommerce-lite.vercel.app/` khi chưa đăng nhập: trang hiện form đăng nhập.
-- Có một tài khoản đã tạo sẵn (email, mật khẩu). Mật khẩu của tài khoản test nằm trong `.env`, không ghi vào tài liệu.
+- Có địa chỉ staging và tài khoản Customer (mật khẩu lưu trong `.env`, không ghi vào tài liệu).
+- Trang đăng nhập hiện nút "Use customer" tự điền email và mật khẩu mẫu của tài khoản Customer; dùng nút này khi cần mật khẩu đúng.
+- Đăng nhập mất vài giây (nút hiện "Signing in…"): chờ trước khi kết luận.
 
 ## 3. User story và tiêu chí chấp nhận
 
-**Cách đọc chung:** mỗi dòng là một tình huống test. *Bối cảnh* = tình trạng trước khi làm; *Người dùng làm* = thao tác cụ thể; *Hệ thống phản hồi* = điều đã nhìn thấy (chữ trong `…` là nguyên văn). (Giới test gọi là Given – When – Then; mỗi dòng là một "tiêu chí chấp nhận", viết tắt AC.)
+### `LOGIN-S01` — Đăng nhập bằng email và mật khẩu
+**Là** khách hàng (Customer), **tôi muốn** đăng nhập bằng email và mật khẩu **để** vào cửa hàng mua hàng.
 
-### `LOGIN-S01` — Đăng nhập thành công
-**Là** khách hàng, **tôi muốn** đăng nhập bằng email và mật khẩu **để** vào cửa hàng.
+**Luồng:** (1) mở trang chủ khi chưa đăng nhập → (2) hiện form đăng nhập → (3) nhập email và mật khẩu, bấm Sign in hoặc nhấn Enter → (4) vào cửa hàng; rẽ nhánh: bỏ trống ô (→ `LOGIN-S01-AC02`), nhập sai (→ `LOGIN-S01-AC05`, `LOGIN-S01-AC06`).
 
-**Luồng:** (1) mở trang → (2) nhập email và mật khẩu → (3) bấm "Sign in" hoặc nhấn Enter → (4) vào trang cửa hàng với lời chào; sai thông tin → `LOGIN-S02`; thiếu ô → `LOGIN-S03`.
-
-| ID | Tình huống | Bối cảnh | Người dùng làm | Hệ thống phản hồi | Nhãn · Bằng chứng · Liên quan |
-|---|---|---|---|---|---|
-| <a id="login-s01-ac01"></a>`LOGIN-S01-AC01` | Đăng nhập đúng bằng nút | Chưa đăng nhập, đang ở form đăng nhập | Nhập email và mật khẩu đúng của tài khoản khách, bấm "Sign in" | Vào trang cửa hàng. Hiện [LOGIN-M04](#login-m04). Thanh trên có "Shop", "My orders", "Profile", "Bag 0", nút "Sign out"; lời chào "Welcome, Sunny". Phiên được lưu bằng cookie ([LOGIN-R03](#login-r03)). Trong lúc chờ, theo tệp giao diện nút đổi chữ thành [LOGIN-M07](#login-m07) (chưa thấy trên màn hình). | đã thấy · [E05](#e05), [E13](#e13) · `LOGIN-R03`, `LOGIN-M04`, `LOGIN-M07` |
-| <a id="login-s01-ac02"></a>`LOGIN-S01-AC02` | Email viết hoa chữ, nhấn Enter | Chưa đăng nhập | Nhập email `SHOPPER@SUNNY.TEST` (viết hoa hết) và mật khẩu đúng, nhấn Enter khi đang ở ô mật khẩu | Đăng nhập thành công như `LOGIN-S01-AC01`; hiện [LOGIN-M04](#login-m04). Thông tin người dùng trả về có email chữ thường. | đã thấy · [E04](#e04) · `LOGIN-R01`, `LOGIN-M04` |
-| <a id="login-s01-ac03"></a>`LOGIN-S01-AC03` | Email có khoảng trắng đầu và cuối | Chưa đăng nhập | Nhập email có hai dấu cách đầu và cuối cùng mật khẩu đúng, bấm "Sign in" | Đăng nhập thành công; hiện [LOGIN-M04](#login-m04). | đã thấy · [E13](#e13), [E12](#e12) · `LOGIN-R01`, `LOGIN-M04` |
-| <a id="login-s01-ac04"></a>`LOGIN-S01-AC04` | Tích "Remember me on this device" | Chưa đăng nhập | Đăng nhập đúng một lần có tích và một lần không tích | Cả hai lần đăng nhập thành công, cùng một cookie phiên, thời hạn cookie hai lần giống nhau; không thấy hộp này làm khác đi điều gì. | chưa rõ · [E13](#e13) · `LOGIN-Q02` |
-
-### `LOGIN-S02` — Đăng nhập không thành công
-**Là** khách hàng, **tôi muốn** biết khi thông tin đăng nhập không đúng **để** nhập lại.
-
-**Luồng:** (1) nhập email, mật khẩu → (2) bấm "Sign in" → (3) khung lỗi đỏ dưới nút; ở lại form.
+**Cách đọc:** mỗi dòng là một tình huống test. *Bối cảnh* = tình trạng trước khi làm; *Người dùng làm* = thao tác cụ thể; *Hệ thống phản hồi* = điều đã nhìn thấy (chữ trong `…` là nguyên văn). (Giới test gọi là Given – When – Then; mỗi dòng là một "tiêu chí chấp nhận", viết tắt AC.)
 
 | ID | Tình huống | Bối cảnh | Người dùng làm | Hệ thống phản hồi | Nhãn · Bằng chứng · Liên quan |
 |---|---|---|---|---|---|
-| <a id="login-s02-ac01"></a>`LOGIN-S02-AC01` | Email đúng, mật khẩu sai | Chưa đăng nhập | Nhập `shopper@sunny.test` và một mật khẩu sai, bấm "Sign in" | Hiện [LOGIN-M03](#login-m03) trong khung đỏ dưới nút. Ở lại form; email còn nguyên trong ô, ô mật khẩu bị xóa trống. Không vào được cửa hàng. | đã thấy · [E01](#e01) · `LOGIN-R04`, `LOGIN-M03` |
-| <a id="login-s02-ac02"></a>`LOGIN-S02-AC02` | Email không tồn tại | Chưa đăng nhập | Nhập `nobody.xyz@sunny.test` và một mật khẩu bất kỳ, bấm "Sign in" | Máy chủ trả 401 với mã lỗi `INVALID_CREDENTIALS`; hiện cùng câu [LOGIN-M03](#login-m03) như `LOGIN-S02-AC01` (không cho biết email sai hay mật khẩu sai). Email giữ nguyên, mật khẩu xóa. | đã thấy · [E02](#e02), [E13](#e13) · `LOGIN-R04`, `LOGIN-M03` |
-| <a id="login-s02-ac03"></a>`LOGIN-S02-AC03` | Mật khẩu đúng nhưng đổi hoa/thường một chữ | Chưa đăng nhập | Nhập email đúng, mật khẩu đúng nhưng một chữ cái đổi hoa thành thường (hoặc ngược lại), bấm "Sign in" | Không đăng nhập được; hiện [LOGIN-M03](#login-m03) (mật khẩu phân biệt chữ hoa, thường). | đã thấy · [E03](#e03), [E13](#e13) · `LOGIN-R02`, `LOGIN-M03` |
-| <a id="login-s02-ac04"></a>`LOGIN-S02-AC04` | Ba lần sai liên tiếp | Chưa đăng nhập | Đăng nhập sai ba lần liên tiếp (một lần mỗi tình huống `LOGIN-S02-AC01`, `AC02`, `AC03`), rồi đăng nhập đúng | Cả ba lần đều chỉ báo [LOGIN-M03](#login-m03); không thấy bị chặn hay thông báo khóa; đăng nhập đúng sau đó vẫn thành công. Chưa thử quá 3 lần. | chưa rõ · [E15](#e15) · `LOGIN-Q01` |
+| <a id="login-s01-ac01"></a>`LOGIN-S01-AC01` | Mở trang khi chưa đăng nhập | Chưa đăng nhập | Mở trang chủ `/` | Hiện màn hình đăng nhập: hai tab "Sign in" và "Create account", ô email, ô mật khẩu, "Remember me on this device", nút Sign in, nút "Show", liên kết "Forgot password?". Hệ thống kiểm phiên khi tải trang (`GET /api/me` → 401). Form có `novalidate` (trình duyệt không tự kiểm) | đã thấy · [E01](#e01) · |
+| <a id="login-s01-ac02"></a>`LOGIN-S01-AC02` | Bỏ trống cả hai ô | Đang ở form đăng nhập, hai ô trống | Bấm Sign in | Dưới ô email hiện `Enter your email address.`, dưới ô mật khẩu hiện `Enter your password.`, hai ô viền đỏ. Không có yêu cầu `POST /api/auth/login` nào được gửi | đã thấy · [E02](#e02) · `LOGIN-R04`, `LOGIN-M01`, `LOGIN-M02` |
+| <a id="login-s01-ac03"></a>`LOGIN-S01-AC03` | Bỏ trống ô mật khẩu | Đang ở form, ô email có `abc`, ô mật khẩu trống | Nhấn Enter | Ô mật khẩu báo `Enter your password.`. Không gửi yêu cầu đăng nhập. (Ô email không báo gì với `abc`: dự án chưa làm kiểm định email, không coi là yêu cầu) | đã thấy · [E03](#e03) · `LOGIN-R04`, `LOGIN-M02` |
+| <a id="login-s01-ac04"></a>`LOGIN-S01-AC04` | Đăng nhập thành công | Chưa đăng nhập; bấm "Use customer" để điền email `shopper@sunny.test` và mật khẩu mẫu; không đánh dấu Remember me | Bấm Sign in | Nút đổi thành "Signing in…" vài giây rồi vào cửa hàng Sunny Store (Shop, My orders, Profile, Bag), lời chào "WELCOME, SUNNY". Mạng: `POST /api/auth/login` → 200, `GET /api/store/products` → 200, `GET /api/store/cart` → 200 | đã thấy · [E06](#e06) · [Ảnh 06](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/06-sau-dang-nhap-cua-hang.jpg) |
+| <a id="login-s01-ac05"></a>`LOGIN-S01-AC05` | Email không tồn tại | Đã bấm "Use customer", rồi đổi email thành `khongtontai@sunny.test` (mật khẩu giữ nguyên) | Nhấn Enter | `POST /api/auth/login` → 401. Khung đỏ dưới nút: `Email or password is incorrect.`. Ô mật khẩu giữ nguyên nội dung, ô email giữ chữ vừa nhập, vẫn ở form | đã thấy · [E12](#e12) · `LOGIN-R03`, `LOGIN-M03` · [Ảnh 05](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/05-email-khong-ton-tai.jpg) |
+| <a id="login-s01-ac06"></a>`LOGIN-S01-AC06` | Mật khẩu sai | Email `shopper@sunny.test`, mật khẩu sai (chuỗi tester tự đặt) | Nhấn Enter | `POST /api/auth/login` → 401. Cùng khung `Email or password is incorrect.` như email không tồn tại (không cho biết email có tồn tại). Mật khẩu giữ nguyên trong ô | đã thấy · [E17](#e17) · `LOGIN-R03`, `LOGIN-M03` · [Ảnh 07](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/07-sai-mat-khau.jpg) |
+| <a id="login-s01-ac07"></a>`LOGIN-S01-AC07` | Mật khẩu đúng nhưng thêm khoảng trắng cuối | Đã bấm "Use customer", bấm vào cuối ô mật khẩu và gõ thêm một dấu cách | Nhấn Enter | `POST /api/auth/login` → 401, cùng thông báo `Email or password is incorrect.`: mật khẩu không bị cắt khoảng trắng | đã thấy · [E18](#e18) · `LOGIN-R02`, `LOGIN-M03` |
+| <a id="login-s01-ac08"></a>`LOGIN-S01-AC08` | Email viết hoa vẫn đăng nhập được | Chưa đăng nhập; mật khẩu mẫu đã điền | Đổi email thành `SHOPPER@SUNNY.TEST`, nhấn Enter | Đăng nhập thành công (`POST /api/auth/login` → 200): email không phân biệt hoa thường | đã thấy · [E13](#e13), [E16](#e16) · `LOGIN-R01` |
+| <a id="login-s01-ac09"></a>`LOGIN-S01-AC09` | Bấm Sign in nhiều lần liên tiếp | Đã bấm "Use customer" | Bấm Sign in 3 lần liên tiếp rất nhanh | Chỉ gửi **1** yêu cầu `POST /api/auth/login` (nút bị vô hiệu hóa sau lần bấm đầu, hiện "Signing in…"); đăng nhập thành công, `/api/me` → 200 | đã thấy · [E20](#e20) · |
+| <a id="login-s01-ac10"></a>`LOGIN-S01-AC10` | Đăng nhập đúng sau vài lần sai | Đã đăng nhập sai 3 lần liên tiếp (email không tồn tại, mật khẩu sai, mật khẩu thừa dấu cách) | Bấm "Use customer", bấm Sign in | Đăng nhập thành công (`/api/me` → 200), tài khoản chưa bị khóa. (Dự án chưa làm giới hạn nên không có ngưỡng) | đã thấy · [E19](#e19) · `LOGIN-S01-AC05`–`AC07` |
+| <a id="login-s01-ac11"></a>`LOGIN-S01-AC11` | Hệ thống biết ai đang đăng nhập | Vừa đăng nhập thành công bằng `SHOPPER` | Xem `GET /api/me` (F12 → Network) | 200; `user` gồm email, id, name "Sunny Shopper", role "Customer", workspaceId | đã thấy · [E07](#e07) · |
 
-### `LOGIN-S03` — Báo thiếu thông tin trước khi gửi
-**Là** khách hàng, **tôi muốn** được báo ngay khi quên nhập ô nào **để** khỏi gửi form thiếu.
-
-**Luồng:** (1) bấm "Sign in" khi còn ô trống → (2) lỗi ngay dưới từng ô trống, không gửi lên máy chủ.
-
-| ID | Tình huống | Bối cảnh | Người dùng làm | Hệ thống phản hồi | Nhãn · Bằng chứng · Liên quan |
-|---|---|---|---|---|---|
-| <a id="login-s03-ac01"></a>`LOGIN-S03-AC01` | Để trống cả hai ô | Chưa đăng nhập, hai ô trống | Bấm "Sign in" | Hiện [LOGIN-M01](#login-m01) dưới ô email và [LOGIN-M02](#login-m02) dưới ô mật khẩu; hai ô viền đỏ. Không có lệnh gọi đăng nhập nào gửi đi. | đã thấy · [E10](#e10) · `LOGIN-R01`, `LOGIN-R02`, `LOGIN-M01`, `LOGIN-M02` |
-| <a id="login-s03-ac02"></a>`LOGIN-S03-AC02` | Email sai định dạng, mật khẩu trống | Chưa đăng nhập | Nhập `abc` vào ô email, để trống mật khẩu, bấm "Sign in" | Chỉ hiện [LOGIN-M02](#login-m02); ô email không báo lỗi định dạng. | đã thấy · [E10](#e10) · `LOGIN-R01`, `LOGIN-M02`, `LOGIN-Q04` |
-
-### `LOGIN-S04` — Phiên đăng nhập và đăng xuất
-**Là** khách hàng, **tôi muốn** vẫn đăng nhập khi tải lại trang và đăng xuất khi xong **để** dùng tiện và an toàn.
-
-**Luồng:** (1) đăng nhập → (2) tải lại hoặc mở thêm tab, vẫn đăng nhập → (3) bấm "Sign out" → (4) về form đăng nhập.
+### `LOGIN-S02` — Hỗ trợ khi nhập mật khẩu
+**Là** khách hàng, **tôi muốn** xem lại mật khẩu đang gõ và có lối "quên mật khẩu" **để** đăng nhập chính xác.
 
 | ID | Tình huống | Bối cảnh | Người dùng làm | Hệ thống phản hồi | Nhãn · Bằng chứng · Liên quan |
 |---|---|---|---|---|---|
-| <a id="login-s04-ac01"></a>`LOGIN-S04-AC01` | Tải lại trang khi đã đăng nhập | Đã đăng nhập | Tải lại trang | Vẫn đăng nhập: thấy "Sign out", không thấy ô mật khẩu. | đã thấy · [E06](#e06) · `LOGIN-R03` |
-| <a id="login-s04-ac02"></a>`LOGIN-S04-AC02` | Mở tab thứ hai cùng phiên | Đã đăng nhập ở tab 1 | Mở tab mới, vào địa chỉ gốc | Tab thứ hai cũng đã đăng nhập. | đã thấy · [E13](#e13) · `LOGIN-R03` |
-| <a id="login-s04-ac03"></a>`LOGIN-S04-AC03` | Đăng xuất | Đã đăng nhập | Bấm nút "Sign out" | Hiện [LOGIN-M05](#login-m05); quay lại form đăng nhập; gọi `GET /api/me` trả 401. | đã thấy · [E07](#e07), [E13](#e13) · `LOGIN-M05` |
-| <a id="login-s04-ac04"></a>`LOGIN-S04-AC04` | Đăng xuất ở tab này, tab kia | Đã đăng nhập ở hai tab cùng phiên | Đăng xuất ở tab 1, rồi gọi `GET /api/me` ở tab 2 và tải lại tab 2 | `GET /api/me` ở tab 2 trả 401; tải lại thì tab 2 hiện form đăng nhập. | đã thấy · [E13](#e13) · `LOGIN-R03` |
+| <a id="login-s02-ac01"></a>`LOGIN-S02-AC01` | Hiện và ẩn mật khẩu | Ở form đăng nhập, ô mật khẩu đã có nội dung (do "Use customer") | Bấm "Show", rồi bấm lần nữa | Lần 1: ô mật khẩu hiện chữ nhìn thấy được, nút đổi thành "Hide". Lần 2: ô mật khẩu ẩn lại (kiểm bằng thuộc tính `type`, không chụp ảnh vì lộ mật khẩu) | đã thấy · [E05](#e05) · |
+| <a id="login-s02-ac02"></a>`LOGIN-S02-AC02` | Bấm "Forgot password?" | Ở form đăng nhập | Bấm "Forgot password?" | Thông báo nhỏ góc dưới phải: `Password recovery is disabled in the training environment.`, không chuyển trang | đã thấy · [E04](#e04) · `LOGIN-M04` · [Ảnh 04](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/04-quen-mat-khau.jpg) |
 
-### `LOGIN-S05` — Truy cập khi chưa đăng nhập
-**Là** người chưa đăng nhập, **tôi muốn** bị đưa về form đăng nhập **để** không xem được nội dung dành cho người đã đăng nhập.
+### `LOGIN-S03` — Giữ phiên và đăng xuất
+**Là** khách hàng, **tôi muốn** vẫn đăng nhập khi tải lại trang và thoát được khi cần **để** dùng thuận tiện mà vẫn kiểm soát tài khoản.
 
 | ID | Tình huống | Bối cảnh | Người dùng làm | Hệ thống phản hồi | Nhãn · Bằng chứng · Liên quan |
 |---|---|---|---|---|---|
-| <a id="login-s05-ac01"></a>`LOGIN-S05-AC01` | Mở thẳng một trang bên trong | Chưa đăng nhập | Mở `…/#profile` | Địa chỉ giữ nguyên `/#profile` nhưng nội dung là form đăng nhập; không thấy trang hồ sơ. | đã thấy · [E08](#e08) |
-| <a id="login-s05-ac02"></a>`LOGIN-S05-AC02` | Mở địa chỉ không tồn tại | Chưa đăng nhập | Mở `…/khong-ton-tai` | Máy chủ trả 200 và hiện luôn trang đăng nhập; không có trang "không tìm thấy". | chưa rõ · [E09](#e09) · `LOGIN-Q05` |
-| <a id="login-s05-ac03"></a>`LOGIN-S05-AC03` | Kiểm phiên khi chưa đăng nhập | Chưa đăng nhập | Gọi `GET /api/me` (trình duyệt tự gọi khi mở trang) | Trả 401. | đã thấy · [E10](#e10), [E13](#e13) · `LOGIN-R03` |
+| <a id="login-s03-ac01"></a>`LOGIN-S03-AC01` | Tải lại trang khi đã đăng nhập | Đã đăng nhập, đang ở cửa hàng | Tải lại trang | Vẫn đăng nhập: không hiện form, hiện "Loading your store…" rồi vào lại cửa hàng | đã thấy · [E08](#e08) · |
+| <a id="login-s03-ac02"></a>`LOGIN-S03-AC02` | Đăng xuất | Đã đăng nhập | Bấm Sign out (thanh cửa hàng) | Thông báo `You have been signed out.`, quay về form đăng nhập, ô email và mật khẩu trống. `POST /api/auth/logout` → 200, sau đó `GET /api/me` → 401 | đã thấy · [E11](#e11) · `LOGIN-M05` |
+| <a id="login-s03-ac03"></a>`LOGIN-S03-AC03` | Truy cập địa chỉ trong ứng dụng sau khi đăng xuất | Vừa đăng xuất | Bấm nút Back của trình duyệt; rồi mở `#profile`, `#my-orders`, `#dashboard` | Back về địa chỉ `#profile` nhưng vẫn hiện form đăng nhập; cả ba địa chỉ đều hiện form đăng nhập. `GET /api/dashboard` và `GET /api/store/products` → 401 | đã thấy · [E14](#e14) · |
+| <a id="login-s03-ac04"></a>`LOGIN-S03-AC04` | Đăng xuất ở tab khác | Tab 1 và tab 2 cùng đăng nhập; đã đăng xuất ở tab 2 | Ở tab 1 chuyển trang (mở `#my-orders`) | Tab 1 hiện form đăng nhập, `GET /api/me` → 401. (Trước khi chuyển trang, tab 1 vẫn hiện cửa hàng: dự án chưa làm tự thoát, không coi là yêu cầu) | đã thấy · [E15](#e15) · |
 
-### `LOGIN-S06` — Quên mật khẩu
-**Là** khách hàng, **tôi muốn** biết cách lấy lại mật khẩu **để** vào lại tài khoản.
+### `LOGIN-S04` — Quyền của Customer với phần quản trị
+**Là** hệ thống, **tôi muốn** không cho Customer dùng chức năng quản trị **để** tách cửa hàng và vận hành.
 
 | ID | Tình huống | Bối cảnh | Người dùng làm | Hệ thống phản hồi | Nhãn · Bằng chứng · Liên quan |
 |---|---|---|---|---|---|
-| <a id="login-s06-ac01"></a>`LOGIN-S06-AC01` | Bấm "Forgot password?" | Chưa đăng nhập | Bấm "Forgot password?" | Hiện [LOGIN-M06](#login-m06) trong thông báo tạm; trang không đổi. | chưa rõ · [E14](#e14) · `LOGIN-M06`, `LOGIN-Q06` |
+| <a id="login-s04-ac01"></a>`LOGIN-S04-AC01` | Customer gọi API quản trị | Đăng nhập bằng `SHOPPER` (Customer) | Gọi `GET /api/dashboard`, `/api/products`, `/api/orders` (F12) | Cả ba trả 403, nội dung `{"error":"FORBIDDEN","message":"Operations portal access is required."}`. `GET /api/auth/login` cũng 403 với cùng nội dung | đã thấy · [E10](#e10) · `LOGIN-M06` |
 
 ## 4. Bảng tra cứu
 ### 4.1 Quy tắc dữ liệu
 | ID | Trường | Quy tắc quan sát được | Nhãn | Bằng chứng |
 |---|---|---|---|---|
-| <a id="login-r01"></a>`LOGIN-R01` | Email | Bắt buộc (trình duyệt chỉ kiểm không để trống, không kiểm định dạng); ô kiểu email, không giới hạn độ dài; khoảng trắng đầu cuối bị cắt trước khi gửi; chữ hoa thường không ảnh hưởng (mới thử một email viết hoa toàn bộ). | đã thấy | [E10](#e10), [E11](#e11), [E12](#e12), [E04](#e04) |
-| <a id="login-r02"></a>`LOGIN-R02` | Mật khẩu | Bắt buộc; không giới hạn độ dài ở ô nhập; phân biệt chữ hoa, thường; gửi nguyên văn, không cắt khoảng trắng. | đã thấy | [E10](#e10), [E11](#e11), [E12](#e12), [E03](#e03) |
-| <a id="login-r03"></a>`LOGIN-R03` | Phiên | Cookie `sunny_session` có `HttpOnly`, `Secure`, `SameSite=Lax`; không lưu gì trong `localStorage` hay `sessionStorage`; các tab cùng trình duyệt dùng chung phiên. | đã thấy | [E13](#e13) |
-| <a id="login-r04"></a>`LOGIN-R04` | Thông tin đăng nhập sai | Email không tồn tại và mật khẩu sai cho cùng một câu lỗi và cùng mã lỗi `INVALID_CREDENTIALS`. | đã thấy | [E01](#e01), [E02](#e02), [E13](#e13) |
+| <a id="login-r01"></a>`LOGIN-R01` | Email | Không phân biệt hoa thường; giao diện cắt khoảng trắng đầu/cuối (`trim`) trước khi gửi | đã thấy | [E13](#e13), [E16](#e16) |
+| <a id="login-r02"></a>`LOGIN-R02` | Mật khẩu | Không bị cắt khoảng trắng: thêm dấu cách cuối thì không đăng nhập được; gửi lên máy chủ trong thân `{email, password}` | đã thấy | [E16](#e16), [E18](#e18) |
+| <a id="login-r03"></a>`LOGIN-R03` | Email và mật khẩu | Lỗi đăng nhập dùng chung một thông báo cho "email không tồn tại" và "mật khẩu sai", không cho biết ô nào sai | đã thấy | [E12](#e12), [E17](#e17) |
+| <a id="login-r04"></a>`LOGIN-R04` | Email và mật khẩu | Cả hai ô đều bắt buộc: bỏ trống thì báo ngay trên trang và không gửi yêu cầu lên máy chủ | đã thấy | [E02](#e02), [E03](#e03) |
 
 ### 4.2 Thông báo hệ thống (nguyên văn)
 | ID | Khi nào | Tiếng Việt | English | Bằng chứng |
 |---|---|---|---|---|
-| <a id="login-m01"></a>`LOGIN-M01` | Để trống ô email | (hệ thống chỉ có tiếng Anh) | `Enter your email address.` | [E10](#e10), [E12](#e12) |
-| <a id="login-m02"></a>`LOGIN-M02` | Để trống ô mật khẩu | (hệ thống chỉ có tiếng Anh) | `Enter your password.` | [E10](#e10), [E12](#e12) |
-| <a id="login-m03"></a>`LOGIN-M03` | Email hoặc mật khẩu không đúng | (hệ thống chỉ có tiếng Anh) | `Email or password is incorrect.` (chữ do máy chủ trả về) | [E01](#e01), [E02](#e02), [E03](#e03) |
-| <a id="login-m04"></a>`LOGIN-M04` | Đăng nhập thành công | (hệ thống chỉ có tiếng Anh) | `Welcome back, Sunny!` (tên đầu của người dùng) | [E04](#e04), [E05](#e05) |
-| <a id="login-m05"></a>`LOGIN-M05` | Đăng xuất | (hệ thống chỉ có tiếng Anh) | `You have been signed out.` | [E07](#e07) |
-| <a id="login-m06"></a>`LOGIN-M06` | Bấm "Forgot password?" | (hệ thống chỉ có tiếng Anh) | `Password recovery is disabled in the training environment.` | [E14](#e14), [E12](#e12) |
-| <a id="login-m07"></a>`LOGIN-M07` | Đang gửi đăng nhập | (hệ thống chỉ có tiếng Anh) | Chữ trên nút đổi thành `Signing in…`, nút bị khóa trong lúc chờ (chỉ thấy trong tệp giao diện, chưa thấy trên màn hình) | [E12](#e12) |
+| <a id="login-m01"></a>`LOGIN-M01` | Bỏ trống ô email | (chưa có bản tiếng Việt, giao diện chỉ có tiếng Anh) | `Enter your email address.` | [E02](#e02) |
+| <a id="login-m02"></a>`LOGIN-M02` | Bỏ trống ô mật khẩu | — | `Enter your password.` | [E02](#e02), [E03](#e03) |
+| <a id="login-m03"></a>`LOGIN-M03` | Email hoặc mật khẩu sai | — | `Email or password is incorrect.` | [E12](#e12), [E17](#e17), [E18](#e18) |
+| <a id="login-m04"></a>`LOGIN-M04` | Bấm "Forgot password?" | — | `Password recovery is disabled in the training environment.` | [E04](#e04) |
+| <a id="login-m05"></a>`LOGIN-M05` | Đăng xuất | — | `You have been signed out.` | [E11](#e11) |
+| <a id="login-m06"></a>`LOGIN-M06` | Customer gọi API quản trị (nội dung lỗi trả về) | — | `Operations portal access is required.` | [E10](#e10) |
 
 ## 5. Điểm chưa rõ và câu hỏi cho team
+Người dùng chốt 2026-11-20: dự án chưa làm các điểm dưới đây nên **không hỏi BA, không viết test case kỳ vọng, không báo bug**; xem lại khi người dùng nói dự án đã làm.
+
 | ID | Đã thấy | Vì sao chưa rõ | Câu hỏi | Liên quan | Trạng thái |
 |---|---|---|---|---|---|
-| <a id="login-q01"></a>`LOGIN-Q01` | Ba lần sai liên tiếp vẫn không bị chặn | Dừng ở 3 lần theo dặn của người test để khỏi khóa hệ thống | Có giới hạn đăng nhập sai không? Bao nhiêu lần, chặn bao lâu, tính theo tài khoản hay theo địa chỉ? | `LOGIN-S02-AC04` | mở |
-| <a id="login-q02"></a>`LOGIN-Q02` | Tích "Remember me" cho cookie giống hệt không tích | Không thấy khác biệt | Hộp này phải làm gì (ví dụ kéo dài phiên)? | `LOGIN-S01-AC04` | mở |
-| <a id="login-q03"></a>`LOGIN-Q03` | Cookie phiên có thời hạn | Chưa đo giá trị chính xác, chưa chờ hết hạn | Phiên sống bao lâu và hết hạn thì hệ thống làm gì? | `LOGIN-R03` | mở |
-| <a id="login-q04"></a>`LOGIN-Q04` | Email `abc` không bị trình duyệt chặn | Chưa gửi lên máy chủ (mỗi lần gửi sai là một lần đếm) | Email sai định dạng có cần báo lỗi riêng không? | `LOGIN-S03-AC02`, `LOGIN-R01` | mở |
-| <a id="login-q05"></a>`LOGIN-Q05` | Địa chỉ không tồn tại trả 200 và hiện trang đăng nhập | Không biết do thiết kế (trang một màn) hay thiếu trang 404 | Có yêu cầu trang "không tìm thấy" không? | `LOGIN-S05-AC02` | mở |
-| <a id="login-q06"></a>`LOGIN-Q06` | "Forgot password?" chỉ báo đang tắt | Môi trường thử | Bản thật xử lý quên mật khẩu thế nào? | `LOGIN-S06-AC01` | mở |
-| <a id="login-q07"></a>`LOGIN-Q07` | Chỉ thấy vai trò "Customer" | Chưa có tài khoản khác | Có vai trò khác (ví dụ quản trị) không, và nhìn thấy gì khác? | `LOGIN-S01-AC01` | mở |
-| <a id="login-q08"></a>`LOGIN-Q08` | Email viết hoa vẫn đăng nhập được | Mới thử một ví dụ | Email có được coi là không phân biệt chữ hoa thường theo yêu cầu không? | `LOGIN-R01`, `LOGIN-S01-AC02` | mở |
+| <a id="login-q01"></a>`LOGIN-Q01` | Nhập `abc` ở ô email không báo lỗi định dạng ([E03](#e03)) | Chưa có yêu cầu về định dạng email | Có cần báo lỗi định dạng email không? | `LOGIN-S01-AC03` | bỏ qua, dự án chưa làm |
+| <a id="login-q02"></a>`LOGIN-Q02` | "Remember me on this device" không có tác dụng thấy được; mã giao diện không dùng ([E16](#e16)) | Không rõ là thiết kế hay chưa làm | Remember me có tác dụng gì? | `LOGIN-S01-AC04` | bỏ qua, dự án chưa làm |
+| <a id="login-q03"></a>`LOGIN-Q03` | Khung "Customer training login" hiện sẵn email và mật khẩu mẫu ([E01](#e01)) | Không rõ có giữ ở môi trường thật | Khung tài khoản mẫu có giữ không? | `LOGIN-S01-AC01` | bỏ qua, dự án chưa làm |
+| <a id="login-q04"></a>`LOGIN-Q04` | Customer mở `#dashboard`, `#products`, `#api-lab` thì hiện trang chủ cửa hàng, không báo thiếu quyền ([E09](#e09)) | Không rõ có đúng ý | Có cần báo "không đủ quyền" không? | `LOGIN-S04-AC01` | bỏ qua, dự án chưa làm |
+| <a id="login-q05"></a>`LOGIN-Q05` | Đăng xuất ở tab khác, tab đầu chỉ biết khi chuyển trang ([E15](#e15)) | Không rõ có cần tự thoát ngay | Có cần tự thoát ngay ở mọi tab không? | `LOGIN-S03-AC04` | bỏ qua, dự án chưa làm |
+| <a id="login-q06"></a>`LOGIN-Q06` | Đã gửi 3 lần sai, chưa thấy khóa ([E19](#e19)); phiên đăng nhập mất vài giây ([E06](#e06)) | Chưa có số lần sai tối đa, thời gian sống phiên, thời gian chờ | Giới hạn lần sai, hạn phiên, thời gian phản hồi là bao nhiêu? | `LOGIN-S01-AC10` | bỏ qua, dự án chưa làm |
 
 ## 6. Bằng chứng và chưa khám phá
 ### 6.1 Bằng chứng
-Cột "Ngày · phiên bản · tài khoản": tất cả ngày 2026-11-20, staging, không thấy số phiên bản; tài khoản khách mẫu khi có đăng nhập.
+Mỗi bằng chứng là một hàng của [nhật ký khám phá](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) (mục 1, cột "#"). Tài khoản `SHOPPER`, ngày 2026-11-20, khung nhìn 1280×800. "Quan sát công cụ" = F12, không có ảnh.
 
 | ID | Loại | Ngày · phiên bản · tài khoản | Thao tác đã làm | Tệp | Cách kiểm lại |
 |---|---|---|---|---|---|
-| <a id="e01"></a>`LOGIN-E01` | ảnh | 2026-11-20 · khách mẫu | Email đúng + mật khẩu sai | [01-sai-mat-khau.png](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/01-sai-mat-khau.png) | Mở trang, nhập email của tài khoản mẫu và một mật khẩu sai, bấm Sign in |
-| <a id="e02"></a>`LOGIN-E02` | ảnh | 2026-11-20 · không có tài khoản | Email không tồn tại | [02-email-khong-ton-tai.png](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/02-email-khong-ton-tai.png) | Nhập email không có thật và mật khẩu bất kỳ |
-| <a id="e03"></a>`LOGIN-E03` | ảnh | 2026-11-20 · khách mẫu | Mật khẩu đúng đổi hoa/thường một chữ | [03-mat-khau-doi-hoa-thuong.png](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/03-mat-khau-doi-hoa-thuong.png) | Nhập mật khẩu đúng nhưng đổi một chữ cái từ hoa sang thường |
-| <a id="e04"></a>`LOGIN-E04` | ảnh | 2026-11-20 · khách mẫu | Email viết hoa, nhấn Enter | [04-email-viet-hoa-enter.png](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/04-email-viet-hoa-enter.png) | Nhập email viết hoa toàn bộ và mật khẩu đúng, nhấn Enter |
-| <a id="e05"></a>`LOGIN-E05` | ảnh | 2026-11-20 · khách mẫu | Đăng nhập đúng | [05-dang-nhap-dung.png](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/05-dang-nhap-dung.png) | Đăng nhập đúng bằng tài khoản mẫu |
-| <a id="e06"></a>`LOGIN-E06` | ảnh | 2026-11-20 · khách mẫu | Tải lại trang | [06-sau-tai-lai.png](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/06-sau-tai-lai.png) | Đăng nhập rồi bấm F5 |
-| <a id="e07"></a>`LOGIN-E07` | ảnh | 2026-11-20 · khách mẫu | Đăng xuất | [07-sau-dang-xuat.png](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/07-sau-dang-xuat.png) | Đăng nhập rồi bấm Sign out |
-| <a id="e08"></a>`LOGIN-E08` | ảnh | 2026-11-20 · chưa đăng nhập | Mở `/#profile` | [08-lien-ket-sau-chua-dang-nhap.png](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/08-lien-ket-sau-chua-dang-nhap.png) | Cửa sổ ẩn danh, mở địa chỉ gốc + `#profile` |
-| <a id="e09"></a>`LOGIN-E09` | ảnh | 2026-11-20 · chưa đăng nhập | Mở `/khong-ton-tai` | [09-dia-chi-khong-ton-tai.png](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/09-dia-chi-khong-ton-tai.png) | Cửa sổ ẩn danh, mở địa chỉ gốc + `khong-ton-tai` |
-| <a id="e10"></a>`LOGIN-E10` | quan sát công cụ nhà phát triển | 2026-11-20 · chưa đăng nhập | Bấm Sign in khi để trống; email `abc` + mật khẩu trống; xem lệnh gọi mạng | không có ảnh; [nhật ký hàng 1–3](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | F12 → Network, bấm Sign in khi để trống: không thấy `/api/auth/login`, chỉ `GET /api/me` → 401 |
-| <a id="e11"></a>`LOGIN-E11` | quan sát công cụ nhà phát triển | 2026-11-20 · chưa đăng nhập | Đọc thuộc tính ô nhập | không có ảnh; [nhật ký hàng 4](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | F12 → Elements, chọn `#email`, `#password`, `#login-form` |
-| <a id="e12"></a>`LOGIN-E12` | tệp giao diện | 2026-11-20 | Đọc `/app.js` công khai | không có ảnh; [nhật ký hàng 24](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | F12 → Sources → `app.js`, tìm `login-form`; tên tệp và nội dung có thể đổi theo bản |
-| <a id="e13"></a>`LOGIN-E13` | quan sát công cụ nhà phát triển (script) | 2026-11-20 · khách mẫu | Script đọc mã trạng thái, tên cookie, hai tab, đăng xuất | [kham-pha-dang-nhap.py](../../evidence/ecommerce-lite/features/dang-nhap/kham-pha-dang-nhap.py); [nhật ký hàng 7–17](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | F12 → Network và Application → Cookies khi làm lại từng thao tác; script cần `.env` và đã dùng hết 3 lần sai |
-| <a id="e14"></a>`LOGIN-E14` | quan sát công cụ nhà phát triển | 2026-11-20 · chưa đăng nhập | Bấm "Forgot password?" | không có ảnh; [nhật ký hàng 5](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | Bấm "Forgot password?", đọc thông báo tạm ở góc dưới phải (biến mất sau vài giây) |
-| <a id="e15"></a>`LOGIN-E15` | ảnh | 2026-11-20 · khách mẫu | Ba lần sai liên tiếp rồi đăng nhập đúng | [01](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/01-sai-mat-khau.png), [02](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/02-email-khong-ton-tai.png), [03](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/03-mat-khau-doi-hoa-thuong.png), [04](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/04-email-viet-hoa-enter.png) | Làm lại ba tình huống sai rồi đăng nhập đúng (chỉ khi người test cho phép, vì chưa biết ngưỡng khóa) |
+| <a id="e01"></a>`LOGIN-E01` | ảnh | 2026-11-20 · không rõ số bản · chưa đăng nhập | Mở `/` khi chưa đăng nhập | [Ảnh 01](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/01-man-hinh-dang-nhap.jpg), nhật ký hàng 1 | Mở `/` ở cửa sổ ẩn danh; F12 → Network → `/api/me` |
+| <a id="e02"></a>`LOGIN-E02` | ảnh | cùng | Bỏ trống hai ô, bấm Sign in | [Ảnh 02](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/02-bo-trong-hai-o.jpg), hàng 2 | Làm lại; F12 → Network không có `login` |
+| <a id="e03"></a>`LOGIN-E03` | ảnh | cùng | Email `abc`, bỏ trống mật khẩu, Enter | [Ảnh 03](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/03-email-abc-bo-trong-mat-khau.jpg), hàng 3 | Làm lại |
+| <a id="e04"></a>`LOGIN-E04` | ảnh | cùng | Bấm "Forgot password?" | [Ảnh 04](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/04-quen-mat-khau.jpg), hàng 4 | Làm lại |
+| <a id="e05"></a>`LOGIN-E05` | quan sát công cụ nhà phát triển | cùng | "Use customer", rồi "Show" / "Hide" | [Nhật ký hàng 5](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) (không có ảnh vì lộ mật khẩu) | F12 → Elements, thuộc tính `type` của ô mật khẩu |
+| <a id="e06"></a>`LOGIN-E06` | ảnh | cùng | Đăng nhập bằng tài khoản mẫu | [Ảnh 06](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/06-sau-dang-nhap-cua-hang.jpg), hàng 6 | Làm lại; F12 → Network |
+| <a id="e07"></a>`LOGIN-E07` | quan sát công cụ nhà phát triển | cùng | Đọc `GET /api/me` sau đăng nhập | [Nhật ký hàng 7](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | F12 → Network → `/api/me` |
+| <a id="e08"></a>`LOGIN-E08` | quan sát | cùng | Tải lại trang khi đã đăng nhập | [Nhật ký hàng 8](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | Làm lại |
+| <a id="e09"></a>`LOGIN-E09` | quan sát | cùng | Đổi địa chỉ thành `#dashboard`, `#products`, `#api-lab`, `#khong-ton-tai`, `#profile` | [Nhật ký hàng 9](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | Làm lại |
+| <a id="e10"></a>`LOGIN-E10` | quan sát công cụ nhà phát triển | cùng | Gọi API quản trị khi là Customer | [Nhật ký hàng 10](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | F12 → Network / Console gọi `fetch('/api/dashboard')` |
+| <a id="e11"></a>`LOGIN-E11` | quan sát | cùng | Bấm Sign out | [Nhật ký hàng 11](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | Làm lại; F12 → Network → `logout` |
+| <a id="e12"></a>`LOGIN-E12` | ảnh | cùng | "Use customer", đổi email thành `khongtontai@sunny.test`, Enter | [Ảnh 05](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/05-email-khong-ton-tai.jpg), hàng 12 | Làm lại; F12 → Network |
+| <a id="e13"></a>`LOGIN-E13` | quan sát | cùng | Email `SHOPPER@SUNNY.TEST` + mật khẩu mẫu, Enter | [Nhật ký hàng 13](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | Làm lại |
+| <a id="e14"></a>`LOGIN-E14` | quan sát | cùng | Sau đăng xuất: Back, mở `#profile`, `#my-orders`, `#dashboard` | [Nhật ký hàng 14](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | Làm lại |
+| <a id="e15"></a>`LOGIN-E15` | quan sát | cùng | Hai tab, đăng xuất ở tab 2, chuyển trang ở tab 1 | [Nhật ký hàng 15](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | Làm lại với hai tab cùng trình duyệt |
+| <a id="e16"></a>`LOGIN-E16` | tệp giao diện | cùng | Đọc `/app.js` (chỉ đọc) | [Nhật ký hàng 16](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | Mở `/app.js`, tìm hàm gửi form đăng nhập |
+| <a id="e17"></a>`LOGIN-E17` | ảnh | cùng | Email đúng, mật khẩu sai, Enter | [Ảnh 07](../../evidence/ecommerce-lite/features/dang-nhap/screenshots/07-sai-mat-khau.jpg), hàng 17 | Làm lại |
+| <a id="e18"></a>`LOGIN-E18` | quan sát công cụ nhà phát triển | cùng | Mật khẩu mẫu thêm dấu cách cuối, Enter | [Nhật ký hàng 18](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | F12 → Network |
+| <a id="e19"></a>`LOGIN-E19` | quan sát | cùng | Sau 3 lần sai, đăng nhập đúng | [Nhật ký hàng 19](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | Làm lại |
+| <a id="e20"></a>`LOGIN-E20` | quan sát công cụ nhà phát triển | cùng | Bấm Sign in 3 lần nhanh | [Nhật ký hàng 20](../../evidence/ecommerce-lite/features/dang-nhap/bao-cao.md) | F12 → Network, đếm `login` |
 
 ### 6.2 Chưa khám phá
-- **Đăng nhập sai quá 3 lần, thời gian chặn:** có thể khóa hệ thống; người test dặn tối đa 3 lần. Cần câu trả lời cho `LOGIN-Q01`.
-- **Hết hạn phiên:** cần chờ dài; chưa đo thời hạn cookie.
-- **Vai trò khác ngoài khách:** chưa có tài khoản.
-- **Nút Back sau đăng xuất:** lần thử đầu cho kết quả không có nghĩa (mở từ trang trắng).
-- **Ô email rất dài, ký tự đặc biệt, email sai định dạng gửi lên máy chủ:** mỗi ca là một lần sai, đã dùng hết 3 lần.
-- **Nút "Show" (hiện mật khẩu), bấm "Sign in" hai lần liên tiếp:** chưa bấm thử.
-- **Đăng ký tài khoản (tab "Create account"):** ngoài phạm vi feature này.
+- **Giới hạn số lần đăng nhập sai, hết hạn phiên:** dự án chưa làm (người dùng chốt 2026-11-20); đã gửi 3 lần sai, không thấy khóa.
+- **Email/mật khẩu rất dài, ký tự đặc biệt:** gửi lên máy chủ tính là lần sai; không thử thêm khi chưa có ngưỡng.
+- **Vai Admin (cổng quản trị):** thiếu tài khoản.
+- **Tab "Create account":** thuộc tính năng đăng ký, cần tạo dữ liệu thật.
+- **Cookie phiên có đổi theo "Remember me":** cookie không đọc được từ trang.
 
 ## 7. Lịch sử thay đổi
 | Ngày | Phiên bản hệ thống | Thay đổi | Lý do |
 |---|---|---|---|
-| 2026-11-20 | không thấy số phiên bản | Tạo SRS lần đầu: 6 story, 18 AC (S01: 4, S02: 4, S03: 2, S04: 4, S05: 3, S06: 1), 4 quy tắc, 7 thông báo, 8 câu hỏi, 15 bằng chứng | Khám phá đăng nhập lần đầu |
+| 2026-11-20 | không rõ số bản | Tạo mới từ nhật ký khám phá: 4 story, 18 tiêu chí chấp nhận (AC), 4 quy tắc, 6 thông báo, 6 câu hỏi (đều bỏ qua), 20 bằng chứng | Có mã cố định để phân tích requirement và viết test case |

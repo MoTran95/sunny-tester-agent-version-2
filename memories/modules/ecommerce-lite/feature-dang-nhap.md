@@ -1,17 +1,31 @@
-# Ecommerce Lite — Đăng nhập (mã `LOGIN`)
-Đọc khi: làm tiếp tính năng Đăng nhập (test plan, test case, chạy test). Trạng thái 2026-11-20: đã có nhật ký khám phá, SRS nháp (6 story, 18 AC), bảng phân tích requirement, câu hỏi BA (chưa gửi, 4 hỏi ngay / 3 hỏi sau / 1 tự kiểm tra). Chưa có test plan, test case.
+# Ecommerce Lite — tính năng Đăng nhập (khám phá 2026-11-20)
+Đọc khi: viết SRS, phân tích requirement, test case, chạy test cho đăng nhập. Nguồn: `evidence/ecommerce-lite/features/dang-nhap/bao-cao.md` (20 hàng, bảng phủ) + `bao-cao-kham-pha.html`.
 
-## Sự thật đã quan sát (chi tiết ở `srs/ecommerce-lite/dang-nhap.md`)
-- Tài khoản test: mã `SHOPPER` trong `.env` (vai trò Customer). Đăng nhập script: `auto_login.py SHOPPER --headless`; nhãn ô `Login email`, nút `Sign in`, API `/api/auth/login`, kiểm phiên `/api/me`.
-- Sai thông tin → 401 `INVALID_CREDENTIALS` "Email or password is incorrect." (cùng câu cho email không tồn tại, mật khẩu sai, mật khẩu đổi hoa thường). Email không phân biệt hoa thường, bị cắt khoảng trắng. Trang một màn: địa chỉ bất kỳ trả 200 và hiện form khi chưa đăng nhập.
-- Bộ đếm nhập sai của máy này đã dùng **3/3** (người test dặn trần 3, chưa biết ngưỡng khóa thật; `block_minutes` chưa khai). Muốn chạy thêm ca nhập sai phải hỏi người test, rồi `run_tests.py --reset-failure-counter` chỉ khi chắc.
-- Tệp giao diện công khai: `/app.js`, `/store.js`, `/styles.css`; app.js không có ngưỡng khóa đăng nhập sai (không dùng để suy ra giới hạn).
-- `session_minutes` còn `null` trong `auto-config.json` (chưa đo; chưa tự đặt số).
+## Hành vi đã thấy (tóm tắt)
+- Form: email + mật khẩu + Remember me + Sign in; tab Create account (chưa khám phá). `novalidate`; bỏ trống → báo ngay trên trang, KHÔNG gửi API. Email "abc" không báo lỗi định dạng.
+- Sai/không tồn tại: `POST /api/auth/login` 401, "Email or password is incorrect." (cùng thông báo cho email không tồn tại và mật khẩu sai, kể cả thêm khoảng trắng cuối: mật khẩu không bị cắt); mật khẩu giữ lại. Email không phân biệt hoa thường (client `trim` email). Remember me: mã giao diện không dùng.
+- Đăng nhập đúng (Customer) → cửa hàng; `/api/me` 200. Mở trang chưa đăng nhập → `/api/me` 401 → form. Đăng xuất: toast "You have been signed out.", `POST /api/auth/logout`.
+- Customer: địa chỉ quản trị (#dashboard…) hiện trang chủ cửa hàng, API quản trị 403 "Operations portal access is required.".
+- Đăng nhập mất vài giây ("Signing in…") → dùng chờ/poll khi viết script.
+- Forgot password: toast "Password recovery is disabled in the training environment."
 
-## Bẫy
-- Git Bash đổi `/` thành đường dẫn Windows khi truyền `/` cho script: dùng PowerShell.
-- Trang ẩn ô mật khẩu sau đăng nhập (không gỡ khỏi trang): `session.py` chờ `hidden` (đã sửa 2026-11-20). `inspect_page.py` cờ `--account` đã sửa. Trang tổng liệt kê tính năng có SRS dù chưa có test case (`docs_pages.py` đã sửa).
-- Tài khoản mẫu và mật khẩu mẫu hiện công khai trên trang đăng nhập; vẫn đưa vào `.env`, không chép vào tài liệu.
+## Chưa làm (lý do thật) và bẫy
+- Giới hạn lần sai (người dùng bảo bỏ qua 2026-11-20), trường dài/ký tự đặc biệt, hết hạn phiên, vai Admin, Create account. Chưa có ngưỡng sai/thời gian chặn: HỎI người dùng (không tự đặt). Đã gửi 3 lần sai (2026-11-20, #12/#17/#18), đăng nhập đúng lại vẫn được, rồi dừng.
+- Người dùng nhờ "bạn gõ giúp" (2026-11-20) nên mình gõ mật khẩu SAI do mình đặt trên staging này (ngoại lệ cho lượt này, không phải quy tắc chung). Mật khẩu đúng vẫn điền bằng nút "Use customer".
+- Mã giao diện (`/app.js`) có lộ tài khoản quản trị khác trong màn API Lab: không dùng khi người dùng chưa đưa.
+- Bấm Sign in nhiều lần: chỉ gửi 1 yêu cầu (nút bị vô hiệu hóa sau lần đầu).
 
-## Việc tiếp
-Chờ BA trả lời (ghi bằng `phan-tich-requirement/scripts/ghi-tl.py`) → test plan → test case. Làm lại ca nút Back sau đăng xuất (C1, không tốn lần sai).
+## Quyết định của dự án (người dùng chốt 2026-11-20)
+- Dự án **chưa làm** 5 chỗ sau, nên KHÔNG hỏi BA, KHÔNG viết test case kỳ vọng, KHÔNG báo bug: (1) kiểm định dạng email ("abc" không báo); (2) tác dụng của Remember me; (3) khung tài khoản mẫu trên màn hình đăng nhập; (4) thông báo khi Customer mở địa chỉ quản trị (hiện về trang chủ); (5) tab đầu tự thoát khi đăng xuất ở tab khác. Chỉ xem lại khi người dùng nói dự án đã làm.
+- Dự án cũng **chưa làm** giới hạn số lần sai, thời gian sống/hết hạn phiên và yêu cầu thời gian chờ đăng nhập (người dùng chốt 2026-11-20): không hỏi, không test, không bug; không còn câu mở nào cho đăng nhập (trừ vai Admin, tab Create account).
+
+## Tiến độ tài liệu (2026-11-20)
+- SRS `srs/ecommerce-lite/dang-nhap.md` (mã `LOGIN`: 4 story, 18 AC, R01–R04, M01–M06, Q01–Q06 đều "bỏ qua, dự án chưa làm", E01–E20 = hàng nhật ký). SRS cũ bị xóa ở working tree trước đó nên viết lại từ nhật ký, không khám phá lại.
+- Bảng phân tích requirement: 28 đơn vị đều ✅ (theo quan sát), 0 câu hỏi BA (TL-01, TL-02 = quyết định người dùng). Tiếp theo: test case (TC 1:1 với AC + TC trim email), chờ người dùng duyệt danh sách.
+- Bẫy: heredoc Bash làm hỏng regex `\|` trong script Python: viết script bằng công cụ Write.
+- Test case: `testing/ecommerce-lite/dang-nhap/test-case.md` 19 TC (Cao 10, TB 8, Thấp 1), phủ 28/28 mã, truy vết đã chốt. Chưa chạy. Cảnh báo email `@sunny.test` không phải `@example.com` là chấp nhận được (tên miền riêng của hệ thống test). TC-015 cố ý sai 3 lần; TC-013 (trim email) chỉ dựa mã giao diện, chưa thử thật.
+- Smoke `testing/ecommerce-lite/smoke-test.md` (2026-11-20): 5 case TC-001, 004, 002, 007, 008 (~6 phút ước lượng, mục tiêu 10 phút do mình đề xuất, chưa được chốt). Cờ `PHU` của `liet-ke-tc.py` cho TC đăng nhập là báo nhầm (chỉ đăng nhập/đăng xuất, không gửi SMS/email). Hành trình mua hàng, đơn, quản trị chưa có test case: ghi ở Phạm vi chưa phủ.
+- Lượt smoke 1 (2026-11-20, chạy tay bằng trình duyệt tích hợp): 5/5 Đạt, Nhận build, lượt hiệu chuẩn; TC-001/002/004/007/008 đã ghi Đạt. Thời gian mục tiêu 10 phút đã chốt. `auto-config.json` đã điền nhãn đăng nhập (`session_minutes` null: dự án chưa làm hạn phiên). Chưa có script `auto/`. Cách chạy tay: chèn wrapper `fetch` để ghi mã trạng thái; nút Sign out có 2 bản (một ẩn), bấm bản hiện; thông báo `signed out` chỉ chạm nhanh nên dùng MutationObserver. Trang hiện mật khẩu mẫu trong văn bản trang: không chép ra.
+- Lượt smoke 2 (2026-11-20, script Playwright, có ảnh): 4 Đạt + TC-004 Đạt kèm ý phụ sai, Nhận build. Script `dang-nhap/auto/tc-001,002,004,007,008.py`; ảnh che khung mật khẩu mẫu bằng blur trong script. Trần nhập sai đã khai `max_consecutive_failures`=10 (người dùng chốt 2026-11-20: hệ thống chưa làm giới hạn, "đừng quá 10 lần"); đã dùng khoảng 4/10. Nhãn ô email là `Login email` (aria-label), không phải `Email address`. ĐÃ GIẢI: ô mật khẩu sau lần sai trống ở lượt 2 và 3 vì script gõ ngay khi trang vừa hiện, trước lúc `GET /api/me` xong và trang vẽ lại form; chờ `networkidle` + 1,5 giây rồi mới gõ thì giữ nguyên 12 ký tự (kiểm tay cũng vậy). Không phải lỗi hệ thống. BẪY khi viết script ca nhập liệu: luôn chờ trang kiểm phiên xong trước khi gõ. Lượt 4 (5/5 Đạt) là lượt đúng.
+- TEST SÂU (2026-11-20, script): 19/19 TC Đạt, lượt 1 của suite `dang-nhap` (`ket-qua-test-case.md`), ảnh trong `evidence/ecommerce-lite/chay-test/`. 14 script mới `auto/tc-003,005,006,009-019.py` + `auto/login_common.py` (mo_form chờ networkidle + 1,5 s, che mật khẩu mẫu bằng blur, đếm POST login). Bộ đếm sai đã dùng 9/10 (file `.phien-dang-nhap/ecommerce-lite/failure-counter.json`, chỉ có trên máy này); muốn chạy lại TC-003/011/015 phải `run_tests.py --reset-failure-counter` khi chắc hệ thống không giới hạn. Quan sát phụ chưa kiểm: sau đăng xuất, nếu đăng nhập bằng cách điền email (không dùng Use customer) thì ô email còn chữ cũ (ảnh TC-009), trái với TC-008 (ô trống). Không thuộc TC nào, chưa có yêu cầu.
+- Regression `testing/ecommerce-lite/regression-test.md` (2026-11-20, người dùng đã duyệt): Tầng 1 = TC-001, 002, 004, 007, 008, 010; Tầng 2 = 4 vùng (đăng nhập thành công 012/013/014/016; từ chối đăng nhập 003/005/006/011/015; phiên ngoài luồng chính 009/017; hỗ trợ mật khẩu 018/019); Tầng 3 = 19 case. Chưa có release note nên phân tích theo vùng. Trước khi chạy vùng từ chối đăng nhập phải đặt lại bộ đếm sai (đang 9/10). 4 câu hỏi Dev và 4 case đề xuất viết thêm (cửa hàng/đơn, quản trị/Admin, Create account, giới hạn lần sai) chờ người dùng.

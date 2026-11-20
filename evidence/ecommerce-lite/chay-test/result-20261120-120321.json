@@ -1,0 +1,243 @@
+{
+  "project": "ecommerce-lite",
+  "timestamp": "2026-11-20 12:03:21",
+  "results": [
+    {
+      "case_id": "dang-nhap/tc-009",
+      "code": "TC-009",
+      "title": "Hiện form đăng nhập khi bấm Back hoặc mở lại địa chỉ trong ứng dụng sau khi đăng xuất",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 4: sau Back vẫn hiện form đăng nhập",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "Sign in to your workspace"
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 4 (nút Back): không hiện form đăng nhập sau khi đăng xuất."
+        },
+        {
+          "kind": "main",
+          "title": "Bước 5: mở #my-orders hiện form đăng nhập",
+          "passed": true,
+          "note": "",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 6: mở #dashboard hiện form đăng nhập",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "Sign in to your workspace"
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 6 (mở #dashboard): không hiện form đăng nhập."
+        },
+        {
+          "kind": "minor",
+          "title": "Bước 4: địa chỉ sau Back là #profile",
+          "passed": true,
+          "note": "Địa chỉ: #profile",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-009-sau-back-20261120-120241.png",
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-009-mo-dashboard-sau-dang-xuat-20261120-120244.png",
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-009-kiem-20261120-120244.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 12.5
+    },
+    {
+      "case_id": "dang-nhap/tc-013",
+      "code": "TC-013",
+      "title": "Đăng nhập thành công khi email có khoảng trắng ở đầu và cuối",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 5: POST /api/auth/login trả 200",
+          "passed": true,
+          "note": "Các mã trả về: [200]",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 5: vào cửa hàng",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "WELCOME"
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 5: email thừa khoảng trắng đầu/cuối không đăng nhập được, đáng ra được cắt."
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-013-email-co-khoang-trang-20261120-120254.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 9.9
+    },
+    {
+      "case_id": "dang-nhap/tc-017",
+      "code": "TC-017",
+      "title": "Hiện form đăng nhập ở tab 1 khi chuyển trang sau khi đã đăng xuất ở tab 2",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 5: tab 1 hiện form đăng nhập",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "Sign in to your workspace"
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 5 (chuyển trang ở tab 1): vẫn hiện cửa hàng dù đã đăng xuất ở tab 2."
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-017-tab-1-sau-khi-chuyen-trang-20261120-120306.png",
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-017-kiem-20261120-120306.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 12.0
+    },
+    {
+      "case_id": "dang-nhap/tc-003",
+      "code": "TC-003",
+      "title": "Hiện thông báo lỗi khi nhập email không tồn tại",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 5: POST /api/auth/login trả 401",
+          "passed": true,
+          "note": "Các mã trả về: [401]",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 5: hiện Email or password is incorrect.",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "Email or password is incorrect."
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 5 (nhấn Enter): không thấy thông báo Email or password is incorrect."
+        },
+        {
+          "kind": "main",
+          "title": "Bước 5: vẫn ở form đăng nhập",
+          "passed": true,
+          "note": "",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "minor",
+          "title": "Bước 5: ô email giữ chữ vừa nhập",
+          "passed": true,
+          "note": "",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "minor",
+          "title": "Bước 5: ô mật khẩu vẫn còn nội dung",
+          "passed": true,
+          "note": "Độ dài: 11",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-003-email-khong-ton-tai-20261120-120315.png",
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-003-kiem-20261120-120315.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 8.3
+    },
+    {
+      "case_id": "dang-nhap/tc-011",
+      "code": "TC-011",
+      "title": "Không đăng nhập được khi mật khẩu đúng nhưng thêm một khoảng trắng ở cuối",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 5: POST /api/auth/login trả 401",
+          "passed": true,
+          "note": "Các mã trả về: [401]",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 5: hiện Email or password is incorrect.",
+          "passed": true,
+          "note": "",
+          "mark_text": [
+            "Email or password is incorrect."
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 5 (nhấn Enter): mật khẩu thừa dấu cách mà không báo lỗi."
+        },
+        {
+          "kind": "main",
+          "title": "Bước 5: vẫn ở form đăng nhập",
+          "passed": true,
+          "note": "",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-011-mat-khau-them-dau-cach-20261120-120321.png",
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-011-kiem-20261120-120321.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 6.0
+    }
+  ]
+}

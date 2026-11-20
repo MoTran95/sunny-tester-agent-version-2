@@ -1,0 +1,33 @@
+{
+  "headline": "Nhận build: cả 5 case smoke đăng nhập đều Đạt khi chạy tay trên staging ngày 2026-11-20. Smoke chỉ bảo đảm đăng nhập dùng được.",
+  "passed": [
+    "Mở trang khi chưa đăng nhập: hiện form đăng nhập có ô email, ô mật khẩu và nút Sign in, không vào thẳng cửa hàng.",
+    "Mật khẩu sai (một lần): máy chủ trả 401, hiện \"Email or password is incorrect.\", vẫn ở form, ô mật khẩu giữ nội dung.",
+    "Đăng nhập đúng bằng tài khoản SHOPPER: máy chủ trả 200, vào cửa hàng sau khoảng 4,6 giây, có Shop, My orders, Profile, Bag và lời chào WELCOME, SUNNY.",
+    "Tải lại trang khi đã đăng nhập: không hiện form, hiện \"Loading your store…\" rồi vào lại cửa hàng; /api/me trả 200.",
+    "Đăng xuất: hiện \"You have been signed out.\", quay về form với ô email và mật khẩu trống, logout trả 200, /api/me trả 401."
+  ],
+  "not_tested": [
+    {
+      "cases": "Các hành trình ngoài đăng nhập: duyệt cửa hàng, giỏ và đặt hàng, xem đơn, hồ sơ, cổng quản trị",
+      "status": "Chưa có test case",
+      "reason": "Mới khám phá và viết test case cho tính năng Đăng nhập; các hành trình này chưa khám phá nên smoke không kiểm được."
+    },
+    {
+      "cases": "14 test case đăng nhập ngoài smoke (TC-003, 005, 006, 009 đến 019)",
+      "status": "Chưa chạy",
+      "reason": "Không thuộc smoke, để test sâu sau khi nhận build."
+    }
+  ],
+  "risks": [
+    {
+      "title": "Phạm vi smoke hẹp",
+      "detail": "Smoke Đạt chỉ cho biết người dùng đăng nhập, giữ phiên và đăng xuất được. Nếu mua hàng hoặc xem đơn hỏng thì lượt này không phát hiện; chưa kiểm."
+    },
+    {
+      "title": "Test case chưa được BA xác nhận",
+      "detail": "Test case đăng nhập dựa trên SRS nháp viết từ quan sát hệ thống, nên kết quả mong đợi là hành vi hiện tại, chưa phải yêu cầu chính thức. Lượt này là lượt hiệu chuẩn: cả 5 case khớp hệ thống."
+    }
+  ],
+  "suggestion": "Đề xuất nhận build để test sâu đăng nhập. Quyết định nhận hay trả build là của người test hoặc PO."
+}

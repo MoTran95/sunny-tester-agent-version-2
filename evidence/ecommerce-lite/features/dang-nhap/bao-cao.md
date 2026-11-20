@@ -1,71 +1,74 @@
 # Đăng nhập — nhật ký khám phá
 
-Ngày: 2026-11-20 · Hệ thống: https://staging-ecommerce-lite.vercel.app/ (môi trường staging, chân trang ghi "Sunny Commerce training environment"; không thấy số phiên bản)
-Khung nhìn: 1024×768. Ảnh: `screenshots/NN-….png`. Người làm: Mo Tran (người test), mình (trợ lý) khám phá.
-Cách làm: phần không cần mật khẩu mình tự thao tác trong trình duyệt; phần cần mật khẩu chạy bằng script [kham-pha-dang-nhap.py](kham-pha-dang-nhap.py) (mật khẩu đọc từ `.env`, không in ra, không có trong file). Số lần đăng nhập sai tối đa 3 theo người test dặn (chưa biết ngưỡng khóa của hệ thống); đã dùng đúng 3 lần.
+Ngày: 2026-11-20 · Hệ thống: https://staging-ecommerce-lite.vercel.app/ · Phiên bản: không thấy số bản ở chân trang (chỉ có chữ "Sunny Commerce · Training environment")
+Khung nhìn: 1280×800. Ảnh: `screenshots/NN-…jpg` (mật khẩu mẫu hiện trên trang đã được che).
+Tài khoản dùng: `SHOPPER` (vai Customer, người dùng cung cấp). Quy tắc: mình không gõ mật khẩu; mật khẩu điền bằng nút "Use customer" của chính trang (trang tự điền mật khẩu mẫu). Mọi ca cần gõ mật khẩu khác ghi ở mục 2.
 
 ## 0. Bảng phủ
 | Nhóm ca | Trạng thái | Hàng nhật ký / lý do |
 |---|---|---|
-| Luồng chính thành công | Đã làm | #12, #10, #11, #15 |
-| Từng nhánh lỗi | Đã làm | #2, #3, #7, #8, #9 |
-| Từng vai trò (ai thấy gì, ai không có nút) | Chưa làm | Mới có một tài khoản khách (Customer); chưa có tài khoản vai trò khác (xem mục 3) |
-| Đổi ngôn ngữ | Không áp dụng | Màn hình đăng nhập không có nút đổi ngôn ngữ; mọi chữ là tiếng Anh |
-| Tải lại trang, nút Back, hai tab | Đã làm | Tải lại #13, hai tab #14 và #17; nút Back chưa ra kết quả có nghĩa (xem mục 3) |
-| Link sâu khi chưa đăng nhập / thiếu quyền; địa chỉ không tồn tại | Đã làm | #19, #20 (thiếu quyền: chỉ có một vai trò, xem mục 3) |
-| Phản hồi mạng (mã trạng thái, `GET /api`) | Đã làm | #1, #7–#12, #16, #21 |
-| Tệp giao diện (chuỗi thông báo) | Đã làm | #24 |
-| Kiểm tra ô nhập (để trống, sai định dạng, khoảng trắng, chữ hoa, Enter, thuộc tính HTML) | Đã làm | #2, #3, #4, #10, #11; độ dài rất dài và ký tự đặc biệt chưa làm (mục 3) |
-| Đăng nhập sai nhiều lần (giới hạn) | Chưa làm | Có thể khóa hệ thống: đã dừng sau 3 lần sai theo người test dặn, không thấy bị chặn (#23) |
-| Hết hạn phiên | Chưa làm | Cần chờ thời gian dài (xem mục 3) |
+| Luồng chính thành công | Đã làm | #6–#8 |
+| Từng nhánh lỗi | Đã làm | #1, #2, #12, #17, #18 |
+| Từng vai trò (ai thấy gì, ai không có nút) | Đã làm | #9–#10 (chỉ có tài khoản Customer; vai Admin xem mục 3) |
+| Đổi ngôn ngữ | Không áp dụng | Giao diện chỉ có tiếng Anh, không thấy nút đổi ngôn ngữ |
+| Tải lại trang, nút Back, hai tab | Đã làm | #8, #14, #15 |
+| Link sâu khi chưa đăng nhập / thiếu quyền; địa chỉ không tồn tại | Đã làm | #9, #14 |
+| Phản hồi mạng (mã trạng thái, `GET /api`) | Đã làm | #1, #6, #10, #12 |
+| Tệp giao diện (chuỗi thông báo) | Đã làm | #16 |
+| Ô nhập: để trống từng ô và cả hai | Đã làm | #1, #2 |
+| Ô nhập: sai định dạng email | Đã làm | #3 |
+| Ô nhập: khoảng trắng đầu/cuối, chữ hoa thường | Đã làm | #13, #16, #18 |
+| Ô nhập: nhấn Enter | Đã làm | #3, #12 |
+| Ô nhập: rất dài, ký tự đặc biệt | Chưa làm | Gửi lên máy chủ tính là lần đăng nhập sai; dự án chưa làm giới hạn nên không thử thêm |
+| Ô nhập: bấm hai lần liên tiếp | Đã làm | #20 |
+| Nút hiện/ẩn mật khẩu, Quên mật khẩu, Remember me | Đã làm | #4, #5, #16 |
+| Đăng xuất, Back sau đăng xuất, đăng xuất ở tab khác | Đã làm | #11, #14, #15 |
+| Hết hạn phiên | Chưa làm | Dự án chưa làm phần này (người dùng chốt 2026-11-20) |
+| Giới hạn đăng nhập sai | Chưa làm | Dự án chưa làm giới hạn này (người dùng chốt 2026-11-20); đã gửi 3 lần sai, chưa thấy khóa (#19) |
 
 ## 1. Đã thấy (có thao tác thật)
 | # | Thao tác | Kết quả quan sát (nguyên văn khi có) | Ảnh |
 |---|---|---|---|
-| 1 | Mở `/` khi chưa đăng nhập | Trang một màn: hai tab "Sign in" và "Create account"; khung "Customer training login" (email và mật khẩu mẫu của môi trường thử, nút "Use customer" tự điền); ô "Email address", "Password" (nút "Show"), "Forgot password?", hộp "Remember me on this device", nút "Sign in". Trình duyệt tự gọi `GET /api/me` → 401. | Ảnh 01 (nửa dưới ảnh); mạng: F12 → Network |
-| 2 | Để trống cả hai ô, bấm "Sign in" | Hiện "Enter your email address." dưới ô email và "Enter your password." dưới ô mật khẩu, hai ô viền đỏ. Không có lệnh gọi `/api/auth/login` nào (danh sách mạng chỉ có `GET /api/me` → 401). | — (không có ảnh lưu; F12 → Network, bấm Sign in khi để trống) |
-| 3 | Gõ `abc` vào ô email, để trống mật khẩu, bấm "Sign in" | Chỉ hiện "Enter your password."; ô email không báo lỗi định dạng dù `abc` không phải email. | — (như #2) |
-| 4 | Đọc thuộc tính ô nhập bằng công cụ nhà phát triển | Form đăng nhập `id=login-form` có `novalidate`; email `type=email`, `required`, `autocomplete=username`; mật khẩu `type=password`, `required`, `autocomplete=current-password`; cả hai không có `maxlength`. | — (F12 → Elements) |
-| 5 | Bấm "Forgot password?" | Hiện thông báo tạm: "Password recovery is disabled in the training environment." Trang không đổi. | — (thông báo tạm biến mất sau vài giây) |
-| 6 | Nút "Show" | Chưa bấm thử; chỉ biết từ tệp giao diện: đổi kiểu ô mật khẩu giữa ẩn và hiện (xem #24). | — |
-| 7 | Email `shopper@sunny.test` + một mật khẩu sai, bấm "Sign in" | Máy chủ trả lỗi; hiện "Email or password is incorrect." ở khung đỏ dưới nút. Email còn nguyên trong ô, ô mật khẩu bị xóa trống. Mã lỗi trả về `INVALID_CREDENTIALS` (script đọc phản hồi; bộ đếm sai tính đây là lần sai, mã 400 hoặc 401). | Ảnh 01 |
-| 8 | Email không tồn tại `nobody.xyz@sunny.test` + một mật khẩu bất kỳ | `POST /api/auth/login` → 401, mã `INVALID_CREDENTIALS`, cùng câu "Email or password is incorrect." như #7. Email giữ nguyên, mật khẩu xóa. | Ảnh 02 |
-| 9 | Email đúng + mật khẩu đúng nhưng đổi hoa/thường một chữ cái | 401, cùng câu "Email or password is incorrect." → mật khẩu phân biệt chữ hoa, thường. | Ảnh 03 |
-| 10 | Email viết hoa toàn bộ (`SHOPPER@SUNNY.TEST`) + mật khẩu đúng, nhấn Enter trong ô mật khẩu | 200; hiện "Welcome back, Sunny!"; vào được trang cửa hàng. Phản hồi trả email `shopper@sunny.test` (chữ thường). | Ảnh 04 |
-| 11 | Email có hai dấu cách đầu và cuối + mật khẩu đúng, bấm "Sign in" | 200; "Welcome back, Sunny!". Mã nguồn giao diện cắt khoảng trắng của email trước khi gửi (xem #24). | — (script; ảnh không lưu) |
-| 12 | Email và mật khẩu đúng của tài khoản test, bấm "Sign in" | 200. Phản hồi: tên "Sunny Shopper", vai trò "Customer". Thông báo "Welcome back, Sunny!". Cookie `sunny_session`: `HttpOnly`, `Secure`, `SameSite=Lax`. `localStorage` và `sessionStorage` đều trống. Màn hình sau đăng nhập có "Shop", "My orders", "Profile", giỏ "Bag 0", nút "Sign out", lời chào "Welcome, Sunny". | Ảnh 05 |
-| 13 | Tải lại trang sau khi đăng nhập | Vẫn đăng nhập, thấy nút "Sign out", không thấy ô mật khẩu. | Ảnh 06 |
-| 14 | Mở tab thứ hai trong cùng phiên, vào `/` | Tab thứ hai cũng đã đăng nhập (thấy "Sign out"). | — (script) |
-| 15 | Đăng nhập đúng có tích "Remember me on this device" so với không tích | Cả hai lần đều 200 và cùng một cookie `sunny_session`; thời điểm hết hạn của hai cookie cách nhau 16 giây, đúng bằng khoảng cách giữa hai lần đăng nhập → thời hạn cookie giống nhau, không thấy "Remember me" đổi gì. | — (script) |
-| 16 | Bấm "Sign out" | `POST /api/auth/logout` → 200; hiện "You have been signed out."; quay lại form đăng nhập; `GET /api/me` → 401. | Ảnh 07 |
-| 17 | Sau khi tab 1 đăng xuất, kiểm tab 2 (cùng phiên) | `GET /api/me` ở tab 2 → 401; tải lại tab 2 thì hiện form đăng nhập. | — (script) |
-| 18 | Nút Back sau đăng xuất | Chưa có kết quả có nghĩa: tab thử mở từ trang trắng nên Back quay về trang trắng. Chưa kiểm được. | — |
-| 19 | Chưa đăng nhập, mở thẳng `/#profile` | Địa chỉ giữ nguyên `/#profile` nhưng nội dung là form đăng nhập; không thấy trang hồ sơ. | Ảnh 08 |
-| 20 | Chưa đăng nhập, mở `/khong-ton-tai` | HTTP 200 và hiện luôn trang đăng nhập (không có trang 404). | Ảnh 09 |
-| 21 | Chưa đăng nhập, gọi `GET /api/me` | 401. | — (script, F12 → Network) |
-| 22 | Vai trò hiển thị | Chỉ có một tài khoản khách: vai trò "Customer". Khung trên trang chỉ nhắc "Customer training login". | Ảnh 05 |
-| 23 | Ba lần đăng nhập sai liên tiếp (#7, #8, #9) | Cả ba đều là lỗi thông thường; không thấy mã 429, không thấy thông báo bị chặn; đăng nhập đúng ngay sau đó vẫn được (#10). Đã dừng ở 3 lần theo người test dặn, nên chưa biết ngưỡng thật. | Ảnh 01–04 |
-| 24 | Đọc tệp giao diện `/app.js` (công khai) | Các chuỗi: "Enter your email address.", "Enter your password.", "Password recovery is disabled in the training environment.", "Signing in…" (chữ trên nút khi đang gửi, nút bị khóa trong lúc chờ), "Welcome back, <tên>!". Email được cắt khoảng trắng trước khi gửi; mật khẩu gửi nguyên. Lỗi từ máy chủ hiện nguyên chữ máy chủ trả về. Nút "Show" đổi kiểu ô mật khẩu. | — (F12 → Sources → app.js, tìm `login-form`) |
+| 1 | Mở trang chủ khi chưa đăng nhập (`/`) | Hiện màn hình đăng nhập, hai tab "Sign in" và "Create account", khung "Customer training login" (có sẵn email và mật khẩu mẫu của tài khoản Customer, nút "Use customer"). Mạng: `GET /api/me` → 401 (hệ thống kiểm phiên khi tải trang). Form có `novalidate` (trình duyệt không tự kiểm), ô email `type=email`, ô mật khẩu `type=password` | 1 |
+| 2 | Bỏ trống cả hai ô, bấm Sign in | Dưới ô email: "Enter your email address." Dưới ô mật khẩu: "Enter your password." Hai ô viền đỏ. **Không có** yêu cầu `POST /api/auth/login` nào được gửi (kiểm bằng Network) | 2 |
+| 3 | Nhập `abc` vào ô email, bỏ trống mật khẩu, nhấn Enter | Chỉ ô mật khẩu báo "Enter your password."; ô email **không báo gì** dù `abc` không phải email. Không gửi yêu cầu đăng nhập | 3 |
+| 4 | Bấm "Forgot password?" | Thông báo nhỏ góc dưới phải: "Password recovery is disabled in the training environment." (không chuyển trang) | 4 |
+| 5 | Bấm "Use customer", rồi bấm "Show" | "Use customer" điền email `shopper@sunny.test` và mật khẩu mẫu (11 ký tự). "Show" đổi ô mật khẩu thành chữ nhìn thấy được, nút đổi thành "Hide"; bấm lần nữa trở lại ẩn (kiểm bằng thuộc tính `type`, không chụp ảnh vì lộ mật khẩu) | — (kiểm lại: F12 → Elements, thuộc tính `type` của ô mật khẩu) |
+| 6 | Bấm Sign in với tài khoản mẫu (không tick Remember me) | Nút đổi thành "Signing in…" khoảng vài giây rồi vào **cửa hàng** (Sunny Store: Shop, My orders, Profile, Bag). Mạng: `POST /api/auth/login` → 200, sau đó `GET /api/store/products` → 200, `GET /api/store/cart` → 200. Lời chào "WELCOME, SUNNY" | 6 |
+| 7 | Đọc `GET /api/me` sau đăng nhập | 200, `user` gồm email, id, name "Sunny Shopper", role "Customer", workspaceId | — (kiểm lại: F12 → Network → `/api/me`) |
+| 8 | Tải lại trang khi đã đăng nhập | Vẫn đăng nhập (không hiện form), hiện "Loading your store…" rồi vào cửa hàng | — |
+| 9 | Khi đã đăng nhập Customer, đổi địa chỉ thành `#dashboard`, `#products`, `#api-lab`, `#khong-ton-tai` | Cả bốn đều hiện lại trang chủ cửa hàng (không hiện trang quản trị, không báo lỗi). `#profile` hiện trang "My profile" | — |
+| 10 | Đọc API quản trị khi là Customer: `GET /api/dashboard`, `/api/products`, `/api/orders` | Đều 403, nội dung `{"error":"FORBIDDEN","message":"Operations portal access is required."}`. `GET /api/auth/login` cũng 403 (chính message đó) | — (kiểm lại: F12 → Network) |
+| 11 | Bấm Sign out (thanh cửa hàng) | Thông báo "You have been signed out." Quay về form đăng nhập, ô email và mật khẩu trống. `GET /api/me` → 401. Mạng: `POST /api/auth/logout` → 200 | — |
+| 12 | Bấm "Use customer", đổi email thành `khongtontai@sunny.test`, nhấn Enter | Mạng: `POST /api/auth/login` → 401. Khung đỏ dưới nút: "Email or password is incorrect." Ô mật khẩu **giữ nguyên** nội dung, ô email giữ chữ vừa nhập | 5 |
+| 13 | Email viết hoa `SHOPPER@SUNNY.TEST` (mật khẩu mẫu), nhấn Enter | **Đăng nhập thành công** (`POST /api/auth/login` → 200): email không phân biệt hoa thường | — |
+| 14 | Sau đăng xuất: nút Back, rồi mở `#profile`, `#my-orders`, `#dashboard` | Back về địa chỉ `#profile` nhưng vẫn hiện form đăng nhập; cả ba địa chỉ đều hiện form đăng nhập. `GET /api/dashboard` và `GET /api/store/products` → 401 | — |
+| 15 | Hai tab: đăng nhập ở tab 1, mở tab 2 (vẫn đăng nhập), đăng xuất ở tab 2 | Tab 1 không đổi ngay (vẫn hiện cửa hàng); khi tab 1 chuyển trang (`#my-orders`) thì hiện form đăng nhập, `GET /api/me` → 401 | — |
+| 16 | Đọc tệp giao diện `/app.js` (chỉ đọc) | Form: email được cắt khoảng trắng đầu/cuối (`trim`) trước khi gửi; mật khẩu không cắt. Gửi `POST /api/auth/login` thân `{email, password}` (không có trường "remember"). Ô "Remember me on this device" **không được dùng** trong mã. Thông báo lỗi lấy từ phản hồi máy chủ. Khi gặp 401 ở trang khác, hệ thống đưa về form đăng nhập | — (kiểm lại: mở `/app.js`) |
+| 17 | (Người dùng nhờ mình gõ) Email đúng `shopper@sunny.test`, mật khẩu sai do mình đặt, nhấn Enter | `POST /api/auth/login` → 401; "Email or password is incorrect." (**cùng thông báo** như email không tồn tại, không lộ email có tồn tại); mật khẩu giữ nguyên trong trường | 7 |
+| 18 | Mật khẩu mẫu thêm một khoảng trắng ở cuối (bấm "Use customer", End, gõ dấu cách), Enter | `POST /api/auth/login` → 401, cùng thông báo: mật khẩu **không** bị cắt khoảng trắng | — (kiểm lại: F12 → Network) |
+| 19 | Sau 3 lần sai (#12, #17, #18), đăng nhập đúng lại | Đăng nhập thành công (`/api/me` 200), tài khoản chưa bị khóa; dự án chưa làm giới hạn nên không có ngưỡng | — |
+| 20 | Bấm Use customer, rồi bấm Sign in 3 lần liên tiếp rất nhanh | Chỉ **1** yêu cầu `POST /api/auth/login` được gửi (nút bị vô hiệu hóa sau lần bấm đầu, hiện "Signing in…"); đăng nhập thành công, `/api/me` 200 | — (kiểm lại: F12 → Network) |
 
 ## 2. Cần người dùng làm (vì phải gõ mật khẩu) — kết quả
-Không có. Người test chọn cách để script đọc tài khoản test trong `.env`; script đã chạy các ca nhập mật khẩu.
+- Không còn. Người dùng đã nhờ mình gõ mật khẩu sai (#17, #18).
 
 ## 3. Chưa thử / không kiểm tra được
-- **Đăng nhập sai quá 3 lần, ngưỡng khóa, thời gian chặn:** có thể khóa hệ thống của cả môi trường thử; người test dặn tối đa 3 lần và chưa biết ngưỡng. Cần BA hoặc dev cho biết (Q01).
-- **Hết hạn phiên:** cần chờ dài (cookie có thời hạn, giá trị chưa đo chính xác), chưa chờ.
-- **Vai trò khác ngoài khách:** chưa có tài khoản nào khác; tài khoản có sẵn trên trang chỉ là khách.
-- **Nút Back sau đăng xuất:** lần thử đầu mở từ trang trắng nên không ra kết quả có nghĩa; cần thử lại bằng cách vào trang rồi đăng nhập, đăng xuất, bấm Back (không tốn lần nhập sai).
-- **Ô email rất dài, ký tự đặc biệt, gửi email sai định dạng lên máy chủ:** mỗi ca là một lần đăng nhập sai, đã hết 3 lần cho phép.
-- **Nút "Show", bấm hai lần liên tiếp nút "Sign in", tab "Create account":** chưa bấm thử; "Create account" là tính năng đăng ký, ngoài phạm vi đăng nhập.
+- **Giới hạn số lần đăng nhập sai / khóa tạm:** dự án chưa làm (người dùng chốt 2026-11-20, không có số lần tối đa); ngưỡng cần requirement hoặc người test chốt. Đã gửi **3** lần đăng nhập sai (#12, #17, #18), không thấy khóa; không gửi thêm khi chưa có ngưỡng.
+- **Rất dài, ký tự đặc biệt (gửi lên máy chủ):** cùng lý do (có thể tăng bộ đếm sai).
+- **Hết hạn phiên:** dự án chưa làm (người dùng chốt 2026-11-20).
+- **Vai Admin (cổng quản trị: Dashboard, Products, Orders, Customers, API Lab, Challenges):** thiếu tài khoản (người dùng mới đưa tài khoản Customer). Trang tự hiện sẵn khung đăng nhập mẫu cho Customer; mã nguồn giao diện còn có thông tin tài khoản quản trị khác trong màn API Lab nhưng người dùng chưa cung cấp nên không dùng.
+- **Tác động của "Remember me on this device":** mã không dùng ô này (#16); chưa kiểm xem cookie phiên có đổi theo ô này không (cookie không đọc được từ trang).
+- **Tab "Create account":** thuộc tính năng đăng ký, chưa khám phá (cần tạo dữ liệu thật, hỏi người dùng trước).
 
-## 4. Điểm chưa rõ
-1. Hệ thống có giới hạn số lần đăng nhập sai không, bao nhiêu lần, chặn bao lâu? (#23)
-2. "Remember me on this device" có tác dụng gì? Cookie không đổi (#15).
-3. Phiên sống bao lâu? Cookie có hạn nhưng chưa đo.
-4. Email sai định dạng (`abc`) không bị chặn ở trình duyệt (#3); máy chủ phản hồi thế nào chưa thử (tốn lần sai).
-5. Địa chỉ không tồn tại trả 200 và hiện trang đăng nhập (#20): có chủ ý không?
-6. "Forgot password?" tắt trong môi trường thử (#5): bản thật hoạt động thế nào?
-7. Có tài khoản vai trò khác (quản trị, nhân viên) không? Trang sau đăng nhập còn mục nào theo vai trò?
-8. Email không phân biệt chữ hoa thường (#10) có phải yêu cầu không.
+## 4. Điểm chưa rõ (ứng viên cho mục câu hỏi của SRS)
+**Quyết định của người dùng (2026-11-20): các điểm 1–5 dưới đây, dự án chưa làm; không hỏi BA, không viết test case kỳ vọng, không báo bug; xem lại khi dự án làm.** Điểm 6 (giới hạn lần sai, thời gian sống phiên) và 7 (thời gian chờ đăng nhập) cũng được chốt là dự án chưa làm (2026-11-20).
+1. Ô email nhập `abc` (không phải email) không báo lỗi định dạng ở trình duyệt (#3); chưa kiểm xem máy chủ trả gì khi gửi email sai định dạng kèm mật khẩu.
+2. Ô "Remember me on this device" không có tác dụng thấy được (#16). Đây là thiết kế hay chưa làm?
+3. Khung "Customer training login" hiện sẵn email và mật khẩu mẫu ngay trên màn hình đăng nhập: có giữ ở môi trường thật không?
+4. Tài khoản Customer đăng nhập vào cửa hàng, địa chỉ quản trị (`#dashboard`…) chỉ đưa về trang chủ cửa hàng (#9), không báo "không đủ quyền". Có đúng ý không?
+5. Đăng xuất ở tab khác: tab đầu chỉ biết sau khi bấm chuyển trang (#15). Có cần tự thoát ngay không?
+6. Giới hạn số lần đăng nhập sai và thời gian sống của phiên là bao nhiêu?
+7. Thời gian chờ đăng nhập thành công khoảng vài giây ("Signing in…"): có yêu cầu thời gian phản hồi không?
 
-> **Ghi chú an toàn:** đã gửi đúng 3 lần đăng nhập sai (#7, #8, #9), không thấy bị chặn. Các lần đăng nhập đúng sau đó không bị ảnh hưởng. Không đổi dữ liệu của ai. Đăng xuất đã làm mất phiên máy chủ của phiên script (không phải phiên của người dùng).
+> **Ghi chú an toàn:** đã gửi 3 lần đăng nhập sai (#12, #17, #18) và 3 lần đăng nhập đúng (#6, #13, #19); không thấy dấu hiệu khóa. Không đổi dữ liệu người khác.

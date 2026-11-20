@@ -1,0 +1,858 @@
+{
+  "project": "ecommerce-lite",
+  "suite": "smoke",
+  "runs": [
+    {
+      "number": 1,
+      "build": "Không có số bản ở chân trang",
+      "timestamp": "2026-11-20 12:00:00",
+      "run_by": "Mo Tran",
+      "run_method": "Chạy tay trên trình duyệt tích hợp, không dùng script",
+      "verdict": "Nhận build",
+      "note": "Chạy tay trên staging ngày 2026-11-20, không thấy số bản ở chân trang. 5 trên 5 case có kết quả, đều Đạt; đây là lượt hiệu chuẩn đầu tiên của test case đăng nhập.",
+      "sources": [
+        "evidence/ecommerce-lite/chay-test/result-smoke-2026-11-20-chay-tay.json"
+      ],
+      "results": {
+        "1": {
+          "status": "Đạt",
+          "evidence": [],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 2: hiện form đăng nhập có ô email, ô mật khẩu, nút Sign in; không vào thẳng cửa hàng",
+              "passed": true,
+              "note": "Đọc văn bản trang: có Sign in, Create account, Email address, Password, Forgot password?, Show, Remember me on this device, Sign in"
+            }
+          ]
+        },
+        "2": {
+          "status": "Đạt",
+          "evidence": [],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 5: POST /api/auth/login trả 401",
+              "passed": true,
+              "note": "Quan sát 401"
+            },
+            {
+              "kind": "main",
+              "title": "Bước 5: hiện \"Email or password is incorrect.\"",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 5: vẫn ở form đăng nhập",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Ô mật khẩu giữ nguyên nội dung",
+              "passed": true,
+              "note": "Còn 12 ký tự"
+            }
+          ]
+        },
+        "3": {
+          "status": "Đạt",
+          "evidence": [],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 4: POST /api/auth/login trả 200",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 4: vào cửa hàng Sunny Store",
+              "passed": true,
+              "note": "Form đăng nhập ẩn; sau khoảng 4,6 giây"
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 3: nút đổi thành Signing in…",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Lời chào WELCOME, SUNNY và các mục Shop, My orders, Profile, Bag",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        },
+        "4": {
+          "status": "Đạt",
+          "evidence": [],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 3: không hiện form đăng nhập, vào lại cửa hàng sau khi tải lại",
+              "passed": true,
+              "note": "/api/me trả 200"
+            },
+            {
+              "kind": "minor",
+              "title": "Hiện \"Loading your store…\" trong lúc tải",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        },
+        "5": {
+          "status": "Đạt",
+          "evidence": [],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 4: quay về form đăng nhập, ô email và mật khẩu trống",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 4: POST /api/auth/logout trả 200",
+              "passed": true,
+              "note": "Sau đó /api/me trả 401"
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 3: thông báo \"You have been signed out.\"",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        }
+      },
+      "conclusion": {
+        "headline": "Nhận build: cả 5 case smoke đăng nhập đều Đạt khi chạy tay trên staging ngày 2026-11-20. Smoke chỉ bảo đảm đăng nhập dùng được.",
+        "passed": [
+          "Mở trang khi chưa đăng nhập: hiện form đăng nhập có ô email, ô mật khẩu và nút Sign in, không vào thẳng cửa hàng.",
+          "Mật khẩu sai (một lần): máy chủ trả 401, hiện \"Email or password is incorrect.\", vẫn ở form, ô mật khẩu giữ nội dung.",
+          "Đăng nhập đúng bằng tài khoản SHOPPER: máy chủ trả 200, vào cửa hàng sau khoảng 4,6 giây, có Shop, My orders, Profile, Bag và lời chào WELCOME, SUNNY.",
+          "Tải lại trang khi đã đăng nhập: không hiện form, hiện \"Loading your store…\" rồi vào lại cửa hàng; /api/me trả 200.",
+          "Đăng xuất: hiện \"You have been signed out.\", quay về form với ô email và mật khẩu trống, logout trả 200, /api/me trả 401."
+        ],
+        "not_tested": [
+          {
+            "cases": "Các hành trình ngoài đăng nhập: duyệt cửa hàng, giỏ và đặt hàng, xem đơn, hồ sơ, cổng quản trị",
+            "status": "Chưa có test case",
+            "reason": "Mới khám phá và viết test case cho tính năng Đăng nhập; các hành trình này chưa khám phá nên smoke không kiểm được."
+          },
+          {
+            "cases": "14 test case đăng nhập ngoài smoke (TC-003, 005, 006, 009 đến 019)",
+            "status": "Chưa chạy",
+            "reason": "Không thuộc smoke, để test sâu sau khi nhận build."
+          }
+        ],
+        "risks": [
+          {
+            "title": "Phạm vi smoke hẹp",
+            "detail": "Smoke Đạt chỉ cho biết người dùng đăng nhập, giữ phiên và đăng xuất được. Nếu mua hàng hoặc xem đơn hỏng thì lượt này không phát hiện; chưa kiểm."
+          },
+          {
+            "title": "Test case chưa được BA xác nhận",
+            "detail": "Test case đăng nhập dựa trên SRS nháp viết từ quan sát hệ thống, nên kết quả mong đợi là hành vi hiện tại, chưa phải yêu cầu chính thức. Lượt này là lượt hiệu chuẩn: cả 5 case khớp hệ thống."
+          }
+        ],
+        "suggestion": "Đề xuất nhận build để test sâu đăng nhập. Quyết định nhận hay trả build là của người test hoặc PO."
+      }
+    },
+    {
+      "number": 2,
+      "build": "Không có số bản ở chân trang",
+      "timestamp": "2026-11-20 11:49:41",
+      "run_by": "Mo Tran",
+      "run_method": "Tự động (Playwright)",
+      "verdict": "Nhận build",
+      "note": "",
+      "sources": [
+        "evidence/ecommerce-lite/chay-test/result-20261120-114941.json"
+      ],
+      "results": {
+        "1": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-001-form-dang-nhap-20261120-114920.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-001-kiem-20261120-114920.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 2: hiện form đăng nhập có ô email, ô mật khẩu, nút Sign in",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 2: không vào thẳng cửa hàng",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 2: có hai tab Sign in và Create account, ô Remember me, nút Show, liên kết Forgot password?",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        },
+        "2": {
+          "status": "Đạt kèm ý phụ sai",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-004-sai-mat-khau-20261120-114925.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-004-kiem-20261120-114925.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [
+            "evidence/ecommerce-lite/chay-test/video/dang-nhap-tc-004-20261120-114925.webm"
+          ],
+          "bug": [],
+          "blocked_by": [],
+          "note": "Sai ý phụ: Bước 5: ô mật khẩu giữ nguyên nội dung",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 5: POST /api/auth/login trả 401",
+              "passed": true,
+              "note": "Mã trả về: 401"
+            },
+            {
+              "kind": "main",
+              "title": "Bước 5: hiện Email or password is incorrect.",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 5: vẫn ở form đăng nhập",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 5: ô mật khẩu giữ nguyên nội dung",
+              "passed": false,
+              "note": ""
+            }
+          ]
+        },
+        "3": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-002-cua-hang-sau-dang-nhap-20261120-114928.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-002-kiem-20261120-114928.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 4: đăng nhập thành công (POST /api/auth/login trả 200) và vào cửa hàng",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 4: có các mục Shop, My orders, Profile, Bag",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        },
+        "4": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-007-cua-hang-sau-tai-lai-20261120-114934.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 3: không hiện form đăng nhập, vào lại cửa hàng sau khi tải lại",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 3: /api/me trả 200",
+              "passed": true,
+              "note": "Mã trả về: 200"
+            }
+          ]
+        },
+        "5": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-008-sau-dang-xuat-20261120-114941.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-008-kiem-20261120-114941.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 4: quay về form đăng nhập, ô email và mật khẩu trống",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 4: POST /api/auth/logout trả 200",
+              "passed": true,
+              "note": "Mã trả về: 200"
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 4: sau đăng xuất /api/me trả 401",
+              "passed": true,
+              "note": "Mã trả về: 401"
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 3: hiện thông báo You have been signed out.",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        }
+      },
+      "conclusion": {
+        "headline": "Nhận build: 4 case smoke đăng nhập Đạt và 1 case Đạt kèm ý phụ sai khi chạy bằng script ngày 2026-11-20, mỗi case có ảnh làm bằng chứng. Smoke chỉ bảo đảm đăng nhập dùng được.",
+        "passed": [
+          "Mở trang khi chưa đăng nhập: hiện form đăng nhập có ô email, ô mật khẩu và nút Sign in, không vào thẳng cửa hàng.",
+          "Mật khẩu sai (một lần): máy chủ trả 401, hiện \"Email or password is incorrect.\", vẫn ở form. Ý phụ sai: ô mật khẩu trống sau lần sai do script gõ quá sớm (không phải lỗi hệ thống, xem rủi ro).",
+          "Đăng nhập đúng bằng tài khoản SHOPPER: vào cửa hàng, có lời chào WELCOME, SUNNY và các mục Shop, My orders, Profile, Bag.",
+          "Tải lại trang khi đã đăng nhập: không hiện form, vào lại cửa hàng; /api/me trả 200.",
+          "Đăng xuất: hiện \"You have been signed out.\", quay về form với ô email và mật khẩu trống, logout trả 200, /api/me trả 401."
+        ],
+        "not_tested": [
+          {
+            "cases": "Các hành trình ngoài đăng nhập: duyệt cửa hàng, giỏ và đặt hàng, xem đơn, hồ sơ, cổng quản trị",
+            "status": "Chưa có test case",
+            "reason": "Mới khám phá và viết test case cho tính năng Đăng nhập; các hành trình này chưa khám phá nên smoke không kiểm được."
+          },
+          {
+            "cases": "14 test case đăng nhập ngoài smoke (TC-003, 005, 006, 009 đến 019)",
+            "status": "Chưa chạy",
+            "reason": "Không thuộc smoke, để test sâu sau khi nhận build."
+          }
+        ],
+        "risks": [
+          {
+            "title": "Phạm vi smoke hẹp",
+            "detail": "Smoke Đạt chỉ cho biết người dùng đăng nhập, giữ phiên và đăng xuất được. Nếu mua hàng hoặc xem đơn hỏng thì lượt này không phát hiện; chưa kiểm."
+          },
+          {
+            "title": "Test case chưa được BA xác nhận",
+            "detail": "Test case đăng nhập dựa trên SRS nháp viết từ quan sát hệ thống, nên kết quả mong đợi là hành vi hiện tại, chưa phải yêu cầu chính thức. Đây là lượt chạy script đầu tiên; 4 trên 5 case khớp lượt chạy tay trước đó, riêng ô mật khẩu của TC-004 khác (xem rủi ro tiếp theo)."
+          },
+          {
+            "title": "Ảnh bằng chứng che khung tài khoản mẫu",
+            "detail": "Trang đăng nhập hiện mật khẩu mẫu, nên script làm mờ khung đó trước khi chụp. Video không quay cho case Đạt, bằng chứng của case Đạt là ảnh."
+          },
+          {
+            "title": "Ô mật khẩu sau lần sai: đã xác định do cách chạy script",
+            "detail": "Lượt 2 và 3 thấy ô mật khẩu trống sau lần sai vì script gõ ngay khi trang vừa hiện, trước lúc trang kiểm phiên xong (GET /api/me) và vẽ lại form. Đo riêng: chờ kiểm phiên xong rồi mới gõ thì ô giữ nguyên 12 ký tự; kiểm tay cũng giữ nguyên. Hệ thống đúng như SRS; lỗi nằm ở cách chạy script, đã sửa và chạy lại ở lượt 4."
+          }
+        ],
+        "suggestion": "Đề xuất nhận build để test sâu đăng nhập. Quyết định nhận hay trả build là của người test hoặc PO."
+      }
+    },
+    {
+      "number": 3,
+      "build": "Không có số bản ở chân trang",
+      "timestamp": "2026-11-20 11:54:05",
+      "run_by": "Mo Tran",
+      "run_method": "Tự động (Playwright)",
+      "verdict": "Nhận build",
+      "note": "",
+      "sources": [
+        "evidence/ecommerce-lite/chay-test/result-20261120-115405.json"
+      ],
+      "results": {
+        "1": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-001-form-dang-nhap-20261120-115339.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-001-kiem-20261120-115340.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 2: hiện form đăng nhập có ô email, ô mật khẩu, nút Sign in",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 2: không vào thẳng cửa hàng",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 2: có hai tab Sign in và Create account, ô Remember me, nút Show, liên kết Forgot password?",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        },
+        "2": {
+          "status": "Đạt kèm ý phụ sai",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-004-sai-mat-khau-20261120-115344.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-004-kiem-20261120-115348.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [
+            "evidence/ecommerce-lite/chay-test/video/dang-nhap-tc-004-20261120-115349.webm"
+          ],
+          "bug": [],
+          "blocked_by": [],
+          "note": "Sai ý phụ: Bước 5: ô mật khẩu giữ nguyên nội dung",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 5: POST /api/auth/login trả 401",
+              "passed": true,
+              "note": "Mã trả về: 401"
+            },
+            {
+              "kind": "main",
+              "title": "Bước 5: hiện Email or password is incorrect.",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 5: vẫn ở form đăng nhập",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 5: ô mật khẩu giữ nguyên nội dung",
+              "passed": false,
+              "note": "Độ dài ô mật khẩu sau 0, 1, 2, 3 giây: [0, 0, 0, 0]"
+            }
+          ]
+        },
+        "3": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-002-cua-hang-sau-dang-nhap-20261120-115354.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-002-kiem-20261120-115354.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 4: đăng nhập thành công (POST /api/auth/login trả 200) và vào cửa hàng",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 4: có các mục Shop, My orders, Profile, Bag",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        },
+        "4": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-007-cua-hang-sau-tai-lai-20261120-115359.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 3: không hiện form đăng nhập, vào lại cửa hàng sau khi tải lại",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 3: /api/me trả 200",
+              "passed": true,
+              "note": "Mã trả về: 200"
+            }
+          ]
+        },
+        "5": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-008-sau-dang-xuat-20261120-115404.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-008-kiem-20261120-115405.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 4: quay về form đăng nhập, ô email và mật khẩu trống",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 4: POST /api/auth/logout trả 200",
+              "passed": true,
+              "note": "Mã trả về: 200"
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 4: sau đăng xuất /api/me trả 401",
+              "passed": true,
+              "note": "Mã trả về: 401"
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 3: hiện thông báo You have been signed out.",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        }
+      },
+      "conclusion": {
+        "headline": "Nhận build: 4 case smoke đăng nhập Đạt và 1 case Đạt kèm ý phụ sai khi chạy bằng script ngày 2026-11-20 (lượt 3). Ý phụ sai do script gõ quá sớm, đã sửa ở lượt 4. Smoke chỉ bảo đảm đăng nhập dùng được.",
+        "passed": [
+          "Mở trang khi chưa đăng nhập: hiện form đăng nhập có ô email, ô mật khẩu và nút Sign in, không vào thẳng cửa hàng.",
+          "Mật khẩu sai (một lần): máy chủ trả 401, hiện \"Email or password is incorrect.\", vẫn ở form. Ý phụ sai: ô mật khẩu trống do script gõ quá sớm (không phải lỗi hệ thống, xem rủi ro).",
+          "Đăng nhập đúng bằng tài khoản SHOPPER: vào cửa hàng, có lời chào WELCOME, SUNNY và các mục Shop, My orders, Profile, Bag.",
+          "Tải lại trang khi đã đăng nhập: không hiện form, vào lại cửa hàng; /api/me trả 200.",
+          "Đăng xuất: hiện \"You have been signed out.\", quay về form với ô email và mật khẩu trống, logout trả 200, /api/me trả 401."
+        ],
+        "not_tested": [
+          {
+            "cases": "Các hành trình ngoài đăng nhập: duyệt cửa hàng, giỏ và đặt hàng, xem đơn, hồ sơ, cổng quản trị",
+            "status": "Chưa có test case",
+            "reason": "Mới khám phá và viết test case cho tính năng Đăng nhập; các hành trình này chưa khám phá nên smoke không kiểm được."
+          },
+          {
+            "cases": "14 test case đăng nhập ngoài smoke (TC-003, 005, 006, 009 đến 019)",
+            "status": "Chưa chạy",
+            "reason": "Không thuộc smoke, để test sâu sau khi nhận build."
+          }
+        ],
+        "risks": [
+          {
+            "title": "Phạm vi smoke hẹp",
+            "detail": "Smoke Đạt chỉ cho biết người dùng đăng nhập, giữ phiên và đăng xuất được. Nếu mua hàng hoặc xem đơn hỏng thì lượt này không phát hiện; chưa kiểm."
+          },
+          {
+            "title": "Test case chưa được BA xác nhận",
+            "detail": "Test case đăng nhập dựa trên SRS nháp viết từ quan sát hệ thống, nên kết quả mong đợi là hành vi hiện tại, chưa phải yêu cầu chính thức."
+          },
+          {
+            "title": "Ảnh bằng chứng che khung tài khoản mẫu",
+            "detail": "Trang đăng nhập hiện mật khẩu mẫu, nên script làm mờ khung đó trước khi chụp. Video không quay cho case Đạt, bằng chứng của case Đạt là ảnh."
+          },
+          {
+            "title": "Gõ quá sớm làm ô mật khẩu bị xóa (chỉ ảnh hưởng cách chạy script)",
+            "detail": "Lượt 2 và 3 thấy ô mật khẩu trống sau lần sai vì script gõ ngay khi trang vừa hiện, trước lúc trang kiểm phiên xong (GET /api/me) và vẽ lại form. Đo riêng: chờ kiểm phiên xong rồi mới gõ thì ô giữ nguyên 12 ký tự; kiểm tay cũng giữ nguyên. Hệ thống đúng như SRS; lỗi nằm ở cách chạy script, đã sửa và chạy lại ở lượt 4."
+          }
+        ],
+        "suggestion": "Đề xuất nhận build để test sâu đăng nhập. Quyết định nhận hay trả build là của người test hoặc PO."
+      }
+    },
+    {
+      "number": 4,
+      "build": "Không có số bản ở chân trang",
+      "timestamp": "2026-11-20 11:57:37",
+      "run_by": "Mo Tran",
+      "run_method": "Tự động (Playwright)",
+      "verdict": "Nhận build",
+      "note": "",
+      "sources": [
+        "evidence/ecommerce-lite/chay-test/result-20261120-115737.json"
+      ],
+      "results": {
+        "1": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-001-form-dang-nhap-20261120-115706.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-001-kiem-20261120-115706.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 2: hiện form đăng nhập có ô email, ô mật khẩu, nút Sign in",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 2: không vào thẳng cửa hàng",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 2: có hai tab Sign in và Create account, ô Remember me, nút Show, liên kết Forgot password?",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        },
+        "2": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-004-sai-mat-khau-20261120-115717.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-004-kiem-20261120-115717.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 5: POST /api/auth/login trả 401",
+              "passed": true,
+              "note": "Mã trả về: 401"
+            },
+            {
+              "kind": "main",
+              "title": "Bước 5: hiện Email or password is incorrect.",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 5: vẫn ở form đăng nhập",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 5: ô mật khẩu giữ nguyên nội dung",
+              "passed": true,
+              "note": "Độ dài ô mật khẩu sau 0, 1, 2, 3 giây: [12, 12, 12, 12]"
+            }
+          ]
+        },
+        "3": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-002-cua-hang-sau-dang-nhap-20261120-115722.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-002-kiem-20261120-115722.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 4: đăng nhập thành công (POST /api/auth/login trả 200) và vào cửa hàng",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 4: có các mục Shop, My orders, Profile, Bag",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        },
+        "4": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-007-cua-hang-sau-tai-lai-20261120-115728.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 3: không hiện form đăng nhập, vào lại cửa hàng sau khi tải lại",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 3: /api/me trả 200",
+              "passed": true,
+              "note": "Mã trả về: 200"
+            }
+          ]
+        },
+        "5": {
+          "status": "Đạt",
+          "evidence": [
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-008-sau-dang-xuat-20261120-115736.png",
+            "evidence/ecommerce-lite/chay-test/dang-nhap-tc-008-kiem-20261120-115736.png"
+          ],
+          "evidence_error": [],
+          "evidence_error_captions": {},
+          "video": [],
+          "bug": [],
+          "blocked_by": [],
+          "note": "",
+          "actual": [
+            {
+              "kind": "main",
+              "title": "Bước 4: quay về form đăng nhập, ô email và mật khẩu trống",
+              "passed": true,
+              "note": ""
+            },
+            {
+              "kind": "main",
+              "title": "Bước 4: POST /api/auth/logout trả 200",
+              "passed": true,
+              "note": "Mã trả về: 200"
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 4: sau đăng xuất /api/me trả 401",
+              "passed": true,
+              "note": "Mã trả về: 401"
+            },
+            {
+              "kind": "minor",
+              "title": "Bước 3: hiện thông báo You have been signed out.",
+              "passed": true,
+              "note": ""
+            }
+          ]
+        }
+      },
+      "conclusion": {
+        "headline": "Nhận build: cả 5 case smoke đăng nhập đều Đạt khi chạy bằng script ngày 2026-11-20, mỗi case có ảnh làm bằng chứng. Smoke chỉ bảo đảm đăng nhập dùng được.",
+        "passed": [
+          "Mở trang khi chưa đăng nhập: hiện form đăng nhập có ô email, ô mật khẩu và nút Sign in, không vào thẳng cửa hàng.",
+          "Mật khẩu sai (một lần): máy chủ trả 401, hiện \"Email or password is incorrect.\", vẫn ở form, ô mật khẩu giữ nội dung.",
+          "Đăng nhập đúng bằng tài khoản SHOPPER: vào cửa hàng, có lời chào WELCOME, SUNNY và các mục Shop, My orders, Profile, Bag.",
+          "Tải lại trang khi đã đăng nhập: không hiện form, vào lại cửa hàng; /api/me trả 200.",
+          "Đăng xuất: hiện \"You have been signed out.\", quay về form với ô email và mật khẩu trống, logout trả 200, /api/me trả 401."
+        ],
+        "not_tested": [
+          {
+            "cases": "Các hành trình ngoài đăng nhập: duyệt cửa hàng, giỏ và đặt hàng, xem đơn, hồ sơ, cổng quản trị",
+            "status": "Chưa có test case",
+            "reason": "Mới khám phá và viết test case cho tính năng Đăng nhập; các hành trình này chưa khám phá nên smoke không kiểm được."
+          },
+          {
+            "cases": "14 test case đăng nhập ngoài smoke (TC-003, 005, 006, 009 đến 019)",
+            "status": "Chưa chạy",
+            "reason": "Không thuộc smoke, để test sâu sau khi nhận build."
+          }
+        ],
+        "risks": [
+          {
+            "title": "Phạm vi smoke hẹp",
+            "detail": "Smoke Đạt chỉ cho biết người dùng đăng nhập, giữ phiên và đăng xuất được. Nếu mua hàng hoặc xem đơn hỏng thì lượt này không phát hiện; chưa kiểm."
+          },
+          {
+            "title": "Test case chưa được BA xác nhận",
+            "detail": "Test case đăng nhập dựa trên SRS nháp viết từ quan sát hệ thống, nên kết quả mong đợi là hành vi hiện tại, chưa phải yêu cầu chính thức."
+          },
+          {
+            "title": "Gõ quá sớm làm ô mật khẩu bị xóa (chỉ ảnh hưởng cách chạy script)",
+            "detail": "Lượt 2 và 3 thấy ô mật khẩu trống sau lần sai vì script gõ ngay khi trang vừa hiện, trước lúc trang kiểm phiên xong (GET /api/me) và vẽ lại form. Đo riêng: chờ kiểm phiên xong rồi mới gõ thì ô giữ nguyên 12 ký tự; kiểm tay cũng giữ nguyên. Người dùng thật không gõ nhanh đến mức đó. Lượt 4 chạy lại với script đã chờ."
+          },
+          {
+            "title": "Ảnh bằng chứng che khung tài khoản mẫu",
+            "detail": "Trang đăng nhập hiện mật khẩu mẫu, nên script làm mờ khung đó trước khi chụp. Video không quay cho case Đạt, bằng chứng của case Đạt là ảnh."
+          }
+        ],
+        "suggestion": "Đề xuất nhận build để test sâu đăng nhập. Quyết định nhận hay trả build là của người test hoặc PO."
+      }
+    }
+  ]
+}

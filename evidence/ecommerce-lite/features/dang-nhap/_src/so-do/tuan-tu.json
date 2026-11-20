@@ -1,17 +1,21 @@
 {
   "loai": "tuan-tu",
-  "mo-ta": "Sơ đồ tuần tự luồng đăng nhập và đăng xuất",
+  "mo-ta": "Luồng đăng nhập thành công rồi đăng xuất",
   "lan": [
-    {"id": "SH", "mau": "p1", "ten": "SHOPPER", "phu": "Customer"},
-    {"id": "SYS", "mau": "sys", "ten": "Sunny Commerce", "phu": "hệ thống"}
+    {"id": "SHOPPER", "mau": "p1", "ten": "SHOPPER", "phu": "Customer"},
+    {"id": "WEB", "mau": "sys", "ten": "Trang web", "phu": "form đăng nhập"},
+    {"id": "API", "mau": "ext", "ten": "API hệ thống", "phu": "/api"}
   ],
   "buoc": [
-    {"tu": "SH", "den": "SYS", "nhan": "Mở trang gốc"},
-    {"tu": "SYS", "den": "SH", "nhan": "Form đăng nhập\n(kiểm phiên: 401)", "tra-ve": true},
-    {"tu": "SH", "den": "SYS", "nhan": "Gửi email + mật khẩu"},
-    {"tu": "SYS", "den": "SH", "nhan": "Thành công: “Welcome back, Sunny!”", "tra-ve": true},
-    {"ghi-chu": "Sai thông tin: lỗi 401 “Email or password is incorrect.”, ở lại form", "tu": "SH", "den": "SYS"},
-    {"tu": "SH", "den": "SYS", "nhan": "Bấm Sign out"},
-    {"tu": "SYS", "den": "SH", "nhan": "“You have been signed out.”\nvề form đăng nhập", "tra-ve": true}
+    {"tu": "SHOPPER", "den": "WEB", "nhan": "Mở trang chủ"},
+    {"tu": "WEB", "den": "API", "nhan": "GET /api/me"},
+    {"tu": "API", "den": "WEB", "nhan": "401: chưa có phiên", "tra-ve": true},
+    {"tu": "SHOPPER", "den": "WEB", "nhan": "Bấm Sign in\n(email + mật khẩu)"},
+    {"tu": "WEB", "den": "API", "nhan": "POST /api/auth/login"},
+    {"tu": "API", "den": "WEB", "nhan": "200: thông tin người dùng", "tra-ve": true},
+    {"tu": "WEB", "den": "SHOPPER", "nhan": "Vào cửa hàng", "tra-ve": true},
+    {"tu": "SHOPPER", "den": "WEB", "nhan": "Bấm Sign out"},
+    {"tu": "WEB", "den": "API", "nhan": "POST /api/auth/logout"},
+    {"tu": "WEB", "den": "SHOPPER", "nhan": "Về form đăng nhập", "tra-ve": true}
   ]
 }

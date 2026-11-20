@@ -1,14 +1,17 @@
 {
   "loai": "trang-thai",
-  "mo-ta": "Vòng đời phiên đăng nhập",
+  "mo-ta": "Trạng thái phiên đăng nhập",
   "trang-thai": [
-    {"id": "chua", "ten": "Chưa đăng nhập", "kieu": "xam", "cot": 0, "hang": 0},
-    {"id": "da", "ten": "Đã đăng nhập", "kieu": "ok", "cot": 1, "hang": 0, "ghi-chu": "thấy Shop, My orders, Profile"},
-    {"id": "chan", "ten": "Bị chặn tạm ❓", "kieu": "ngoai", "cot": 1, "hang": 1.4, "dong": ["chưa thấy, chưa xác nhận có không"]}
+    {"id": "chua", "ten": "Chưa đăng nhập", "kieu": "xam", "cot": 0, "hang": 1},
+    {"id": "dang", "ten": "Đang gửi", "kieu": "xanh", "cot": 1, "hang": 1, "ghi-chu": "nút “Signing in…”"},
+    {"id": "vao", "ten": "Đã đăng nhập", "kieu": "ok", "cot": 2, "hang": 0, "ghi-chu": "vào cửa hàng"},
+    {"id": "loi", "ten": "Báo lỗi", "kieu": "loi", "cot": 2, "hang": 2, "ghi-chu": "ở lại form"}
   ],
   "chuyen": [
-    {"so": 1, "tu": "chua", "den": "da", "nhan": "Đăng nhập đúng"},
-    {"so": 2, "tu": "da", "den": "chua", "nhan": "Sign out"},
-    {"so": 3, "tu": "chua", "den": "chan", "nhan": "sai nhiều lần ❓", "net-dut": true}
-  ]
+    {"so": 1, "tu": "chua", "den": "dang", "nhan": "Sign in"},
+    {"so": 2, "tu": "dang", "den": "vao", "nhan": "200"},
+    {"so": 3, "tu": "dang", "den": "loi", "nhan": "401"},
+    {"so": 4, "tu": "vao", "den": "chua", "nhan": "Sign out"}
+  ],
+  "chu-thich": ["Ô trống chưa bấm Sign in: báo lỗi ngay trên trang, không gửi yêu cầu (không qua trạng thái “Đang gửi”)."]
 }

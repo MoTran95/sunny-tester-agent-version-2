@@ -31,5 +31,6 @@ Sản phẩm dùng chung cho người đọc (không phải memory): `testing/ch
 | File | Khi | Chứa |
 |---|---|---|
 | `modules/ecommerce-lite/overview.md` | đầu tiên | hệ thống, tài khoản, thư mục |
+| `modules/ecommerce-lite/feature-dang-nhap.md` | làm tính năng đăng nhập | kết quả khám phá, ca chưa làm, bẫy |
+| `modules/ecommerce-lite/feature-quen-mat-khau.md` | làm tính năng Quên mật khẩu (`FORGOT`) | trạng thái SRS/phân tích, bẫy staging tắt tính năng |
 | `modules/ecommerce-lite/tu-ngu-cau-hoi-ba.md` | viết câu hỏi BA | từ đã chốt với BA của dự án này |
-| `modules/ecommerce-lite/feature-dang-nhap.md` | làm tiếp Đăng nhập (test plan, test case, chạy test) | trạng thái, sự thật đã thấy, bẫy |

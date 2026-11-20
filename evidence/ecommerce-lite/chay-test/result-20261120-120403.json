@@ -1,0 +1,62 @@
+{
+  "project": "ecommerce-lite",
+  "timestamp": "2026-11-20 12:04:03",
+  "results": [
+    {
+      "case_id": "dang-nhap/tc-015",
+      "code": "TC-015",
+      "title": "Đăng nhập thành công khi nhập đúng sau 3 lần đăng nhập sai liên tiếp",
+      "smoke_number": "",
+      "verdict": "Đạt",
+      "reason": "",
+      "checks": [
+        {
+          "kind": "main",
+          "title": "Bước 2: lần sai thứ 1 hiện Email or password is incorrect.",
+          "passed": true,
+          "note": "",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 3: lần sai thứ 2 hiện Email or password is incorrect.",
+          "passed": true,
+          "note": "",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 4: lần sai thứ 3 hiện Email or password is incorrect.",
+          "passed": true,
+          "note": "",
+          "mark_text": [],
+          "account": "",
+          "error_note": ""
+        },
+        {
+          "kind": "main",
+          "title": "Bước 6: đăng nhập thành công, vào cửa hàng, không bị khóa",
+          "passed": true,
+          "note": "Các mã trả về: [401, 401, 401, 200]",
+          "mark_text": [
+            "WELCOME"
+          ],
+          "account": "",
+          "error_note": "Lỗi ở bước 6: đăng nhập đúng sau 3 lần sai nhưng không vào được cửa hàng."
+        }
+      ],
+      "images": [
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-015-lan-sai-thu-3-20261120-120345.png",
+        "evidence\\ecommerce-lite\\chay-test\\dang-nhap-tc-015-dang-nhap-dung-sau-3-lan-sai-20261120-120403.png"
+      ],
+      "error_images": [],
+      "error_image_captions": {},
+      "videos": [],
+      "seconds": 38.4
+    }
+  ]
+}
