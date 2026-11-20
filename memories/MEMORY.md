@@ -9,6 +9,7 @@ Chỉ 2 file **LUÔN ĐỌC** (★). Còn lại mở khi việc khớp cột "Kh
 | `user/document-preferences.md` | viết báo cáo/SRS/bảng soát/checklist/bug | cách người dùng muốn tài liệu |
 | `user/connectors-and-plugins.md` | cần connector/plugin; chậm | Notion/Docs tắt; tắt plugin từ repo không được (đã đo) |
 | `conventions/nhieu-du-an.md` | máy mới, đổi/tạo dự án, hỏi/ghi tài khoản test `.env` | chọn dự án, tài khoản test, không lẫn kiến thức |
+| `conventions/dieu-huong-html.md` | sửa trang HTML, thanh điều hướng, trang tổng | thanh trên, tab, menu, chèn ở đâu |
 | `conventions/memory-writing-rules.md` | trước khi ghi/sửa memory | khuôn viết cho AI, độ dài |
 | `conventions/ba-question-wording.md` | viết câu hỏi BA | xưng hô, từ chung, khuôn |
 | `project/skills.md` | **sửa** skill (chỉ dùng skill thì đọc `SKILL.md` của skill đó, không mở file này) | 11 skill (có `chay-test-tu-dong`, `de-xuat-regression`, `lap-ke-hoach-retest`, `tao-test-summary-report`, `tao-test-plan`), script, trạng thái đã thử |

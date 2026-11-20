@@ -24,6 +24,9 @@ Người dùng nhờ khám phá một tính năng: làm xong **tự** dựng bá
 ## Trả kết quả HTML: một link trang tổng (người dùng dặn 2026-11-19)
 Việc làm ra hoặc sửa trang HTML của dự án (tài liệu, test case, kết quả chạy, bug, smoke, regression, test plan, báo cáo tổng kết, báo cáo khám phá): trong câu trả lời chỉ đưa **một link** tới trang tổng `testing/<slug>/index.html`, kèm điểm nhảy tới đúng phần: `#tn-<tính-năng>` (tài liệu, kết quả, bug của tính năng), `#smoke`, `#regression`, `#test-plan`, `#bao-cao-tong-ket`, `#huong-dan`. Người dùng mở một file là tới được mọi trang; **không liệt kê nhiều file HTML**. File md dùng để sửa thì vẫn link được khi cần. Trang tổng tự có link tới mọi trang của dự án; `build_docs.py --check` (trong `kiem-tra-bo-nho.py`) báo LỖI nếu có trang thiếu link.
 
+## Giao diện trang HTML là chuẩn chung mọi dự án (người dùng dặn 2026-11-20)
+Làm trang tổng/trang con cho dự án nào cũng **dùng đúng bộ có sẵn** (`theme.py` màu, font Be Vietnam Pro, logo; `dieu_huong.py` thanh trên, breadcrumb, tab, menu; `build_docs.py` sinh), **không tự dựng lại**. Muốn đổi giao diện/điều hướng: sửa một chỗ trong thư viện rồi `build_docs.py --all`, không sửa tay từng HTML, không đọc HTML sinh ra (0 token). Chi tiết: `memories/conventions/dieu-huong-html.md`.
+
 ## Giữ ngữ cảnh gọn (mọi skill)
 - Script soát chỉ in kết luận ngắn: **0 lỗi thì không đọc lại file vừa sinh**; chỉ đọc đúng dòng script báo (`Read` với `offset`/`limit`).
 - Không `cat` cả file; file lớn thì `Grep` rồi đọc đoạn cần. Xem vài mã SRS/bảng phân tích/test case: `python -X utf8 scripts/truy-vet.py tra <dự-án> <tính-năng> --ma …`.

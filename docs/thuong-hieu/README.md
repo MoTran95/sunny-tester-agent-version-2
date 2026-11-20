@@ -51,3 +51,7 @@ Logo không cố định trong code. Cấu hình ở `docs/thuong-hieu/brand.jso
 ## Đổi giao diện
 
 Sửa `theme.py` (hoặc `_CSS_DOC` trong `docs_pages.py` cho riêng trang tài liệu) rồi chạy `python -X utf8 scripts/build_docs.py --all`. Mọi trang được sinh lại cùng lúc nên không bao giờ lệch nhau.
+
+## Thanh điều hướng (mọi trang của dự án)
+
+Mỗi trang HTML của dự án có thanh cố định trên cùng: nút **← Trang tổng** (về đúng thẻ tính năng), đường dẫn Dự án › Tính năng › Trang, menu nhảy tới Smoke / Regression / Test plan / Tổng kết / Hướng dẫn, dải tab chuyển giữa các trang cùng tính năng, nút ↑ Lên đầu. Trang tổng có menu ngang cố định (nút ☰ khi màn hẹp). Test plan (gửi ngoài) không có thanh. Dự án nào cũng có sẵn, không cần cấu hình; code ở `scripts/test_automation/dieu_huong.py`, sửa rồi chạy `python -X utf8 scripts/build_docs.py --all`.

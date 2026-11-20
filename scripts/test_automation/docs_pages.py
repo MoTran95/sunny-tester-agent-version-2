@@ -13,7 +13,7 @@ import os
 import re
 from pathlib import Path
 
-from . import bug_page, config, theme
+from . import bug_page, config, dieu_huong, theme
 from . import report as report_mod
 from . import summary_report as summary_mod
 
@@ -450,13 +450,8 @@ def render_doc(project, src, converted, codes, exists):
     body, title, heads = render_markdown(md, src, converted, codes, feature)
     out = src.with_suffix(".html")
     root = config.ROOT
-    parts = ['<nav class="nav-doc">']
-    if project in src.parts:   # tài liệu dùng chung (docs/, srs/*.md) không gắn với một dự án: không có link về trang tổng
-        parts.append(f'<a href="{_rel(src.parent, root / "testing" / project / "index.html")}">← Trang tổng</a>')
-    if feature:
-        for label, p in feature_docs(project, feature, exists):
-            parts.append(f"<b>{html.escape(label)}</b>" if p == out else f'<a href="{_rel(src.parent, p)}">{html.escape(label)}</a>')
-    parts.append("</nav>")
+    # trang thuộc dự án: thanh điều hướng dùng chung (dieu_huong.py) thay dải nav cũ; tài liệu dùng chung không có
+    parts = []
     toc = ""
     if len(heads) >= 4:
         toc = '<details class="muc-luc"><summary>Mục lục</summary><ul>' + "".join(f'<li><a href="#{i}">{html.escape(t)}</a></li>' for lv, i, t in heads if lv == 2) + "</ul></details>"
@@ -626,6 +621,21 @@ def render_all(project):
     if index_path is not None:
         pages[index_path] = index_text
         UNLINKED[project] = _unlinked(project, index_path, index_text, planned)
+    # báo cáo khám phá dựng bằng skill (không do build_docs sinh): chỉ chèn thanh điều hướng, giữ nguyên phần còn lại
+    ev = config.ROOT / "evidence" / project
+    for p in sorted(ev.rglob("*.html")) if ev.exists() else []:
+        if p not in pages and "_src" not in p.parts:
+            pages[p] = p.read_text(encoding="utf-8")
+    names = report_mod.feature_names(project)
+
+    def feature_tabs(feature):
+        tabs = list(feature_docs(project, feature, exists))
+        bdir = config.ROOT / "testing" / project / feature / "bug"
+        tabs += [(b.stem, b) for b in sorted(set(bdir.glob("BUG-*.html")) | {x for x in pages if Path(x).parent == bdir and Path(x).name.startswith("BUG-")}) if exists(b)]
+        return tabs
+
+    for path in list(pages):
+        pages[path] = dieu_huong.render(project, path, pages[path], exists, names, feature_tabs)
     return pages, skipped
 
 

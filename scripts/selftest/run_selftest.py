@@ -295,6 +295,11 @@ def main():
         check("second sync finds nothing stale (pages are idempotent)", changed_again == [], str(changed_again))
         (srs_dir / "feature.md").write_text((srs_dir / "feature.md").read_text(encoding="utf-8") + "- thêm" + chr(10), encoding="utf-8")
         check("editing the md makes the check report a stale page", len(docs_pages.sync("demo", write=False)[0]) > 0)
+        idx = (project / "index.html").read_text(encoding="utf-8")
+        check("nav: index has the top menu and back-to-top", 'class="dh"' in idx and 'id="dh-top"' in idx and idx.count("<!--dh-->") == 1)
+        check("nav: feature page has back link to its card, breadcrumb and tabs", 'href="../index.html#tn-feature"' in checklist_html and "dh-crumb" in checklist_html and "dh-tabs" in checklist_html, checklist_html[:1200])
+        check("nav: the SRS page of a feature also has the bar", "dh-back" in srs_html)
+        check("nav: bar is inserted once (idempotent)", checklist_html.count("<!--dh-->") == 1 and srs_html.count("<!--dh-->") == 1)
         fonts = root / "docs" / "thuong-hieu" / "fonts"
         fonts.mkdir(parents=True)
         (fonts / "Fraunces-roman-latin.woff2").write_bytes(b"x")
