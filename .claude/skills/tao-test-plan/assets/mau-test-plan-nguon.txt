@@ -1,0 +1,161 @@
+<!-- Khuôn NGUỒN của test plan (skill tao-test-plan). Sao thành testing/<dự-án>/test-plan-nguon.txt rồi điền các chỗ <...>; KHÔNG sửa test-plan.md bằng tay.
+Dấu {{...}} do sinh-test-plan.py thay: {{o:khóa}} ô người test điền (references/khoa-thong-tin.json), {{tc:thư-mục}}, {{smoke}}, {{regression}}, {{truy-vet}}, {{do-phu}}, {{n-chua-co-case}}.
+Xóa các dòng chữ nghiêng hướng dẫn và dòng chú thích này khi điền xong. Test plan KHÔNG ghi kết quả test. -->
+
+# Kế hoạch kiểm thử (Test plan) — <Tên hệ thống / đợt test>
+
+| | |
+|---|---|
+| Hệ thống | <tên hệ thống>, <địa chỉ môi trường test> |
+| Bản build / phiên bản | <số phiên bản đang test> |
+| Mã kế hoạch | {{o:ma_ke_hoach}} |
+| Ngày lập | <YYYY-MM-DD> |
+| Cập nhật lần cuối | <YYYY-MM-DD> |
+| Người lập | <tên> |
+| Người yêu cầu | {{o:nguoi_yeu_cau}} |
+| Người duyệt kế hoạch | {{o:nguoi_duyet_kh}} |
+
+## 1. Mục tiêu và bối cảnh
+- **Vì sao có đợt test này:** <1–2 câu: build mới, feature mới, chuẩn bị phát hành…>
+- **Câu hỏi đợt test cần trả lời:** <ví dụ "Bản build này đủ điều kiện để phát hành chưa?">
+- **Kết quả bàn giao cuối cùng:** <ví dụ báo cáo tổng kết kiểm thử và quyết định nhận / không nhận build>
+- **Tài liệu đầu vào:** <requirement/SRS, release note, câu trả lời của BA — mỗi mục một link; mục nào chưa có thì ghi "Chưa có">
+
+## 2. Phạm vi
+*Phần sếp đọc kỹ nhất: ghi rõ cả điều không test.*
+
+**2.1. Trong phạm vi**
+
+| Feature / chức năng | Vai trò (tài khoản) liên quan | Căn cứ (requirement) | Đã có test case chưa |
+|---|---|---|---|
+| <feature 1> | <vai trò> | <link requirement> | {{tc:<thư-mục-tính-năng>}} |
+
+**2.2. Ngoài phạm vi (không test đợt này)**
+
+| Nội dung | Lý do không test | Rủi ro nếu bỏ qua |
+|---|---|---|
+| <ví dụ bảo mật, hiệu năng, feature chưa có test case> | <lý do: ngoài yêu cầu, chưa có tài liệu, chưa có thời gian…> | <hậu quả có thể xảy ra> |
+
+## 3. Cách kiểm thử
+*Mỗi lớp test trả lời một câu hỏi khác nhau. Chỉ ghi lớp nào đợt này dùng.*
+
+| Lớp test | Để làm gì | Chạy khi nào | Cách làm (tay / tự động) | Tài liệu / bộ case |
+|---|---|---|---|---|
+| Smoke | Build có đủ ổn để bắt đầu test sâu không | Ngay khi nhận build | <tay / tự động> | {{smoke}} |
+| Test từng feature | Từng chức năng chạy đúng theo requirement | Sau khi smoke Đạt | <tay / tự động> | <Tên tính năng 1>: {{tc:<thư-mục-1>}}; <Tên tính năng 2>: {{tc:<thư-mục-2>}} |
+| Regression | Chỗ đã chạy tốt trước đây còn chạy tốt không sau khi build đổi | Khi build có thay đổi | <tay / tự động> | {{regression}} |
+| Re-test | Bug Dev báo đã sửa thì thật sự hết chưa | Khi Dev giao bản sửa | <tay> | <link kế hoạch re-test> |
+
+**Kỹ thuật thiết kế test case đã dùng:** <ví dụ phân vùng tương đương, giá trị biên, bảng quyết định… — ghi theo file test case của feature>
+
+## 4. Môi trường và dữ liệu test
+- **Môi trường:** <địa chỉ>, nhãn môi trường: <staging / dev / test>.
+- **Trình duyệt / thiết bị:** <tên>; số bản: {{o:chrome_ban}}.
+- **Tài khoản test:**
+
+| Tài khoản | Vai trò | Dùng cho feature | Ghi chú |
+|---|---|---|---|
+| <mã tài khoản> | <vai trò> | <feature> | *Mật khẩu không ghi ở đây; để trong kho lưu tài khoản test của dự án.* |
+
+- **Dữ liệu cần chuẩn bị trước:** <hồ sơ mẫu, số liệu, trạng thái cần có; ai chuẩn bị; chuẩn bị bằng cách nào>
+- **Chỗ dễ gây khóa hệ thống hoặc đổi dữ liệu người khác:** <ví dụ nhập sai mật khẩu quá số lần cho phép; cách tránh; ca nào để người test tự làm tay>
+
+## 5. Tiêu chí bắt đầu, kết thúc, tạm dừng
+*Các con số lấy từ sếp, requirement hoặc người test; ghi nguồn cạnh số. Chưa có số thì ghi "Chưa chốt — hỏi <ai>".*
+
+**5.1. Điều kiện để bắt đầu test**
+
+| Điều kiện | Cách kiểm |
+|---|---|
+| Build đã lên môi trường test | <cách kiểm: số phiên bản ở chân trang…> |
+| Smoke test Đạt | Theo tiêu chí trả build trong smoke-test.md |
+| Có requirement / release note của build | <cách kiểm hoặc "hiện chưa có"> |
+| Tài khoản và dữ liệu test sẵn sàng | <cách kiểm> |
+
+**5.2. Điều kiện để kết thúc test (đủ thì mới gửi báo cáo tổng kết)**
+
+| Tiêu chí | Ngưỡng | Nguồn của con số |
+|---|---|---|
+| Test case bắt buộc đã chạy | {{o:tc_bat_buoc}} | {{o:nguon_tieu_chi}} |
+| Tỉ lệ Đạt tối thiểu | {{o:ti_le_dat}} | {{o:nguon_tieu_chi}} |
+| Bug mức Nghiêm trọng còn mở | {{o:bug_nghiem_trong}} | {{o:nguon_tieu_chi}} |
+| Bug mức Lớn còn mở | {{o:bug_lon}} | {{o:nguon_tieu_chi}} |
+| Re-test mọi bug đã sửa xong | Có | Quy ước của dự án |
+| Regression | {{o:regression_tang}} | {{o:nguon_tieu_chi}} |
+
+**5.3. Khi nào tạm dừng và khi nào chạy tiếp**
+
+| Dừng khi | Chạy tiếp khi |
+|---|---|
+| Smoke test Không đạt | Dev giao build mới và smoke Đạt |
+| Môi trường test không truy cập được | Môi trường hoạt động lại |
+| <tình huống khác> | <điều kiện> |
+
+## 6. Phân công và lịch
+
+| Việc | Người làm | Bắt đầu | Hạn | Thời gian chạy | Ghi chú |
+|---|---|---|---|---|---|
+| Soát requirement, hỏi BA | <tên người làm> | {{o:l1_bd|ngay_bat_dau}} | {{o:l1_han|han_nop}} | <thời gian chạy lấy từ smoke/test case, hoặc —> | |
+| Viết / cập nhật test case | <tên người làm> | {{o:l2_bd|ngay_bat_dau}} | {{o:l2_han|han_nop}} | <thời gian chạy lấy từ smoke/test case, hoặc —> | |
+| Chạy smoke | <tên người làm> | {{o:l3_bd|ngay_bat_dau}} | {{o:l3_han|han_nop}} | <thời gian chạy lấy từ smoke/test case, hoặc —> | |
+| Chạy test từng feature | <tên người làm> | {{o:l4_bd|ngay_bat_dau}} | {{o:l4_han|han_nop}} | <thời gian chạy lấy từ smoke/test case, hoặc —> | |
+| Chạy regression | <tên người làm> | {{o:l5_bd|ngay_bat_dau}} | {{o:l5_han|han_nop}} | <thời gian chạy lấy từ smoke/test case, hoặc —> | |
+| Re-test bug đã sửa | <tên người làm> | {{o:l6_bd|ngay_bat_dau}} | {{o:l6_han|han_nop}} | <thời gian chạy lấy từ smoke/test case, hoặc —> | |
+| Lập báo cáo tổng kết, gửi duyệt build | <tên người làm> | {{o:l7_bd|ngay_bat_dau}} | {{o:l7_han|han_nop}} | <thời gian chạy lấy từ smoke/test case, hoặc —> | |
+
+**Người liên hệ:** BA: {{o:ba}} · Dev: {{o:dev}} · Người duyệt build: {{o:nguoi_duyet_build}}
+
+## 7. Quản lý bug
+- **Ghi bug thế nào:** bug report đủ mục (bước tái hiện, kết quả thực tế / mong đợi, môi trường, ảnh hoặc video); mỗi lỗi một bug; link tới test case Không đạt.
+- **Thang đo:** mức nghiêm trọng Nghiêm trọng / Lớn / Nhỏ / Rất nhỏ; mức ưu tiên Cao / Trung bình / Thấp. <ghi định nghĩa của dự án cho từng mức nếu sếp yêu cầu>
+- **Vòng đời bug:** Mới → Dev đã sửa → Đã re-test → Đóng hoặc Mở lại.
+- **Nơi quản lý bug:** {{o:cong_cu_bug}}.
+- **Bug lọt ra production:** nếu chưa có test case chặn đúng bug đó thì viết case mới và thêm vào bộ regression.
+
+## 8. Sản phẩm bàn giao
+
+| Sản phẩm | Khi nào có | Link |
+|---|---|---|
+| Bảng soát requirement và câu hỏi cho BA | Trước khi viết test case | <link> |
+| Test case từng feature | Trước khi chạy | <link> |
+| Bộ smoke test và kết quả | Khi nhận build | <link> |
+| Bộ regression và kết quả | Khi build có thay đổi | <link> |
+| Bug report | Trong lúc test | <link> |
+| Báo cáo tổng kết kiểm thử (có quyết định nhận build) | Cuối đợt | <link> |
+
+## 9. Rủi ro, giả định, phụ thuộc
+
+*Rủi ro viết dạng "có thể", dựa trên requirement và khám phá, KHÔNG rút từ lượt chạy.*
+
+**9.1. Rủi ro và phụ thuộc**
+
+| Loại | Nội dung | Ảnh hưởng | Cách giảm / ai quyết |
+|---|---|---|---|
+| Rủi ro | <ví dụ requirement chưa BA xác nhận> | <test case có thể phải viết lại> | <hỏi BA trước khi chạy> |
+| Rủi ro | <ví dụ môi trường dùng chung dữ liệu; chưa có release note; chỉ một trình duyệt> | <ảnh hưởng> | <cách giảm> |
+| Phụ thuộc | <chờ Dev trả lời câu hỏi, chờ release note…> | <ảnh hưởng> | <ai quyết> |
+
+**9.2. Giả định**
+*Mỗi gạch một điều đang coi là đúng khi lập kế hoạch; điều nào sai thì kế hoạch phải sửa.*
+- <ví dụ: chỉ test chức năng>
+- <ví dụ: môi trường test phản ánh đúng bản build cần test>
+- <ví dụ: tích hợp bên ngoài chưa thiết lập nên không thuộc đợt test này>
+
+## 10. Truy vết requirement ↔ test case
+
+{{truy-vet}}
+
+**Độ phủ theo kế hoạch:** {{do-phu}}.
+
+## 11. Phê duyệt kế hoạch
+
+| Vai trò | Họ tên | Quyết định (Duyệt / Cần sửa) | Ngày | Ý kiến |
+|---|---|---|---|---|
+| Người lập | | | | |
+| Người duyệt kế hoạch | {{o:nguoi_duyet_kh}} | | | |
+
+## 12. Lịch sử cập nhật
+
+| Ngày | Người sửa | Nội dung sửa | Lý do |
+|---|---|---|---|
+| <YYYY-MM-DD> | <tên> | Tạo bản đầu | <lý do> |

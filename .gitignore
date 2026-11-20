@@ -1,0 +1,11 @@
+.env
+.du-an-hien-tai
+.claude/settings.local.json
+.phien-dang-nhap/
+__pycache__/
+.venv/
+
+# video và ảnh tạm của lượt chạy test (nặng; chỉ giữ máy local, đính kèm tay vào bug)
+evidence/**/video/
+evidence/**/video-tmp/
+.nguoi-test

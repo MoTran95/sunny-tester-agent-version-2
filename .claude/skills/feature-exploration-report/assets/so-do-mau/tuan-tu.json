@@ -1,0 +1,20 @@
+{
+  "_huong-dan": "MẪU — mỗi phần tử 'buoc' là một mũi tên, đánh số tự động theo thứ tự. 'tra-ve': true = nét đứt (kết quả trả về). Phần tử có 'ghi-chu' là hộp ghi chú (vd nút bị vô hiệu hóa), không đánh số.",
+  "loai": "tuan-tu",
+  "mo-ta": "Sơ đồ tuần tự luồng chính",
+  "lan": [
+    {"id": "A", "mau": "p1", "ten": "Tài khoản A", "phu": "Người tạo yêu cầu"},
+    {"id": "SYS", "mau": "sys", "ten": "Tên hệ thống", "phu": "hệ thống"},
+    {"id": "B", "mau": "p2", "ten": "Tài khoản B", "phu": "Người duyệt"},
+    {"id": "EMAIL", "mau": "ext", "ten": "Dịch vụ email"}
+  ],
+  "buoc": [
+    {"tu": "A", "den": "SYS", "nhan": "Tạo yêu cầu → “Nháp”"},
+    {"tu": "A", "den": "SYS", "nhan": "Gửi duyệt"},
+    {"ghi-chu": "⏸ Nút “Sửa” bị vô hiệu hóa khi đang chờ duyệt", "tu": "A", "den": "B"},
+    {"tu": "B", "den": "SYS", "nhan": "Chọn Duyệt,\nghi chú"},
+    {"tu": "SYS", "den": "EMAIL", "nhan": "Gửi email cho A"},
+    {"tu": "EMAIL", "den": "SYS", "nhan": "“Đã gửi”", "tra-ve": true},
+    {"tu": "SYS", "den": "A", "nhan": "Đã duyệt · không sửa được nữa", "tra-ve": true}
+  ]
+}

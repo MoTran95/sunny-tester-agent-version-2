@@ -1,0 +1,18 @@
+{
+  "ma_ke_hoach": {"nhom": "A", "thu_tu": 1, "nhan": "Mã kế hoạch", "goi_y": "Công ty có quy ước đặt mã không? Không có thì bỏ trống."},
+  "nguoi_yeu_cau": {"nhom": "A", "thu_tu": 2, "nhan": "Người yêu cầu test plan", "goi_y": "Sếp hoặc bên nào yêu cầu."},
+  "nguoi_duyet_kh": {"nhom": "A", "thu_tu": 3, "nhan": "Người duyệt kế hoạch"},
+  "ti_le_dat": {"nhom": "B", "thu_tu": 10, "nhan": "Tỉ lệ test case Đạt tối thiểu để xin nhận build", "goi_y": "Tính trên số đã có kết luận. Chưa có số thì ghi: Người duyệt build quyết định dựa trên báo cáo, không có ngưỡng cứng."},
+  "bug_nghiem_trong": {"nhom": "B", "thu_tu": 11, "nhan": "Số bug mức Nghiêm trọng còn mở tối đa", "goi_y": "Số do sếp hoặc công ty quy định."},
+  "bug_lon": {"nhom": "B", "thu_tu": 12, "nhan": "Số bug mức Lớn còn mở tối đa", "goi_y": "Số do sếp hoặc công ty quy định."},
+  "tc_bat_buoc": {"nhom": "B", "thu_tu": 13, "nhan": "Test case bắt buộc chạy để kết thúc đợt test", "goi_y": "Ví dụ: tất cả, chỉ ca ưu tiên cao, hoặc do người test quyết định theo nguồn lực và thời gian."},
+  "regression_tang": {"nhom": "B", "thu_tu": 14, "nhan": "Regression chạy đến tầng nào", "goi_y": "Tầng 1 (lõi), Tầng 2 (theo vùng), Tầng 3 (toàn bộ), hoặc do người test quyết định."},
+  "nguon_tieu_chi": {"nhom": "B", "thu_tu": 15, "nhan": "Nguồn của các con số trên", "goi_y": "Ví dụ: quy định của công ty, yêu cầu của sếp."},
+  "ba": {"nhom": "C", "thu_tu": 20, "nhan": "Tên BA"},
+  "dev": {"nhom": "C", "thu_tu": 21, "nhan": "Tên Dev"},
+  "nguoi_duyet_build": {"nhom": "C", "thu_tu": 22, "nhan": "Người duyệt build"},
+  "ngay_bat_dau": {"nhom": "C", "thu_tu": 23, "nhan": "Ngày bắt đầu test", "goi_y": "Dùng chung cho mọi việc ở mục lịch nếu chưa có ngày riêng từng việc."},
+  "han_nop": {"nhom": "C", "thu_tu": 24, "nhan": "Hạn nộp (xong test và báo cáo)", "goi_y": "Dùng chung cho mọi việc ở mục lịch nếu chưa có hạn riêng từng việc."},
+  "chrome_ban": {"nhom": "D", "thu_tu": 30, "nhan": "Số bản trình duyệt đang dùng", "goi_y": "Ví dụ: Chrome 130 trên Windows 11."},
+  "cong_cu_bug": {"nhom": "D", "thu_tu": 31, "nhan": "Công cụ quản lý bug của team", "goi_y": "Ví dụ: Jira, hoặc file trong repo."}
+}

@@ -1,0 +1,19 @@
+{
+  "_huong-dan": "MẪU — đặt ô theo 'cot' (0,1,2… trái sang phải) và 'hang' (0,1,2… trên xuống). 'kieu': xam (nháp), xanh (đang xử lý), ok (thành công), loi (bị từ chối), cho (chờ/trả lại), tim. Mũi tên quay lại cột trái tự vẽ đường cong.",
+  "loai": "trang-thai",
+  "mo-ta": "Sơ đồ trạng thái",
+  "trang-thai": [
+    {"id": "nhap", "ten": "Nháp", "kieu": "xam", "cot": 0, "hang": 1},
+    {"id": "cho", "ten": "Chờ duyệt", "kieu": "xanh", "cot": 1, "hang": 1},
+    {"id": "duyet", "ten": "Đã duyệt", "kieu": "ok", "cot": 2, "hang": 0, "ghi-chu": "khóa: không sửa được nữa"},
+    {"id": "tuchoi", "ten": "Bị từ chối", "kieu": "loi", "cot": 2, "hang": 1, "ghi-chu": "khóa: không sửa được nữa"},
+    {"id": "tralai", "ten": "Bị trả lại", "kieu": "cho", "cot": 2, "hang": 2, "ghi-chu": "mở khóa cho Tài khoản A"}
+  ],
+  "chuyen": [
+    {"so": 1, "tu": "nhap", "den": "cho", "nhan": "Gửi duyệt"},
+    {"so": 2, "tu": "cho", "den": "duyet", "nhan": "Duyệt"},
+    {"so": 3, "tu": "cho", "den": "tuchoi", "nhan": "Từ chối"},
+    {"so": 4, "tu": "cho", "den": "tralai", "nhan": "Trả lại"},
+    {"so": 5, "tu": "tralai", "den": "cho", "nhan": "Sửa rồi gửi lại"}
+  ]
+}

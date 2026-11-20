@@ -1,0 +1,30 @@
+{
+  "_ghi_chu": "Ranh giới phần dùng chung (bộ lõi) và phần riêng. Đọc bởi scripts/kiem-tra-lan-du-an.py và scripts/xuat-bo-loi.py. Thư mục từng dự án (memories/modules/<slug>, srs/<slug>, testing/<slug>, evidence/<slug>) tự động là phần riêng, không cần ghi ở đây. Không ghi tên dự án, tên người hay địa chỉ vào file này.",
+  "khong_xuat": [
+    ".git/",
+    ".venv/",
+    "__pycache__/",
+    ".phien-dang-nhap/",
+    ".claude/settings.local.json",
+    ".env",
+    ".du-an-hien-tai",
+    ".nguoi-test",
+    "memories/project/notion-journey-page.md",
+    "docs/kiem-thu-cac-thay-doi.md",
+    "docs/kiem-thu-cac-thay-doi.html"
+  ],
+  "_khong_xuat_ly_do": {
+    "memories/project/notion-journey-page.md": "trang Notion cá nhân của người dùng",
+    "docs/kiem-thu-cac-thay-doi.md": "kịch bản tự kiểm thay đổi của repo này, gắn với file của dự án đầu"
+  },
+  "chi_muc_du_an": [
+    ".env.example",
+    "memories/MEMORY.md",
+    "memories/project/overview.md"
+  ],
+  "_chi_muc_du_an_ly_do": "File cố ý liệt kê các dự án. Khi xuất, phần dự án bị cắt (khối '# Dự án ...' của .env.example, mục '## Dự án ...' của MEMORY.md, dòng bảng dự án của overview.md); phần còn lại vẫn được soát.",
+  "thay_khi_xuat": {
+    "memories/project/git-remote.md": "# Git và remote\nĐọc khi: commit/push.\n\n- Remote `origin`: chưa ghi. Người dùng repo này tự thêm (`git remote add origin <địa chỉ>`) rồi ghi địa chỉ và nhánh chính vào đây.\n- `.gitignore`: `.env`, `.du-an-hien-tai`, `.nguoi-test`, `.claude/settings.local.json`, `.phien-dang-nhap/`. Mật khẩu test **không** lên git.\n- Trước khi commit file mới: không chép mật khẩu từ `.env`. Commit/push **chỉ khi người dùng nhờ**. Cảnh báo LF→CRLF trên Windows là bình thường.\n",
+    "memories/user/connectors-and-plugins.md": "# Connector/plugin: mặc định tắt, hỏi trước khi bật\nĐọc khi: việc cần connector/plugin; người dùng than chậm/tốn token.\n\n- Chỉ bật connector/plugin khi người dùng yêu cầu hoặc thật cần, **và hỏi trước**. Kiểm thử bằng skill của repo + trình duyệt có sẵn + script Python không cần connector nào.\n- Plugin/skill gắn với tài khoản claude.ai **không tắt được từ repo** (đã đo: `syncClaudeAiPlugins=false`, `disableClaudeAiConnectors=true`, `permissions.deny` đều không đổi phần nạp sẵn đầu phiên). Tắt tay trong app thì có tác dụng nhưng chỉ bớt khoảng 3–6% token; phần lớn phần nạp sẵn là prompt hệ thống + schema công cụ, không tắt được.\n- Muốn đo: `python -X utf8 scripts/do-toc-do-phien.py` ở đầu một phiên mới.\n"
+  }
+}

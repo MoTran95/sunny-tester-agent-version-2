@@ -1,0 +1,6 @@
+# Cài bằng scripts/cai-dat-may-moi.py (vào venv .venv trong repo)
+playwright==1.65.2
+markitdown[pdf,docx,pptx,xlsx,xls]==0.1.9
+pillow
+fonttools
+brotli

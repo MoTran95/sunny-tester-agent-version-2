@@ -1,0 +1,8 @@
+#!/bin/sh
+# Trước mỗi commit: sinh lại mọi trang HTML (tài liệu, kết quả chạy, bug, trang tổng) từ file md và dữ liệu,
+# rồi thêm các trang vừa đổi vào commit. Nhờ vậy không bao giờ commit trang HTML cũ hơn nguồn.
+# Bật một lần cho mỗi bản clone: git config core.hooksPath .githooks   (scripts/kiem-tra-may-moi.py nhắc nếu chưa bật)
+cd "$(git rev-parse --show-toplevel)" || exit 1
+PY=python
+command -v python >/dev/null 2>&1 || PY=python3
+"$PY" -X utf8 scripts/build_docs.py --all --stage || { echo "pre-commit: build_docs.py lỗi, commit bị hủy"; exit 1; }

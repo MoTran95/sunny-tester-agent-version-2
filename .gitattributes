@@ -1,0 +1,11 @@
+# Hook git phải giữ dấu xuống dòng LF, nếu không shell báo lỗi trên một số máy
+.githooks/* text eol=lf
+
+# Mọi file văn bản trong repo dùng LF (số dòng, neo L<n> và nội dung sinh trang giống nhau ở mọi máy)
+*.md text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.ps1 text eol=crlf
+*.txt text eol=lf

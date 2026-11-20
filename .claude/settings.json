@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(memories/**)",
+      "Edit(srs/**)",
+      "Edit(testing/**)",
+      "Edit(evidence/**)",
+      "Edit(docs/**)",
+      "Edit(.claude/skills/**)",
+      "Edit(CLAUDE.md)",
+      "Bash(python -X utf8 .claude/skills/*)",
+      "Bash(python -X utf8 scripts/kiem-tra-may-moi.py *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)"
+    ]
+  }
+}

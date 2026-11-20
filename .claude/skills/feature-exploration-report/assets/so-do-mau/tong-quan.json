@@ -1,0 +1,26 @@
+{
+  "_huong-dan": "MẪU — thay toàn bộ chữ bằng điều đã thấy thật. Cách viết: references/so-do.md. Số 'so' = số trong danh sách 'Giải thích từng số'.",
+  "loai": "tong-quan",
+  "mo-ta": "Sơ đồ tổng quan và kết nối hệ thống",
+  "he-thong": {
+    "ten": "Tên hệ thống", "phu": "Tên feature",
+    "tieu-de-muc": "Mỗi yêu cầu đi qua:",
+    "muc": ["Tạo yêu cầu", "Nhập thông tin", "Duyệt", "Lịch sử"],
+    "tieu-de-trang-thai": "Trạng thái",
+    "trang-thai": ["Nháp → Chờ duyệt →", "Đã duyệt / Bị từ chối"]
+  },
+  "vai-tro": [
+    {"id": "A", "mau": "p1", "ten": "Tài khoản A", "vai": "Người tạo yêu cầu", "mo-ta": ["Tạo, sửa, gửi yêu cầu"]},
+    {"id": "B", "mau": "p2", "ten": "Tài khoản B", "vai": "Người duyệt", "mo-ta": ["Duyệt hoặc từ chối"]}
+  ],
+  "ben-ngoai": [
+    {"id": "email", "ten": "Dịch vụ email", "mo-ta": ["gửi thông báo"]}
+  ],
+  "buoc": [
+    {"so": 1, "tu": "A", "nhan": "Tạo yêu cầu mới"},
+    {"so": 2, "tu": "A", "nhan": "Gửi duyệt"},
+    {"so": 3, "tu": "B", "nhan": "Duyệt / Từ chối"},
+    {"so": 4, "den": "email", "nhan": "Gửi email cho A", "tra-ve": "“Đã gửi”"}
+  ],
+  "ghi-chu": {"so": 5, "mau": "p2", "dong": ["Nếu B chọn **Trả lại**: yêu cầu về lại A để sửa rồi gửi lại (quay lại bước 2)."]}
+}

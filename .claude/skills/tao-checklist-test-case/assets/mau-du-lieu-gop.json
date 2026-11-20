@@ -1,0 +1,175 @@
+{
+  "tieu_de": "Đặt số lượng sản phẩm vào giỏ (ví dụ mẫu)",
+  "ngay": "YYYY-MM-DD (mẫu)",
+  "he_thong": "Web bán hàng (ví dụ trung lập, không phải requirement thật). Phạm vi: ô Số lượng và nút Thêm vào giỏ",
+  "nguon_doc": "Requirement mẫu: R1 số lượng mỗi lần thêm từ 1 đến 10; R2 dưới 1 báo \"Số lượng tối thiểu là 1.\"; R3 trên 10 báo \"Số lượng tối đa là 10.\"; R4 để trống báo \"Vui lòng nhập số lượng.\"",
+  "ghi_chu_dau": [
+    "**Cách đọc.** Mỗi dòng gồm cả phần checklist (Tình huống, Ưu tiên, Kỹ thuật, Nguồn) và phần chi tiết test case (Điều kiện trước, Các bước, Dữ liệu test, Kết quả mong đợi), làm một lần, không có file checklist riêng. Bốn cột cuối (`Kết quả thực tế`, `Trạng thái`, `Người viết`, `Tự động hóa`) để ghi khi chạy test. **Cột Nguồn** viết bằng câu thường kèm link tới dòng requirement; mã phụ ở dòng `Tra thêm`; không có dòng `Giả định` trong bảng. **Cột Tình huống** là tên test case (câu đầy đủ: hệ thống làm gì khi người dùng làm gì). **Cột Điều kiện trước** chỉ ghi dữ kiện cần để vào kiểm tra ca đó, mỗi ý một gạch."
+  ],
+  "ca": [
+    {
+      "tinh_huong": "Giỏ hiện 5 sản phẩm khi nhập số lượng hợp lệ `5` rồi bấm Thêm vào giỏ",
+      "uu_tien": "Cao",
+      "ky_thuat": "EP",
+      "nguon": "Có trong tài liệu: Số lượng mỗi lần thêm phải từ 1 đến 10 ([Requirement, R1](requirement-mau.md#r1)).",
+      "dieu_kien": [
+        "- Giỏ hàng đang trống"
+      ],
+      "buoc": [
+        "Mở trang sản phẩm.",
+        "Ở ô `Số lượng` nhập `5`.",
+        "Bấm nút `Thêm vào giỏ`.",
+        "Nhìn biểu tượng giỏ hàng."
+      ],
+      "du_lieu": [
+        "Số lượng: `5`"
+      ],
+      "ket_qua": [
+        "Bước 3: thêm thành công, không có thông báo lỗi.",
+        "Bước 4: giỏ hiện 5 sản phẩm."
+      ]
+    },
+    {
+      "tinh_huong": "Thêm được và giỏ hiện 1 sản phẩm khi nhập số lượng ở biên dưới `1`",
+      "uu_tien": "Cao",
+      "ky_thuat": "BVA",
+      "nguon": "Có trong tài liệu: Số lượng mỗi lần thêm phải từ 1 đến 10 ([Requirement, R1](requirement-mau.md#r1)).",
+      "dieu_kien": [
+        "- Giỏ hàng đang trống"
+      ],
+      "buoc": [
+        "Mở trang sản phẩm.",
+        "Ở ô `Số lượng` nhập `1`.",
+        "Bấm nút `Thêm vào giỏ`.",
+        "Nhìn biểu tượng giỏ hàng."
+      ],
+      "du_lieu": [
+        "Số lượng: `1` (biên dưới)"
+      ],
+      "ket_qua": [
+        "Bước 3: thêm thành công, không có thông báo lỗi.",
+        "Bước 4: giỏ hiện 1 sản phẩm."
+      ]
+    },
+    {
+      "tinh_huong": "Không thêm và báo \"Số lượng tối thiểu là 1.\" khi nhập số lượng `0` (ngay dưới biên)",
+      "uu_tien": "Cao",
+      "ky_thuat": "BVA",
+      "nguon": "Có trong tài liệu: Số lượng dưới 1 thì báo lỗi tối thiểu ([Requirement, R2](requirement-mau.md#r2)).<br>Tra thêm: quy tắc R1.",
+      "dieu_kien": [
+        "- Giỏ hàng đang trống"
+      ],
+      "buoc": [
+        "Mở trang sản phẩm.",
+        "Ở ô `Số lượng` nhập `0`.",
+        "Bấm nút `Thêm vào giỏ`.",
+        "Nhìn thông báo và biểu tượng giỏ hàng."
+      ],
+      "du_lieu": [
+        "Số lượng: `0` (ngay dưới biên)"
+      ],
+      "ket_qua": [
+        "Bước 3: không thêm vào giỏ.",
+        "Bước 4: hiện thông báo \"Số lượng tối thiểu là 1.\"; giỏ vẫn trống."
+      ]
+    },
+    {
+      "tinh_huong": "Thêm được và giỏ hiện 10 sản phẩm khi nhập số lượng ở biên trên `10`",
+      "uu_tien": "Cao",
+      "ky_thuat": "BVA",
+      "nguon": "Có trong tài liệu: Số lượng mỗi lần thêm phải từ 1 đến 10 ([Requirement, R1](requirement-mau.md#r1)).",
+      "dieu_kien": [
+        "- Giỏ hàng đang trống"
+      ],
+      "buoc": [
+        "Mở trang sản phẩm.",
+        "Ở ô `Số lượng` nhập `10`.",
+        "Bấm nút `Thêm vào giỏ`.",
+        "Nhìn biểu tượng giỏ hàng."
+      ],
+      "du_lieu": [
+        "Số lượng: `10` (biên trên)"
+      ],
+      "ket_qua": [
+        "Bước 3: thêm thành công, không có thông báo lỗi.",
+        "Bước 4: giỏ hiện 10 sản phẩm."
+      ]
+    },
+    {
+      "tinh_huong": "Không thêm và báo \"Số lượng tối đa là 10.\" khi nhập số lượng `11` (ngay trên biên)",
+      "uu_tien": "Cao",
+      "ky_thuat": "BVA",
+      "nguon": "Có trong tài liệu: Số lượng trên 10 thì báo lỗi tối đa ([Requirement, R3](requirement-mau.md#r3)).<br>Tra thêm: quy tắc R1.",
+      "dieu_kien": [
+        "- Giỏ hàng đang trống"
+      ],
+      "buoc": [
+        "Mở trang sản phẩm.",
+        "Ở ô `Số lượng` nhập `11`.",
+        "Bấm nút `Thêm vào giỏ`.",
+        "Nhìn thông báo, biểu tượng giỏ hàng và nội dung ô `Số lượng`."
+      ],
+      "du_lieu": [
+        "Số lượng: `11` (ngay trên biên)"
+      ],
+      "ket_qua": [
+        "Bước 3: không thêm vào giỏ.",
+        "Bước 4: hiện thông báo \"Số lượng tối đa là 10.\"; giỏ vẫn trống. Nội dung ô `Số lượng` sau khi báo lỗi: CẦN XÁC NHẬN (xem Câu hỏi cho BA, câu 2)."
+      ]
+    },
+    {
+      "tinh_huong": "Báo \"Vui lòng nhập số lượng.\" khi để trống ô Số lượng rồi bấm Thêm vào giỏ",
+      "uu_tien": "Trung bình",
+      "ky_thuat": "EP",
+      "nguon": "Có trong tài liệu: Để trống số lượng thì báo nhập số lượng ([Requirement, R4](requirement-mau.md#r4)).",
+      "dieu_kien": [
+        "- Giỏ hàng đang trống"
+      ],
+      "buoc": [
+        "Mở trang sản phẩm.",
+        "Để trống ô `Số lượng`.",
+        "Bấm nút `Thêm vào giỏ`.",
+        "Nhìn thông báo và biểu tượng giỏ hàng."
+      ],
+      "du_lieu": [
+        "Số lượng: để trống"
+      ],
+      "ket_qua": [
+        "Bước 3: không thêm vào giỏ.",
+        "Bước 4: hiện thông báo \"Vui lòng nhập số lượng.\"; giỏ vẫn trống."
+      ]
+    },
+    {
+      "tinh_huong": "Giỏ hiện 8 sản phẩm khi giỏ đã có 5 sản phẩm và thêm lần hai `3` sản phẩm",
+      "uu_tien": "Trung bình",
+      "ky_thuat": "Use case",
+      "nguon": "Suy luận: R1 áp dụng cho mỗi lần thêm nên lần hai `3` cũng là một lần thêm hợp lệ ([Requirement, R1](requirement-mau.md#r1)).",
+      "dieu_kien": [
+        "- Giỏ hàng đang có đúng 5 sản phẩm (tạo bằng cách thêm `5` một lần)"
+      ],
+      "buoc": [
+        "Mở trang sản phẩm.",
+        "Ở ô `Số lượng` nhập `3`.",
+        "Bấm nút `Thêm vào giỏ`.",
+        "Nhìn biểu tượng giỏ hàng."
+      ],
+      "du_lieu": [
+        "Số lượng lần hai: `3`"
+      ],
+      "ket_qua": [
+        "Bước 3: thêm thành công, không có thông báo lỗi.",
+        "Bước 4: giỏ hiện 8 sản phẩm."
+      ]
+    }
+  ],
+  "cau_hoi": [
+    "Giỏ đã có 8 sản phẩm, thêm lần hai 3 sản phẩm thì tổng 11: có bị chặn không? Mình đang hiểu là chỉ kiểm mỗi lần thêm (R1). Liên quan: R1 (đã có ở checklist, không phải TC riêng).",
+    "Sau khi báo \"Số lượng tối đa là 10.\" ở TC-005, ô `Số lượng` giữ chữ `11` hay bị xóa? Requirement không nói. Liên quan: TC-005, R3."
+  ],
+  "chua_dua_vao": [
+    "Số lượng có phần thập phân (`2.5`) hoặc chữ: requirement không nói, chưa đưa vào (xem câu hỏi cho BA)."
+  ],
+  "ghi_nhan_rieng": [
+    "Ví dụ: checklist TC-00x gộp hai giá trị không hợp lệ; test case dùng giá trị đầu, giá trị còn lại chưa có case (cần thêm mã TC mới nếu muốn kiểm)."
+  ]
+}

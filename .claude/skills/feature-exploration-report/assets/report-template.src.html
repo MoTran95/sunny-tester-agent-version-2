@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TÊN_BÁO_CÁO}}</title>
+<style id="giao-dien-chuan">/* build-embed.py chèn CSS + font chuẩn (assets/giao-dien-chuan.css, assets/fonts/) vào đây.
+   KHÔNG viết CSS, không đổi màu/font trong báo cáo: mọi dự án dùng chung một giao diện. */</style>
+</head>
+<body>
+<!-- MẪU BÁO CÁO KHÁM PHÁ FEATURE. Thay mọi {{...}} bằng nội dung thật (chỉ điều đã thấy), xoá ví dụ không dùng.
+     Ảnh: <img src="screenshots/NN-ten.jpg"> (NN = số 2 chữ số). Build bằng scripts/build-embed.py.
+     Chú thích HTML bị xoá khi build. -->
+
+<header class="hero"><div class="wrapper">
+  <h1>{{TÊN_BÁO_CÁO}}</h1>
+  <p>{{MÔ_TẢ_1_2_CÂU: hệ thống/feature là gì, báo cáo gồm những gì}}</p>
+  <div class="chips">
+    <span class="chip">Cập nhật {{NGÀY}}</span>
+    <span class="chip">{{URL hệ thống}} · Phiên bản {{PHIÊN_BẢN}}</span>
+    <span class="chip">{{N}} tài khoản đã đăng nhập: {{DANH_SÁCH}}</span>
+    <span class="chip">{{N}} ảnh bằng chứng</span>
+  </div>
+</div></header>
+
+<nav class="top"><div class="wrapper">
+  <a href="#doc">Cách đọc</a>
+  <a href="#tong-quan">1 · Hệ thống là gì</a>
+  <a href="#ban-do">2 · Sơ đồ tổng quan</a>
+  <a href="#vai-tro">3 · Vai trò</a>
+  <a href="#e2e">4 · Luồng end-to-end</a>
+  <a href="#mo-ho">5 · Điểm mơ hồ</a>
+  <a href="#chua-thu">6 · Chưa thử</a>
+  <a href="#cau-hoi">7 · Cần bạn trả lời</a>
+</div></nav>
+
+<main>
+<section id="doc"><div class="wrapper">
+  <h2>Cách đọc báo cáo này</h2>
+  <div class="grid2">
+    <div class="card"><h4>Nguyên tắc</h4>
+      <p style="margin:0">Chỉ ghi điều <b>đã nhìn thấy trên màn hình</b> (nguồn: {{FILE_MD_GỐC}} và các ảnh trong thư mục <code>screenshots/</code>). Điều chưa kiểm chứng đánh dấu <span class="t unk">❓ chưa xác nhận</span>. Không thêm giả định.</p>
+      <p class="small" style="margin:8px 0 0">Khung gạch đứt “Ví dụ so sánh” chỉ để minh họa cho người mới, không phải mô tả chính thức.</p></div>
+    <div class="card"><h4>Ý nghĩa ký hiệu trên ảnh</h4>
+      <ol class="lg" style="margin-top:0">
+        <li data-n="1">Khung đỏ + số: nút/vùng được nói tới (số = thứ tự đọc).</li>
+        <li class="neg" data-n="2">Khung cam gạch đứt: chỗ <b>không có</b> nút / vùng cần chú ý.</li>
+      </ol>
+      <p class="small" style="margin:0">Bấm vào ảnh để phóng to.</p></div>
+  </div>
+</div></section>
+
+<section id="tong-quan"><div class="wrapper">
+  <h2><span class="num">1</span> Hệ thống là gì</h2>
+  <p class="lead">{{Feature xử lý việc gì, cho ai; mã/đối tượng chính}}</p>
+  <div class="note"><b>Ví dụ so sánh</b> <span class="small">(minh họa, không phải mô tả chính thức)</span><br>{{so sánh đời thường}}</div>
+  <h3>Đăng nhập / điểm vào</h3>
+  <!-- 1 khối .step có ảnh màn hình đăng nhập; mẫu .step ở mục 3 bên dưới -->
+  <h3>Bảng thuật ngữ — các thuật ngữ xuất hiện trên màn hình</h3>
+  <div class="tblwrap"><table>
+    <tr><th>Thuật ngữ</th><th>Trên màn hình nghĩa là</th><th>Ví dụ thật đã thấy</th></tr>
+    <tr><td><b>{{thuật ngữ}}</b></td><td>{{theo nhãn/số liệu trên màn hình; công thức chưa có tài liệu thì ghi ❓}}</td><td>{{ví dụ thật}}</td></tr>
+  </table></div>
+  <h3>Phân tích màn hình chính của feature</h3>
+  <!-- 1 khối .step: các thành phần giao diện (header, banner, stepper...) kèm ảnh khoanh số -->
+</div></section>
+
+<section id="ban-do"><div class="wrapper">
+  <h2><span class="num">2</span> Sơ đồ tổng quan và kết nối hệ thống</h2>
+  <p class="lead">Ai nói chuyện với ai, theo thứ tự nào; số 1 → N là thứ tự các bước.</p>
+  <!-- Sơ đồ KHÔNG vẽ tay: chép assets/so-do-mau/tong-quan.json sang _src/so-do/, sửa nội dung; build tự vẽ đúng mẫu.
+       Cách viết JSON: references/so-do.md -->
+  <div class="diag" data-so-do="so-do/tong-quan.json"></div>
+  <h3>Giải thích từng số</h3>
+  <ol class="steplist">
+    <li data-n="1" style="--c:var(--p1)"><span class="tag p1">{{TÀI_KHOẢN}}</span> {{hành động}} <span class="small">Ảnh {{NN}}</span></li>
+  </ol>
+</div></section>
+
+<section id="vai-tro"><div class="wrapper">
+  <h2><span class="num">3</span> Các vai trò tài khoản</h2>
+  <p class="lead">{{các tài khoản phối hợp theo quy trình (workflow) nào}}</p>
+  <div class="tblwrap"><table>
+    <tr><th>Chức năng</th><th class="c"><span class="tag p1">{{TK1}}</span></th><th class="c"><span class="tag p2">{{TK2}}</span></th></tr>
+    <tr><td>{{chức năng}}</td><td class="c">✅</td><td class="c">❌</td></tr>
+  </table></div>
+
+  <article class="role p1" style="--c:var(--p1)">
+    <header><h3>{{TK1}} — {{Vai trò hiển thị trên giao diện}}</h3><div class="one">{{1 câu: tài khoản này làm gì}}</div></header>
+    <div class="body">
+      <div class="analogy"><b>Ví dụ so sánh</b> <span class="small">(minh họa, không phải mô tả chính thức)</span>: {{...}}</div>
+      <div class="can">
+        <div class="yes"><h4>Làm được (đã thấy)</h4><ul><li>{{...}}</li></ul></div>
+        <div class="no"><h4>Không làm được (đã thấy)</h4><ul><li>{{...}}</li></ul></div>
+      </div>
+      <h3 style="margin-top:20px">Các thao tác của {{TK1}} theo từng bước</h3>
+
+      <!-- MẪU 1 THAO TÁC = 1 .step. Legend và khung trên ảnh dùng chung số. -->
+      <div class="step wide" style="--c:var(--p1)">
+        <div>
+          <h4><span class="sn">B1</span>{{Tên thao tác}}</h4>
+          <p class="goal">{{mục đích 1 câu}}</p>
+          <ol class="lg">
+            <li data-n="1">Nút <b>{{tên nút đúng như trên màn hình}}</b>.</li>
+            <li class="neg" data-n="2"><b>Không có</b> {{nút/vùng không hiện}}.</li>
+          </ol>
+          <div class="res"><b>Kết quả đã thấy:</b> {{thông báo/thay đổi thật}}</div>
+          <p class="src">Ảnh {{NN}} · {{nguồn trong báo cáo MD}}</p>
+        </div>
+        <div class="figs">
+          <figure class="shot" style="--W:{{RỘNG_ẢNH_GỐC}};--H:{{CAO_ẢNH_GỐC}}"><div class="wrap">
+            <img src="screenshots/{{NN-ten-file}}.jpg" alt="{{mô tả}}">
+            <i class="mk" data-n="1" style="--x:0;--y:0;--w:100;--h:40"></i>
+            <i class="mk neg" data-n="2" style="--x:0;--y:60;--w:100;--h:40"></i>
+          </div><figcaption>Ảnh {{NN}} · {{chú thích}}</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </article>
+  <!-- nhân bản <article class="role p2"> (màu --p2) và p3 cho tài khoản khác -->
+</div></section>
+
+<section id="e2e"><div class="wrapper">
+  <h2><span class="num">4</span> Các luồng end-to-end (E2E)</h2>
+  <p class="lead">Chỉ ghi luồng <b>đã chạy thật</b>. Màu: <span class="tag p1">TK1</span> <span class="tag p2">TK2</span> <span class="tag p3">TK3</span> <span class="tag ext">hệ thống bên thứ ba</span> <span class="tag sys">hệ thống chính</span>.</p>
+  <h3>4.1 Sơ đồ tuần tự luồng chính</h3>
+  <p class="small">Đọc từ trên xuống; số trong vòng tròn là thứ tự. Nét liền = yêu cầu, nét đứt = kết quả trả về.</p>
+  <div class="diag" data-so-do="so-do/tuan-tu.json"></div>
+  <h3>4.2 Vòng đời trạng thái</h3>
+  <div class="diag" data-so-do="so-do/trang-thai.json"></div>
+  <ol class="steplist">
+    <li data-n="1" style="--c:#334"><span class="tag p1">{{TK}}</span> {{điều kiện chuyển trạng thái, viết ở đây, không nhồi lên mũi tên}}</li>
+  </ol>
+  <h3>4.3 Các luồng cụ thể</h3>
+  <div class="path">
+    <h4>Luồng A · {{tên}} ({{mã bản ghi test}}) — luồng chính (happy path)</h4>
+    <ol class="flow">
+      <li style="--c:var(--p1)"><span class="n">1</span><span class="w"><span class="tag p1">{{TK}}</span></span><span class="tx">{{hành động}} → {{kết quả thật}}. <a class="ev" data-img="{{NN}}">ảnh {{NN}}</a></span></li>
+    </ol>
+  </div>
+  <div class="path">
+    <h4>Luồng D · Các ràng buộc chặn thao tác (không đi tiếp được)</h4>
+    <div class="tblwrap"><table>
+      <tr><th>Tình huống</th><th>Hệ thống làm gì</th><th>Ảnh</th></tr>
+      <tr><td>{{...}}</td><td>“{{thông báo nguyên văn}}”</td><td><a class="ev" data-img="{{NN}}">{{NN}}</a></td></tr>
+    </table></div>
+  </div>
+</div></section>
+
+<section id="mo-ho"><div class="wrapper">
+  <h2><span class="num">5</span> Điểm mơ hồ cần bạn làm rõ</h2>
+  <p class="lead">Mỗi mục: <b>đã thấy gì</b> (có chứng cứ), <b>vì sao chưa kết luận được</b>, <b>cần làm rõ điều gì</b>. Không kết luận “lỗi” hay “đúng thiết kế” khi chưa có tài liệu.</p>
+  <div class="amb">
+    <div>
+      <h4><span class="id">M-01</span>{{Tiêu đề ngắn}} <span class="t hi">Nên hỏi trước</span></h4>
+      <dl>
+        <dt>Đã thấy</dt><dd>{{hiện tượng + nguyên văn thông báo + (Ảnh NN)}}</dd>
+        <dt>Vì sao chưa rõ</dt><dd>{{thiếu tài liệu nào; chỗ nào không có ảnh thì nói rõ}}</dd>
+        <dt>Cần làm rõ</dt><dd>{{câu hỏi cụ thể}}</dd>
+      </dl>
+    </div>
+    <div class="figs"><figure class="shot" style="--W:606;--H:845"><div class="wrap">
+      <img src="screenshots/{{NN-ten-file}}.jpg" alt="{{mô tả}}">
+      <i class="mk" data-n="1" style="--x:0;--y:0;--w:100;--h:40"></i>
+    </div><figcaption>Ảnh {{NN}} · ① {{chú thích}}</figcaption></figure></div>
+  </div>
+</div></section>
+
+<section id="chua-thu"><div class="wrapper">
+  <h2><span class="num">6</span> Những gì chưa thử / chưa có ảnh</h2>
+  <div class="grid2">
+    <div class="amb noimg" style="margin:0"><div><h4><span class="id">C-1</span>{{Việc chưa thử}}</h4><p style="margin:4px 0">{{vì sao chưa thử; cần người dùng đồng ý gì}}</p></div></div>
+  </div>
+</div></section>
+
+<section id="cau-hoi"><div class="wrapper">
+  <h2><span class="num">7</span> Việc cần bạn quyết định / trả lời</h2>
+  <ul class="ask"><li><b>{{Câu hỏi}}</b> ({{mã M-xx / C-x}}) — {{vì sao cần}}</li></ul>
+</div></section>
+</main>
+
+<footer><div class="wrapper">Nguồn: {{FILE_MD_GỐC}} và thư mục <code>screenshots/</code>. File HTML đã nhúng sẵn ảnh nên mở độc lập được.</div></footer>
+<script>/* build-embed.py sẽ thay khối này */</script>
+</body>
+</html>
