@@ -1,0 +1,17 @@
+{
+  "env_prefix": "ECOMMERCE_LITE",
+  "default_url": "https://staging-ecommerce-lite.vercel.app/",
+  "login": {
+    "id_labels": [
+      "Login email"
+    ],
+    "button_labels": [
+      "Sign in"
+    ],
+    "login_api": "/api/auth/login",
+    "session_check_api": "/api/me",
+    "session_minutes": null,
+    "max_consecutive_failures": 3,
+    "block_minutes": null
+  }
+}

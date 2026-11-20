@@ -7,5 +7,6 @@
 
 | Slug | Tên | Tổng quan |
 |---|---|---|
+| `ecommerce-lite` | Ecommerce Lite | [../modules/ecommerce-lite/overview.md](../modules/ecommerce-lite/overview.md) |
 
 Dự án mới: `scripts/tao-du-an.py` tự thêm dòng.

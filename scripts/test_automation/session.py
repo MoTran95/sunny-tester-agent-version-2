@@ -85,7 +85,8 @@ def login_once(page, cfg, username, password):
     failure_counter.record(cfg, status_code)
 
     if status_code == 200:
-        password_input.wait_for(state="detached", timeout=MAX_WAIT_MS)
+        # "hidden" chấp nhận cả ô bị gỡ khỏi trang lẫn ô chỉ bị ẩn (trang một màn đổi giao diện tại chỗ)
+        password_input.wait_for(state="hidden", timeout=MAX_WAIT_MS)
         return True, "200"
     if status_code == 429:
         return False, "429: hệ thống đang chặn tạm vì đăng nhập sai nhiều lần, chờ hết chặn rồi tự thử lại"

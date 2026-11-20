@@ -103,7 +103,7 @@ prefix = slug.upper().replace("-", "_") + "_" if slug else None
 if not prefix:
     warn("bỏ qua vì chưa chọn dự án", "chọn dự án trước")
 elif not os.path.exists(env_path):
-    warn(".env chưa có (chỉ cần khi chạy test tự động)", "khi cần chạy test: chép .env.example thành .env rồi tự điền mật khẩu (không gửi qua chat)")
+    warn(".env chưa có (chỉ cần khi chạy test tự động)", "nhờ Claude tạo (hỏi tài khoản rồi chạy scripts/nhap-tai-khoan.py; mật khẩu gõ ẩn ở terminal)")
 else:
     env = read_env(env_path)
     mau = {k: v for k, v in (read_env(mau_path) if os.path.exists(mau_path) else {}).items() if k.startswith(prefix)}
@@ -111,11 +111,11 @@ else:
     thieu_khoa = [k for k in mau if k not in env]
     trong = [k for k in co if not env[k]]
     if not co:
-        warn(f".env chưa có khóa nào bắt đầu bằng {prefix}", "người dùng tự thêm tài khoản test của dự án này")
+        warn(f".env chưa có khóa nào bắt đầu bằng {prefix}", "python -X utf8 scripts/nhap-tai-khoan.py --ma <MÃ> --user <tên> --go-mat-khau")
     if thieu_khoa:
         miss(".env thiếu khóa: " + ", ".join(thieu_khoa), "thêm theo .env.example")
     if trong:
-        warn(".env còn trống: " + ", ".join(trong), "tự điền giá trị")
+        warn(".env còn trống: " + ", ".join(trong), "python -X utf8 scripts/nhap-tai-khoan.py --ma <MÃ> --go-mat-khau")
     if co and not thieu_khoa and not trong:
         ok(f".env có {len(co)} khóa {prefix}… (không in giá trị)")
 

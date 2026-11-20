@@ -1,0 +1,17 @@
+{
+  "loai": "tuan-tu",
+  "mo-ta": "Sơ đồ tuần tự luồng đăng nhập và đăng xuất",
+  "lan": [
+    {"id": "SH", "mau": "p1", "ten": "SHOPPER", "phu": "Customer"},
+    {"id": "SYS", "mau": "sys", "ten": "Sunny Commerce", "phu": "hệ thống"}
+  ],
+  "buoc": [
+    {"tu": "SH", "den": "SYS", "nhan": "Mở trang gốc"},
+    {"tu": "SYS", "den": "SH", "nhan": "Form đăng nhập\n(kiểm phiên: 401)", "tra-ve": true},
+    {"tu": "SH", "den": "SYS", "nhan": "Gửi email + mật khẩu"},
+    {"tu": "SYS", "den": "SH", "nhan": "Thành công: “Welcome back, Sunny!”", "tra-ve": true},
+    {"ghi-chu": "Sai thông tin: lỗi 401 “Email or password is incorrect.”, ở lại form", "tu": "SH", "den": "SYS"},
+    {"tu": "SH", "den": "SYS", "nhan": "Bấm Sign out"},
+    {"tu": "SYS", "den": "SH", "nhan": "“You have been signed out.”\nvề form đăng nhập", "tra-ve": true}
+  ]
+}

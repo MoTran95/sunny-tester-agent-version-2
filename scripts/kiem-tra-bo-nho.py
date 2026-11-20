@@ -114,7 +114,8 @@ def main():
     for slug in sorted(d for d in os.listdir(os.path.join(ROOT, "testing")) if os.path.isdir(os.path.join(ROOT, "testing", d))):
         tdir = os.path.join(ROOT, "testing", slug)
         for feat in sorted(os.listdir(tdir)):
-            if os.path.exists(os.path.join(tdir, feat, "truy-vet-cau-hinh.json")):
+            if (os.path.exists(os.path.join(tdir, feat, "truy-vet-cau-hinh.json"))
+                    and os.path.exists(os.path.join(tdir, feat, "test-case.md"))):   # chưa có test case thì chưa có gì để truy vết
                 rt = subprocess.run(py + [os.path.join(ROOT, "scripts", "truy-vet.py"), "kiem", slug, feat, "--chi-doc"],
                                     capture_output=True, text=True, encoding="utf-8")
                 m = re.search(r"TÓM TẮT: ma_doi=(\d+) can_xem_lai=(\d+) tc_bo=(\d+)", rt.stdout or "")

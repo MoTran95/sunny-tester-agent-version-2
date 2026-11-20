@@ -11,7 +11,7 @@ Một repo chứa **nhiều dự án** (mỗi dự án là một hệ thống đ
    python -X utf8 scripts/kiem-tra-may-moi.py
    ```
 2. **Ghi tên của bạn** vào file `.nguoi-test` ở gốc repo (một dòng; chỉ nằm trên máy bạn, không đưa lên Git). Tên này ghi vào cột Người viết và người chạy test.
-   Tài khoản test (file `.env`, chép từ `.env.example` rồi tự điền) **chỉ cần khi chạy test tự động**; phân tích requirement, viết test case, bug, test plan không cần. Không gửi mật khẩu qua chat.
+   Tài khoản test (file `.env`) **chỉ cần khi chạy test tự động**: lần đầu vào dự án Claude hỏi địa chỉ, tên đăng nhập, mật khẩu trong chat rồi tự tạo `.env` (hoặc nói "để sau"; muốn gõ mật khẩu ẩn thì nói "gõ ở terminal"). Chỉ dùng tài khoản test, vì chat được lưu trong lịch sử phiên. Phân tích requirement, viết test case, bug, test plan không cần.
 3. **Mở repo trong app Claude** (desktop, tab Code) và gõ việc cần làm. Lần đầu Claude hỏi bạn đang làm dự án nào, hoặc tạo dự án mới.
 
 ## Dùng thế nào
@@ -54,7 +54,7 @@ Script tự soát và báo nếu còn sót thông tin dự án hoặc cá nhân.
 ## Quy tắc an toàn
 
 - Claude chỉ chạy test trên địa chỉ bạn nêu và có nhãn môi trường thử (staging, test…).
-- Mật khẩu chỉ nằm trong `.env`; Claude không gõ, không đọc ra, không ghi vào tài liệu.
+- Mật khẩu chỉ nằm trong `.env` (Claude tạo file từ thông tin bạn đưa); Claude không gõ vào form đăng nhập, không đọc ra, không ghi vào tài liệu.
 - Không làm khóa tài khoản, không đổi dữ liệu người khác; số lần nhập sai cho phép lấy từ requirement hoặc do bạn cung cấp.
 - Claude không bịa: điều requirement không nói thì thành câu hỏi, chỗ tự thêm có nhãn "Giả định".
 - Commit và push chỉ khi bạn nhờ.

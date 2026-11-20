@@ -54,16 +54,10 @@ Repo chứa nhiều dự án (mỗi dự án là một hệ thống đang test, 
 - Dự án đã có: chọn trong danh sách.
 - Dự án mới: Claude hỏi tên, URL, tên thư mục ngắn rồi tạo thư mục riêng (`scripts/tao-du-an.py`). Claude **không dùng kiến thức của dự án khác** (nghiệp vụ, tài khoản, từ ngữ, con số) cho dự án mới.
 
-`.env` không đi theo git (để không lộ mật khẩu). Chép file mẫu rồi **tự điền mật khẩu** của dự án đang làm bằng trình soạn thảo văn bản. Đừng gửi mật khẩu qua chat. Dự án mới: tạo dự án sẽ thêm sẵn nhóm khóa mẫu ở cuối `.env.example`.
+`.env` không đi theo git (để không lộ mật khẩu). Chọn dự án xong, **Claude hỏi địa chỉ môi trường thử, mã tài khoản, tên đăng nhập, mật khẩu trong chat rồi tự tạo `.env`**. Chỉ đưa tài khoản test, vì chat được lưu trong lịch sử phiên; muốn gõ mật khẩu ẩn (Claude không thấy) thì nói "gõ ở terminal". Chưa có tài khoản thì nói "để sau". Tự làm cũng được:
 
-**Windows:**
 ```powershell
-Copy-Item .env.example .env
-```
-
-**Mac:**
-```bash
-cp .env.example .env
+python -X utf8 scripts/nhap-tai-khoan.py --url <địa chỉ> --ma NV01 --user <tên đăng nhập> --go-mat-khau
 ```
 
 ## 5. Việc phải tự làm trong app Claude

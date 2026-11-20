@@ -21,5 +21,6 @@
 | `scripts/build_docs.py`, `scripts/test_automation/docs_pages.py` | Đổi md (SRS, bảng soát, câu hỏi BA, checklist, test case, truy vết, nhật ký khám phá, hướng dẫn chạy test) sang HTML cạnh file md + trang tổng `testing/<dự-án>/index.html` (thẻ từng tính năng: link tài liệu, tiến độ test case, bug, lượt chạy). 0 token, không dùng AI. `--all` mọi dự án, `--check` so nội dung (không ghi), `--stage` git add. Giao diện chung ở `test_automation/theme.py`. Hook `.githooks/pre-commit` tự sinh lại trước commit. Selftest có kiểm bộ đổi md |
 | `scripts/auto_login.py`, `scripts/run_tests.py`, `scripts/test_automation/` | Chạy test case tự động bằng Playwright cho mọi dự án (`testing/<dự-án>/auto-config.json`, script ca ở `<tính-năng>/auto/`). Đăng nhập do **người dùng tự chạy**; phiên ở `.phien-dang-nhap/` (gitignore). Chi tiết: `project/tu-dong-hoa-test.md`, hướng dẫn `docs/chay-test-tu-dong.md` |
 | `.du-an-hien-tai`, `.env` / `.env.example` | Dự án đang làm; tài khoản test (không commit) / mẫu khóa |
+| `scripts/nhap-tai-khoan.py` | Tạo `.env`, ghi URL/tài khoản; `--go-mat-khau` gõ ẩn (getpass treo nếu Claude tự chạy trên Windows: chỉ dùng trong tab terminal) |
 
 Bẫy Windows: chạy Python kèm `-X utf8`; heredoc Git Bash làm méo `\\` trong regex → viết script ra file rồi chạy.

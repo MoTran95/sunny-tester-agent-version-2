@@ -1,0 +1,8 @@
+{
+  "ten_tinh_nang": "Đăng nhập",
+  "tien_to": "LOGIN",
+  "srs": "srs/ecommerce-lite/dang-nhap.md",
+  "bang_soat": "testing/ecommerce-lite/dang-nhap/bang-soat-requirement.md",
+  "test_case": "testing/ecommerce-lite/dang-nhap/test-case.md",
+  "ten_ngan": {}
+}

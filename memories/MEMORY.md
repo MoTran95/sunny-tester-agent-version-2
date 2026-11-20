@@ -8,7 +8,7 @@ Chỉ 2 file **LUÔN ĐỌC** (★). Còn lại mở khi việc khớp cột "Kh
 | ★ `project/overview.md` | mọi việc | repo là gì, danh sách dự án |
 | `user/document-preferences.md` | viết báo cáo/SRS/bảng soát/checklist/bug | cách người dùng muốn tài liệu |
 | `user/connectors-and-plugins.md` | cần connector/plugin; chậm | Notion/Docs tắt; tắt plugin từ repo không được (đã đo) |
-| `conventions/nhieu-du-an.md` | máy mới, đổi/tạo dự án | chọn dự án, không lẫn kiến thức |
+| `conventions/nhieu-du-an.md` | máy mới, đổi/tạo dự án, hỏi/ghi tài khoản test `.env` | chọn dự án, tài khoản test, không lẫn kiến thức |
 | `conventions/memory-writing-rules.md` | trước khi ghi/sửa memory | khuôn viết cho AI, độ dài |
 | `conventions/ba-question-wording.md` | viết câu hỏi BA | xưng hô, từ chung, khuôn |
 | `project/skills.md` | **sửa** skill (chỉ dùng skill thì đọc `SKILL.md` của skill đó, không mở file này) | 11 skill (có `chay-test-tu-dong`, `de-xuat-regression`, `lap-ke-hoach-retest`, `tao-test-summary-report`, `tao-test-plan`), script, trạng thái đã thử |
@@ -24,3 +24,10 @@ Chỉ 2 file **LUÔN ĐỌC** (★). Còn lại mở khi việc khớp cột "Kh
 | `modules/_template.md` | tạo file module | khuôn |
 
 Sản phẩm dùng chung cho người đọc (không phải memory): `testing/chien-luoc-phan-tich-requirement.md` (sách Sunny; đọc khi nhắc "sách"); `docs/bat-dau.md` (hướng dẫn người mới, nguồn duy nhất về cách dùng); `docs/quy-trinh-kiem-thu.md` (bản đồ bước → skill cho người bảo trì); `docs/danh-gia-skill.md` (đánh giá, rà soát). Khuôn test plan: `testing/_template-test-plan.md` (skill `tao-test-plan`).
+
+## Dự án `ecommerce-lite` (chỉ khi `.du-an-hien-tai` = ecommerce-lite)
+| File | Khi | Chứa |
+|---|---|---|
+| `modules/ecommerce-lite/overview.md` | đầu tiên | hệ thống, tài khoản, thư mục |
+| `modules/ecommerce-lite/tu-ngu-cau-hoi-ba.md` | viết câu hỏi BA | từ đã chốt với BA của dự án này |
+| `modules/ecommerce-lite/feature-dang-nhap.md` | làm tiếp Đăng nhập (test plan, test case, chạy test) | trạng thái, sự thật đã thấy, bẫy |

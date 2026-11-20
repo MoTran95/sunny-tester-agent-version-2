@@ -41,7 +41,7 @@ Luôn đọc: `memories/user/working-preferences.md`, `memories/project/overview
 6. **Build**: `python -X utf8 scripts/build-embed.py --src <src.html> --out <report.html> --shots <thư_mục_ảnh>`. Phải ≤ 512 KiB (build tự giảm chất lượng ảnh thu nhỏ nếu vượt). Build in **Cảnh báo** (sơ đồ vẽ tay, CSS riêng đổi font/màu…) thì sửa cho hết rồi mới giao.
 7. **Soát**: chạy thêm `--review <thư_mục>` và xem từng tranh ghép (khung có đúng ô? số có đè chữ/đè nhau?); mở file thật trong khung xem trước kiểm tra ảnh hiện, thanh tab cuộn đúng. Xong mới giao.
 8. **Cập nhật bộ nhớ** (`memories/modules/<hệ thống>/feature-<tên>.md` + `MEMORY.md`): kết quả khám phá, bẫy mới, khoảng trống bằng chứng.
-9. **Trả lời người dùng**: nêu file, điều đã kiểm tra, điều **chưa** kiểm tra, và các câu cần họ trả lời.
+9. **Trả lời người dùng**: đưa **một link** trang tổng `testing/<dự-án>/index.html#tn-<tính-năng>` kèm "bấm nút Báo cáo khám phá (sơ đồ, ảnh khoanh nút) trong thẻ tính năng" (nút tự có khi file `*.html` nằm ở `evidence/<dự-án>/features/<tính-năng>/`; chạy `build_docs.py --all` rồi mở thử trang tổng); nêu file, điều đã kiểm tra, điều **chưa** kiểm tra, và các câu cần họ trả lời.
 
 ## Khi người dùng nhờ sửa báo cáo đã có
 

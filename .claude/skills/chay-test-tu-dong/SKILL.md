@@ -33,7 +33,7 @@ Sau `CLAUDE.md` và `memories/MEMORY.md` (đọc `.du-an-hien-tai`); chỉ file 
 | Sửa thư viện `test_automation` | `memories/project/tu-dong-hoa-test.md`, rồi chạy `python -X utf8 scripts/selftest/run_selftest.py` (mong đợi `RESULT: ALL OK`) |
 
 ## Quy trình
-1. **Chốt phạm vi:** địa chỉ test do người dùng nêu (có nhãn môi trường thử như staging); ca nào chạy, ca nào bỏ (ca mà chính bước làm gây chặn hệ thống); dữ liệu cần tạo (hỏi trước).
+1. **Chốt phạm vi:** địa chỉ test do người dùng nêu (có nhãn môi trường thử như staging); ca nào chạy, ca nào bỏ (ca mà chính bước làm gây chặn hệ thống); dữ liệu cần tạo (hỏi trước). Tài khoản ca cần: `python -X utf8 scripts/nhap-tai-khoan.py --trang-thai`; thiếu thì hỏi người dùng trong chat rồi ghi (cách hỏi và lệnh: `memories/conventions/nhieu-du-an.md` mục "Tài khoản test").
 2. **Đăng nhập một lần:** `python -X utf8 scripts/auto_login.py <mã…> --headless` (mỗi tài khoản đúng một lần bấm; một tài khoản lỗi thì dừng). Phiên sống ngắn: chạy test ngay sau đó.
 3. **Viết script ca** theo khuôn cho ca chưa có (`<tính-năng>/auto/tc-xxx.py`); ý đạt cũng khai `mark_text` để có ảnh xanh.
 4. **Chạy:** `python -X utf8 scripts/run_tests.py --project <slug> --case-id <tính-năng>/tc-xxx … ` (hoặc `--smoke`, `--feature`). Ca có nhập sai: sắp từ ít sai đến nhiều sai, dừng ngay khi bị chặn.

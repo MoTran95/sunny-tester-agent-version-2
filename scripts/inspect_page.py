@@ -24,7 +24,7 @@ if hasattr(sys.stdout, "reconfigure"):
 def main():
     ap = argparse.ArgumentParser(description="In cấu trúc trang để viết selector")
     ap.add_argument("path", help="đường dẫn trong hệ thống, ví dụ /applications/<id>/financials")
-    ap.add_argument("--account", help="mã tài khoản đã lưu phiên")
+    ap.add_argument("--account", dest="accounts", help="mã tài khoản đã lưu phiên")
     ap.add_argument("--no-login", action="store_true")
     ap.add_argument("--project")
     ap.add_argument("--wait-text", help="chờ chữ này hiện trước khi in")

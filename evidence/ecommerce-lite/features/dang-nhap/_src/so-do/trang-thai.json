@@ -1,0 +1,14 @@
+{
+  "loai": "trang-thai",
+  "mo-ta": "Vòng đời phiên đăng nhập",
+  "trang-thai": [
+    {"id": "chua", "ten": "Chưa đăng nhập", "kieu": "xam", "cot": 0, "hang": 0},
+    {"id": "da", "ten": "Đã đăng nhập", "kieu": "ok", "cot": 1, "hang": 0, "ghi-chu": "thấy Shop, My orders, Profile"},
+    {"id": "chan", "ten": "Bị chặn tạm ❓", "kieu": "ngoai", "cot": 1, "hang": 1.4, "dong": ["chưa thấy, chưa xác nhận có không"]}
+  ],
+  "chuyen": [
+    {"so": 1, "tu": "chua", "den": "da", "nhan": "Đăng nhập đúng"},
+    {"so": 2, "tu": "da", "den": "chua", "nhan": "Sign out"},
+    {"so": 3, "tu": "chua", "den": "chan", "nhan": "sai nhiều lần ❓", "net-dut": true}
+  ]
+}

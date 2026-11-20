@@ -161,7 +161,7 @@ _Điền khi có._
     print("\nViệc còn lại:")
     print(f"- Mỗi tính năng có SRS: python -X utf8 scripts/truy-vet.py khoi-tao {slug} <tính-năng> --tien-to <MÃ> --ten \"<Tên tính năng>\" "
           "(tạo cấu hình truy vết, ghi tên tính năng cho trang HTML và test plan).")
-    print(f"- Chỉ khi chạy test tự động: thêm tài khoản vào .env (tiền tố {env_prefix}) và điền các chỗ <…> trong "
+    print(f"- Chỉ khi chạy test tự động: thêm tài khoản vào .env bằng scripts/nhap-tai-khoan.py (tiền tố {env_prefix}) và điền các chỗ <…> trong "
           f"testing/{slug}/auto-config.json (nhãn ô, API: dùng scripts/inspect_page.py). Viết tài liệu, bug, test plan không cần hai việc này.")
     return 0
 

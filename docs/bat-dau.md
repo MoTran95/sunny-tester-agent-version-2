@@ -12,7 +12,7 @@ Trang này để bạn xem lại khi quên. Bạn không cần nhớ tên skill 
 >
 > Thứ tự thường đi: phân tích requirement và hỏi BA → lập test plan → viết test case → chọn bộ smoke, regression → chạy test (ca nào không đạt mình tạo bug luôn, kèm ảnh chụp và video) → re-test → báo cáo tổng kết.
 >
-> Có vài việc **bạn tự làm**: gõ mật khẩu vào file `.env` (không gửi qua chat), cho mình địa chỉ môi trường thử, duyệt danh sách tình huống trước khi mình viết test case, chốt đóng hay mở lại bug, và quyết định nhận build. Bug mình lưu trong repo; bạn nhờ thì mình tạo thêm trên Jira. Chỗ nào chưa rõ mình sẽ hỏi, không tự đoán.
+> Có vài việc **bạn tự làm**: cho mình tài khoản test (mình tự lưu vào file `.env`), cho mình địa chỉ môi trường thử, duyệt danh sách tình huống trước khi mình viết test case, chốt đóng hay mở lại bug, và quyết định nhận build. Bug mình lưu trong repo; bạn nhờ thì mình tạo thêm trên Jira. Chỗ nào chưa rõ mình sẽ hỏi, không tự đoán.
 >
 > **Đọc trước trang hướng dẫn cho người mới:** `docs/bat-dau.html` (khoảng 5 phút: thứ tự công việc, câu nói mẫu, việc bạn tự làm).
 >
@@ -28,7 +28,7 @@ Trang này để bạn xem lại khi quên. Bạn không cần nhớ tên skill 
 | Ghi tên bạn | Tạo file `.nguoi-test` ở gốc repo, một dòng là tên bạn. Tên này ghi vào cột Người viết và người chạy test |
 | Mở repo | Mở thư mục repo trong app Claude (desktop, tab Code) |
 | Chọn dự án | Lần đầu Claude hỏi bạn test dự án nào. Dự án chưa có thì chọn "dự án mới", Claude tạo đủ thư mục. Muốn đổi dự án thì nói tên dự án khác |
-| Tài khoản test | **Chỉ cần khi chạy test tự động.** Chép `.env.example` thành `.env` rồi tự điền tài khoản, mật khẩu. Không gửi mật khẩu qua chat |
+| Tài khoản test | **Chỉ cần khi chạy test tự động.** Lần đầu vào dự án Claude hỏi địa chỉ, tên đăng nhập, mật khẩu trong chat rồi tự lưu vào `.env` (hoặc nói "để sau"). Chỉ đưa tài khoản test: chat được lưu trong lịch sử phiên; muốn gõ mật khẩu ẩn thì nói "gõ ở terminal" |
 
 ## 2. SRS và phân tích requirement là gì
 

@@ -422,7 +422,12 @@ def feature_docs(project, feature, exists):
         page = md.with_suffix(".html")
         if page.name not in known and exists(page):
             out.append((_doc_title(md), page))
-    log = root / "evidence" / project / "features" / feature / "bao-cao.html"
+    fdir = root / "evidence" / project / "features" / feature
+    # báo cáo khám phá dạng HTML (sơ đồ, ảnh khoanh nút) của tính năng: đặt ngay trong thẻ tính năng, nhãn dễ nhận
+    for rep in sorted(fdir.glob("*.html")) if fdir.exists() else []:
+        if rep.name != "bao-cao.html" and exists(rep):
+            out.append(("Báo cáo khám phá (sơ đồ, ảnh khoanh nút)", rep))
+    log = fdir / "bao-cao.html"
     if exists(log):
         out.append(("Nhật ký khám phá", log))
     return out
@@ -463,6 +468,8 @@ def render_doc(project, src, converted, codes, exists):
 # ---------------------------------------------------------------- trang tổng
 def _status_counts(test_case_file):
     names, counts = None, {}
+    if not test_case_file.exists():   # tính năng mới chỉ có SRS, chưa có test case
+        return counts
     for line in test_case_file.read_text(encoding="utf-8").splitlines():
         if names is None and line.startswith("| Mã |"):
             names = [c.strip() for c in _CELL_SPLIT.split(line)[1:-1]]
@@ -492,7 +499,8 @@ def render_index(project, exists):
     root = config.ROOT
     tdir = cfg.project_dir
     e = html.escape
-    features = [d for d in sorted(tdir.iterdir()) if d.is_dir() and (d / "test-case.md").exists()]
+    # tính năng hiện ở trang tổng khi đã có test case HOẶC đã có SRS (giai đoạn đầu chưa có test case vẫn phải có link tới SRS và nhật ký khám phá)
+    features = [d for d in sorted(tdir.iterdir()) if d.is_dir() and ((d / "test-case.md").exists() or (root / "srs" / project / f"{d.name}.md").exists())]
     names = report_mod.feature_names(project)
     version = cfg.test_data.get("version", "")
     cards, total_tc, total_bug, total_ran, total_fail = [], 0, 0, 0, 0

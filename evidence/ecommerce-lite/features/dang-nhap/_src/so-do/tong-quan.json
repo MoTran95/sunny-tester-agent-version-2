@@ -1,0 +1,22 @@
+{
+  "loai": "tong-quan",
+  "mo-ta": "Sơ đồ tổng quan: khách đăng nhập vào cửa hàng",
+  "he-thong": {
+    "ten": "Sunny Commerce", "phu": "Đăng nhập (môi trường thử)",
+    "tieu-de-muc": "Màn hình liên quan:",
+    "muc": ["Form đăng nhập", "Kiểm tra email và mật khẩu", "Cửa hàng: Shop, My orders, Profile", "Đăng xuất"],
+    "tieu-de-trang-thai": "Trạng thái người dùng",
+    "trang-thai": ["Chưa đăng nhập →", "Đã đăng nhập"]
+  },
+  "vai-tro": [
+    {"id": "SH", "mau": "p1", "ten": "SHOPPER", "vai": "Customer (khách hàng)", "mo-ta": ["Đăng nhập, mua sắm, đăng xuất"]}
+  ],
+  "ben-ngoai": [],
+  "buoc": [
+    {"so": 1, "tu": "SH", "nhan": "Mở trang gốc"},
+    {"so": 2, "tu": "SH", "nhan": "Gửi email + mật khẩu"},
+    {"so": 3, "tu": "SH", "chieu": "ve", "tra-ve": true, "nhan": "Vào cửa hàng hoặc báo lỗi"},
+    {"so": 4, "tu": "SH", "nhan": "Bấm Sign out"}
+  ],
+  "ghi-chu": {"dong": ["Hệ thống không gọi dịch vụ bên ngoài nào trong luồng đăng nhập đã thấy.", "“Forgot password?” chỉ hiện thông báo tạm, chưa có luồng khôi phục mật khẩu."]}
+}
