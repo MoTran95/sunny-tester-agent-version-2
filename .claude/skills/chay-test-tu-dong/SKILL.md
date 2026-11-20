@@ -17,7 +17,7 @@ Tiếng Việt với người dùng; tên hàm, biến, khóa JSON, lệnh trong
 ## Giữ token thấp (bắt buộc)
 - Đọc đúng ca cần: `python -X utf8 scripts/truy-vet.py tra <dự-án> <tính-năng> --ma TC-xxx --day-du`; không mở cả `test-case.md`.
 - Chạy lệnh rồi chỉ đọc phần cuối (`| tail`, `| grep "^|\|Tổng"`); không đọc cả log, không dán JSON kết quả vào chat.
-- Xem ảnh (`Read`) chỉ khi kết quả bất ngờ hoặc cần kiểm khung tô; không xem ảnh ca Đạt. **Luôn lưu ảnh/video cho mọi ca (kể cả Đạt) để người dùng kiểm lại: `references/quy-tac-da-chot.md` mục 7.**
+- Xem ảnh (`Read`) chỉ khi kết quả bất ngờ hoặc cần kiểm khung tô; không xem ảnh ca Đạt. **Luôn lưu ảnh/video cho mọi ca (kể cả Đạt) để người dùng kiểm lại: `references/quy-tac-da-chot.md` mục 9.**
 - Chạy nhóm nhỏ bằng `--case-id`; chạy lại chỉ ca lỗi; không chạy cả bộ "để thử".
 - Ca cùng nhóm dùng chung một file hàm (như `login_common.py`); script ca dựng từ `assets/mau-ca-tu-dong.py`.
 - Kết luận, rủi ro, câu hỏi cho Dev viết **một lần** vào file; trang web sinh từ file đó, không viết lại mỗi lần.
@@ -28,11 +28,13 @@ Sau `CLAUDE.md` và `memories/MEMORY.md` (đọc `.du-an-hien-tai`); chỉ file 
 | Việc | Đọc |
 |---|---|
 | Lần đầu dùng skill trong phiên, hoặc không chắc quy tắc | `references/quy-tac-da-chot.md` (ngắn, đọc hết) |
+| **Tính năng mới** (test case viết từ requirement, dev vừa làm xong, chưa từng chạy) | `references/chay-tinh-nang-moi.md` (làm theo thứ tự trước khi viết script) |
 | Dự án mới / máy mới | `references/them-du-an-moi.md` |
 | Cần cờ lệnh đầy đủ | `docs/chay-test-tu-dong.md` (chỉ mục cần) |
 | Sửa thư viện `test_automation` | `memories/project/tu-dong-hoa-test.md`, rồi chạy `python -X utf8 scripts/selftest/run_selftest.py` (mong đợi `RESULT: ALL OK`) |
 
 ## Quy trình
+0. **Tính năng mới chưa từng chạy?** Làm `references/chay-tinh-nang-moi.md` trước (cổng luồng chính, đối chiếu giao diện thật, phân loại khác biệt requirement, phân ca tự động/không), rồi mới sang bước 1–8 dưới đây.
 1. **Chốt phạm vi:** địa chỉ test do người dùng nêu (có nhãn môi trường thử như staging); ca nào chạy, ca nào bỏ (ca mà chính bước làm gây chặn hệ thống); dữ liệu cần tạo (hỏi trước). Tài khoản ca cần: `python -X utf8 scripts/nhap-tai-khoan.py --trang-thai`; thiếu thì hỏi người dùng trong chat rồi ghi (cách hỏi và lệnh: `memories/conventions/nhieu-du-an.md` mục "Tài khoản test").
 2. **Đăng nhập một lần:** `python -X utf8 scripts/auto_login.py <mã…> --headless` (mỗi tài khoản đúng một lần bấm; một tài khoản lỗi thì dừng). Phiên sống ngắn: chạy test ngay sau đó.
 3. **Viết script ca** theo khuôn cho ca chưa có (`<tính-năng>/auto/tc-xxx.py`); ý đạt cũng khai `mark_text` để có ảnh xanh.
@@ -53,5 +55,6 @@ Máy kiểm sẵn (chạy `python -X utf8 scripts/kiem-tra-bo-nho.py`): trang HT
 
 ## Tệp trong skill
 - `references/quy-tac-da-chot.md` — quy tắc người dùng đã xác nhận (kèm lý do).
+- `references/chay-tinh-nang-moi.md` — chạy test cho tính năng mới từ requirement (người dùng chốt 2026-11-20).
 - `references/them-du-an-moi.md` — thêm dự án, máy mới, cấu hình thương hiệu.
 - `assets/mau-ca-tu-dong.py` — khuôn script ca.

@@ -49,8 +49,12 @@ Lượt theo tính năng chỉ được ghi khi `add-run` kiểm đạt (code, k
 - Đổi tên hàng loạt: chạy selftest (từng bắt lỗi tên dùng dạng chuỗi, tham số che tên hàm, cờ lệnh lệch tên).
 - Hệ thống mới có thể đổi địa chỉ/bản: kiểm `/api/health` và số bản ở `auto-data.json` trước khi chạy.
 
-## 7. Evidence bắt buộc (người dùng dặn 2026-11-20)
+## 9. Evidence bắt buộc (người dùng dặn 2026-11-20)
 - **Mọi ca có kết luận đều phải có evidence để người dùng tự kiểm lại**, kể cả ca Đạt và lượt chạy tay: ảnh (ca Đạt có ảnh xanh theo `mark_text`), video nếu có, ghi trong file kết quả (`images`, `videos`) và hiện trên trang kết quả. Chỉ ghi chữ "đã quan sát" thì **không** coi là đủ: không ghi lượt.
 - "Chỉ xem ảnh khi Không đạt" ở mục giữ token là việc **AI đọc** ảnh; không liên quan việc lưu ảnh. Luôn lưu, đừng luôn xem.
 - Trình duyệt tích hợp của app chỉ trả ảnh cho AI, không lưu ra repo: muốn có evidence thì chạy bằng script Playwright của repo (`run_tests.py`). Chạy tay chỉ để khám phá, không dùng để ghi lượt chính thức; ngoại lệ phải ghi rõ trong ghi chú lượt và người dùng đồng ý.
 - Ảnh có mật khẩu mẫu hiện trên trang (khung tài khoản mẫu) phải che trước khi lưu; không có cách che được thì chụp vùng không chứa mật khẩu hoặc dùng ảnh sau khi đăng nhập.
+
+## 10. Tính năng mới và requirement đổi (người dùng chốt 2026-11-20)
+- Các bước đầy đủ ở `chay-tinh-nang-moi.md` (đây chỉ là nguồn quy tắc). Cốt lõi: không viết script khi chưa đối chiếu giao diện thật (nhưng không khám phá lại cái đã có nhật ký); requirement đổi hoặc team chốt điểm mơ hồ thì cập nhật cả chuỗi cùng lượt và soát chéo cho không mâu thuẫn.
+- **Chưa rõ ai chốt, chốt gì, áp dụng mã nào → hỏi trước khi làm, không tự quyết.** Ngoại lệ của "tự làm, đừng hỏi": việc thao tác thuần thì tự làm, việc **quyết định nội dung requirement** thì hỏi.
