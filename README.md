@@ -54,7 +54,7 @@ Script tự soát và báo nếu còn sót thông tin dự án hoặc cá nhân.
 ## Quy tắc an toàn
 
 - Claude chỉ chạy test trên địa chỉ bạn nêu và có nhãn môi trường thử (staging, test…).
-- Mật khẩu chỉ nằm trong `.env` (Claude tạo file từ thông tin bạn đưa); Claude không gõ vào form đăng nhập, không đọc ra, không ghi vào tài liệu.
+- Mật khẩu chỉ nằm trong `.env` (Claude tạo file từ thông tin bạn đưa); Claude tự nhập vào form đăng nhập của tài khoản test (mật khẩu thật và mật khẩu sai) nhưng không in ra, không ghi vào tài liệu.
 - Không làm khóa tài khoản, không đổi dữ liệu người khác; số lần nhập sai cho phép lấy từ requirement hoặc do bạn cung cấp.
 - Claude không bịa: điều requirement không nói thì thành câu hỏi, chỗ tự thêm có nhãn "Giả định".
 - Commit và push chỉ khi bạn nhờ.

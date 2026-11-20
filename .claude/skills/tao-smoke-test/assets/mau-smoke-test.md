@@ -14,7 +14,7 @@
 
 **Mục đích.** Smoke test trả lời một câu: build này đủ ổn để bắt đầu test sâu chưa? Một case được chọn khi nó hỏng thì việc test khác vô nghĩa hoặc bị chặn, không phải vì nó nhanh hay dễ. Thời gian chỉ là mục tiêu để giữ smoke nông và gọn; nếu một case cần cho mục đích mà làm vượt mục tiêu thì giữ case, chấp nhận vượt và ghi lý do.
 
-**Cách đọc.** <Thứ tự chạy và lý do (dùng lại phiên đăng nhập/dữ liệu); mật khẩu do người kiểm thử tự gõ>.
+**Cách đọc.** <Thứ tự chạy và lý do (dùng lại phiên đăng nhập/dữ liệu); mật khẩu không ghi vào tài liệu>.
 
 | # | Smoke case | Mã case gốc | Phần | Vì sao chọn | Thời gian ước tính | Nên tự động hoá? |
 |---|---|---|---|---|---|---|
@@ -32,7 +32,7 @@
 | Chuẩn bị chung, không phải case: <việc, làm một lần> | <n> |
 | **Tổng** | **<tổng>, <so với mục tiêu khoảng N>** |
 
-Ước lượng theo số bước (mỗi bước khoảng 15–20 giây, trang tải 3–5 giây, thêm thời gian tự gõ mật khẩu), chưa đo bằng chạy thật. Không dùng con số này để cắt case.
+Ước lượng theo số bước (mỗi bước khoảng 15–20 giây, trang tải 3–5 giây, thêm thời gian đăng nhập), chưa đo bằng chạy thật. Không dùng con số này để cắt case.
 
 ## Tiêu chí trả build
 

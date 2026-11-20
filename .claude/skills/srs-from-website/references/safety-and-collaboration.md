@@ -2,15 +2,12 @@
 
 Các quy tắc dưới đây đến từ sự cố và chỉ dẫn thật trong các phiên làm việc. Lý do được ghi để áp dụng đúng tinh thần, không máy móc.
 
-## 1. Mật khẩu: người dùng gõ, mình đọc kết quả
-- Mình **không tự gõ mật khẩu**, kể cả mật khẩu sai/giả, và dù người dùng bảo "sai thì có sao đâu". Quy tắc áp dụng cho việc gõ vào ô mật khẩu, không phụ thuộc đúng hay sai; Playwright MCP hay công cụ khác cũng không đổi điều này.
-- Cách phối hợp đã chạy tốt:
-  1. Mình **điền sẵn ô tên đăng nhập** (`form_input`) và để ô mật khẩu trống/đang có chữ người dùng gõ.
-  2. Mình nói rõ cho người dùng: gõ gì (ví dụ "một mật khẩu sai bất kỳ"), bấm gì, rồi báo "xong ca N". Bật khung trình duyệt nếu đang ẩn.
-  3. Khi người dùng báo xong, mình đọc kết quả bằng `screenshot` + `read_network_requests` + `javascript_tool`, rồi ghi vào nhật ký.
-  4. Mình có thể đổi ô **tên đăng nhập** và bấm nút gửi giữa các lần, vì ô mật khẩu vẫn giữ chữ người dùng đã gõ — nhưng chỉ khi việc lặp lại đó an toàn (mục 2).
-- Có thể xóa ô mật khẩu (đặt rỗng) để thử ca "mật khẩu trống"; đó không phải nhập mật khẩu.
-- Mật khẩu test nằm ở `.env` (đã `.gitignore`): **không đọc, không chép** vào tài liệu, bộ nhớ hay chat.
+## 1. Mật khẩu: tài khoản test thì mình tự nhập (người dùng dặn lại 2026-11-20, thay quy tắc cũ "người dùng gõ")
+- Với **tài khoản test**, mình **tự nhập cả mật khẩu thật lẫn mật khẩu sai** khi khám phá, chạy tay hay chạy script, **chỉ trên địa chỉ do người dùng nêu và có nhãn môi trường thử** (staging, dev, test, qa, sandbox, preview) hoặc localhost. Địa chỉ khác, tài khoản thật của người dùng → không nhập, nhờ người dùng tự làm.
+- Mật khẩu thật: ưu tiên để script/công cụ đọc từ `.env` rồi điền (không in ra); khi duyệt tay bằng trình duyệt tích hợp thì dùng mật khẩu người dùng đã đưa cho tài khoản test. Mật khẩu sai dùng chữ giả (ví dụ `Sai@Matkhau1`).
+- **Không in/nhắc lại mật khẩu** trong chat, nhật ký, tài liệu, bug, script; ảnh có mật khẩu mẫu hiện trên trang thì che. Không đọc thân yêu cầu POST đăng nhập.
+- Nhập sai lặp lại vẫn theo mục 2 (tối đa 3 lần, kiểm sau từng lần, không tự đặt ngưỡng).
+- Công cụ trình duyệt tự chặn việc nhập mật khẩu → theo mục 6 (không đi đường vòng), ghi "Chưa khám phá" kèm lý do và nhờ người dùng làm ca đó.
 
 ## 2. Không gây khóa hệ thống / đổi dữ liệu người khác
 Người dùng đã dặn: khám phá **đầy đủ**, chỉ tránh việc **làm khóa hệ thống** hoặc **đổi dữ liệu của người khác**.

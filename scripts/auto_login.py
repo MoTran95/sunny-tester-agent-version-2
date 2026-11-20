@@ -2,7 +2,7 @@
 """Đăng nhập tự động bằng Playwright rồi lưu phiên (dùng cho mọi dự án có `auto-config.json`).
 
 Người dùng TỰ CHẠY script này trên máy mình. Mật khẩu chỉ đọc từ `.env` ở gốc repo
-trong tiến trình Python; Claude không thấy và không gõ mật khẩu.
+trong tiến trình Python; Claude không thấy mật khẩu khi dùng script này.
 
 Ví dụ (một hoặc nhiều tài khoản):
     python -X utf8 scripts/auto_login.py NV01            # mở cửa sổ đã đăng nhập sẵn

@@ -63,7 +63,7 @@ python -X utf8 scripts/nhap-tai-khoan.py --url <địa chỉ> --ma NV01 --user <
 ## 5. Việc phải tự làm trong app Claude
 1. Mở thư mục repo trong tab Code. Khi app hỏi có tin cậy thư mục không, chọn tin cậy: app mới đọc `.claude/settings.json`, nơi đã cho phép sẵn các lệnh an toàn (sửa file trong `memories/`, `srs/`, `testing/`, `evidence/`, `docs/`, skill; chạy script soát; `git status/diff/log/show`). `git commit`, `git push`, xóa file vẫn hỏi bạn trước.
 2. (Tùy chọn, ít tác dụng) Tắt tay trong phần quản lý plugin/skill của app những thứ không dùng cho kiểm thử. Đã đo: nạp sẵn ~74 nghìn token, phần của plugin/skill tài khoản chỉ vài nghìn, và **script/cấu hình trong repo không tắt được** chúng (`memories/user/connectors-and-plugins.md`).
-3. Lần đầu Claude mở trang của hệ thống đang test trong trình duyệt của app: bấm cho phép trang, rồi tự đăng nhập (Claude không gõ mật khẩu).
+3. Lần đầu Claude mở trang của hệ thống đang test trong trình duyệt của app: bấm cho phép trang, rồi Claude tự đăng nhập bằng tài khoản test (mật khẩu không hiện ra trong chat).
 
 ## 6. Kiểm tra máy đã sẵn sàng
 ```bash

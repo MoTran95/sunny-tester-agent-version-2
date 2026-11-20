@@ -560,6 +560,9 @@ def render_index(project, exists):
             ev_items.append((f"{names.get(p.parent.name, p.parent.name)}: {p.stem}", p))
         for p in sorted((ev / "features").glob("*/bao-cao.md")):
             ev_items.append((f"Nhật ký khám phá: {names.get(p.parent.name, p.parent.name)}", p.with_suffix(".html")))
+    if (ev / "tai-lieu").exists():   # requirement gốc dạng văn bản (SRS viết từ tài liệu), bằng chứng loại "tài liệu yêu cầu"
+        for p in sorted((ev / "tai-lieu").glob("*.html")):
+            ev_items.append((f"Tài liệu yêu cầu gốc: {p.stem}", p))
     seen, ev_unique = set(), []
     for label, p in ev_items:
         if p not in seen and exists(p):

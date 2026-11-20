@@ -2,7 +2,7 @@
 
 Ngày: YYYY-MM-DD · Hệ thống: <URL> · Phiên bản (ghi ở chân trang/`/api/health`): <x.y.z>
 Khung nhìn: <ví dụ 606×845>. Ảnh: `screenshots/NN-…jpg`. Ảnh nền cũ (nếu có): `<đường dẫn>`.
-Quy tắc: không tự gõ mật khẩu (kể cả sai); các ca cần mật khẩu ghi ở mục 2 và chờ người dùng.
+Quy tắc: tài khoản test thì tự nhập mật khẩu (thật và sai), không ghi mật khẩu vào nhật ký; ca chưa tự làm được ghi ở mục 2 kèm lý do.
 
 ## 0. Bảng phủ (điền khi xong khám phá; lần sau dựa vào đây để biết đã đủ chưa)
 | Nhóm ca | Trạng thái | Hàng nhật ký / lý do |
@@ -31,7 +31,7 @@ Quy tắc: không tự gõ mật khẩu (kể cả sai); các ca cần mật kh�
 - Hàng do **người dùng** thao tác ghi rõ "(người dùng gõ)" và ghi mình xác nhận kết quả bằng cách nào.
 - Số hàng **không đổi** sau khi đã dẫn từ SRS (SRS trỏ "Nhật ký, hàng N"); hàng mới thêm vào cuối.
 
-## 2. Cần người dùng làm (vì phải gõ mật khẩu) — kết quả
+## 2. Cần người dùng làm (ca mình chưa tự làm được) — kết quả
 - A. 
 
 ## 3. Chưa thử / không kiểm tra được

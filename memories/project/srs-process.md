@@ -34,7 +34,7 @@
 
 ## Bẫy
 - Sinh bảng MD bằng script: escape `|` **từng ô**, không escape cả dòng. Kiểm số cột từng dòng bằng file script (không heredoc `python -`, regex bị méo).
-- Phối hợp mật khẩu: mình điền ô tên đăng nhập, người dùng gõ mật khẩu + bấm, báo "xong", mình đọc bằng screenshot + Network.
+- Mật khẩu: từ 2026-11-20 mình tự nhập mật khẩu thật và sai của tài khoản test (cách cũ "người dùng gõ" bỏ); đọc kết quả bằng screenshot + Network.
 
 ## Từ người dùng nói lệch
 "SRS" = bước ngay sau khám phá. "Thiết khai" có thể là "thiết kế (test)". "Queue" chưa rõ, hỏi trước khi dùng.

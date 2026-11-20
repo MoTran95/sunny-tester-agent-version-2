@@ -28,7 +28,7 @@ flowchart TD
 | Bước | Việc | Skill | Ra file chính | Bạn phải làm |
 |---|---|---|---|---|
 | 0 | Chuẩn bị máy, chọn dự án | (không cần skill) | `.du-an-hien-tai`, `.env` | Cài phần mềm, điền tài khoản test |
-| 1a | Khám phá hệ thống chưa có tài liệu, viết SRS | `srs-from-website` | `srs/<dự-án>/<tính-năng>.md` | Tự gõ mật khẩu khi được nhờ, trả lời câu hỏi |
+| 1a | Khám phá hệ thống chưa có tài liệu, viết SRS | `srs-from-website` | `srs/<dự-án>/<tính-năng>.md` | Trả lời câu hỏi (mật khẩu tài khoản test do Claude tự nhập) |
 | 1a+ | (Tùy chọn) báo cáo khám phá HTML cho người mới | `feature-exploration-report` | `evidence/<dự-án>/.../*.html` | Không |
 | 1a' | Chuyển tài liệu văn bản thành SRS có mã | `srs-from-website` | `srs/<dự-án>/<tính-năng>.md` | Đưa tài liệu |
 | 1b | Phân tích requirement, soạn câu hỏi BA | `phan-tich-requirement` | `bang-soat-requirement.md`, `cau-hoi-cho-ba.md` | **Gửi câu hỏi cho BA**, mang câu trả lời về |

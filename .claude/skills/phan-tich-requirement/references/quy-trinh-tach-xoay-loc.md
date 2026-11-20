@@ -20,7 +20,7 @@ Tóm tắt bằng lời của mình từ sách *Nền Tảng Tester Thời AI*, 
 | Trùng lặp | Một ý viết ở hai chỗ, dễ lệch khi sửa một chỗ | |
 
 ## 3. Tách
-Chia requirement thành từng đơn vị nhỏ, mỗi đơn vị một mã. Đơn vị nào chứa hai ba ý thì tách tiếp. **Tài liệu đã có mã thì dùng nguyên mã**; chưa có thì gán R1, R2… theo thứ tự xuất hiện.
+Chia requirement thành từng đơn vị nhỏ, mỗi đơn vị một mã. Đơn vị nào chứa hai ba ý thì tách tiếp. **Tài liệu đã có mã thì dùng nguyên mã**; chưa có thì tạo SRS trước để có mã (SKILL.md quy tắc 2); mã tạm R1, R2… chỉ khi người dùng nói rõ không muốn SRS.
 
 ## 4. Xoay sáu nút (chỉ chức năng)
 Với mỗi đơn vị, hỏi "Nếu như…?" qua sáu nút. Nút nào không liên quan thì bỏ, không ép ra câu hỏi.
@@ -63,7 +63,7 @@ Với mỗi đơn vị, hỏi "Nếu như…?" qua sáu nút. Nút nào không l
 
 Ba câu để xếp nhóm: (1) dễ hiểu sai không, sai thì ai bị ảnh hưởng và nặng đến đâu; (2) câu trả lời có làm Dev code khác không; (3) mình có tự tìm được ở chỗ khác không.
 
-**Lưu ý nhóm C:** xem hệ thống chỉ cho biết hệ thống **đang làm gì**, không chứng minh là **đúng**. Nếu hành vi quan sát có vẻ là lỗi (ví dụ màn hình không hiện kết quả mà dữ liệu thì có) thì vẫn phải hỏi BA. Khi tự kiểm tra trên hệ thống thật: chỉ dùng dữ liệu của mình, không làm khóa hệ thống, không gõ mật khẩu thay người dùng (xem `srs-from-website/references/safety-and-collaboration.md`).
+**Lưu ý nhóm C:** xem hệ thống chỉ cho biết hệ thống **đang làm gì**, không chứng minh là **đúng**. Nếu hành vi quan sát có vẻ là lỗi (ví dụ màn hình không hiện kết quả mà dữ liệu thì có) thì vẫn phải hỏi BA. Khi tự kiểm tra trên hệ thống thật: chỉ dùng dữ liệu của mình, không làm khóa hệ thống, chỉ nhập mật khẩu của tài khoản test (xem `srs-from-website/references/safety-and-collaboration.md`).
 
 ## 7. Tính lại số liệu
 Với mọi con số, công thức, ví dụ có số trong requirement: viết script Python nhỏ (để trong thư mục tạm) tính lại từ chính công thức của tài liệu, so với số tài liệu ghi.

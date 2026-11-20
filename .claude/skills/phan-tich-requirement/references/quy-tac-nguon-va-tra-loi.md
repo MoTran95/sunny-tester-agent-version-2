@@ -20,7 +20,7 @@ Không dùng kiến thức chung để thêm quy tắc nghiệp vụ, quy địn
 
 ## 3. Mã requirement
 - Dùng nguyên mã sẵn có. Không đổi, không đánh số lại.
-- Chỉ gán mã tạm R1, R2… khi tài liệu chưa có mã, theo thứ tự xuất hiện, và ghi chú đó là mã tạm.
+- Tài liệu chưa có mã: tự chuyển thành SRS trước (SKILL.md quy tắc 2). Chỉ gán mã tạm R1, R2… khi người dùng nói rõ không muốn SRS, theo thứ tự xuất hiện, và ghi chú đó là mã tạm.
 - Mỗi mã requirement phải có mặt ít nhất một lần trong bảng soát hoặc phụ lục. Dùng `--ma` của script để kiểm.
 
 ## 4. Ghi câu trả lời `TL-xx`

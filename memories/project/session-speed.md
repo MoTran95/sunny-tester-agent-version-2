@@ -24,7 +24,7 @@
 - Mô hình sinh ra 100–500 nghìn token/phiên nặng (xem số đo loại trùng ở trên); phần nhìn thấy được chủ yếu là **script Python viết một lần rồi bỏ** (30–46 KB: `build_analysis.py`, `cap-nhat-tl.py`, `gen_tc.py`) và đọc lại file lớn (bảng soát 73 KB đọc 8 lần/phiên).
 - Đã làm: `truy-vet.py tra` (xem `project/truy-vet-requirement.md`) và `phan-tich-requirement/scripts/ghi-tl.py` (xem `project/skills.md`). **Chưa đo trên phiên thật**: mốc cũ phiên ghi 5 TL = 31 phút, 142 nghìn token sinh ra, 4 script viết mới (~86 KB).
 - Đã làm (2026-11-18, chưa đo trên phiên thật): **cổng khám phá** (đã có nhật ký thì không khám phá lại; xem `project/srs-process.md`) + **mục 0 "Bảng phủ"** trong nhật ký khám phá + `srs-from-website/scripts/kiem-tra-bang-phu.py` (ĐỦ / CÒN THIẾU / KHÔNG CÓ); dựng bảng phủ cho các feature đã khám phá (trạng thái từng dự án ở `modules/<slug>/`). Quy tắc "Giữ ngữ cảnh gọn" ở 4 skill. `do-toc-do-phien.py` in lượt gọi/token sinh ra/token đọc lại đã loại trùng.
-- Chưa làm (đề xuất): đoạn JS dò trang + ngân sách ảnh khi khám phá feature mới; đặt `effort` thấp cho skill máy móc (tách skill nhỏ; `context: fork` chỉ cho việc thuần file, không cho khám phá vì cần người dùng gõ mật khẩu); nguồn JSON cho bảng soát + câu hỏi (cần round-trip).
+- Chưa làm (đề xuất): đoạn JS dò trang + ngân sách ảnh khi khám phá feature mới; đặt `effort` thấp cho skill máy móc (tách skill nhỏ; `context: fork` chỉ cho việc thuần file, không cho khám phá vì cần thao tác trên trình duyệt); nguồn JSON cho bảng soát + câu hỏi (cần round-trip).
 
 ## Rủi ro khi sửa
 - Bảng soát: đừng thay câu hỏi bằng mã trần (người dùng chê mã nội bộ); `kiem-tra.py` phải theo.

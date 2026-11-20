@@ -12,12 +12,12 @@ Ngôn ngữ: **tiếng Việt**, câu đầy đủ, dễ hiểu. Khuôn: `assets
 ## Quy tắc không được phá (và vì sao)
 
 1. **Chỉ ghi điều đã nhìn thấy.** Chưa chắc → nhãn `chưa rõ` + câu hỏi cho team. Không kết luận "lỗi" hay "đúng thiết kế" khi chưa có tài liệu nghiệp vụ. *Vì SRS làm nền cho test; một điều bịa sẽ thành test sai.*
-2. **Mật khẩu do người dùng gõ — kể cả mật khẩu sai.** Mình điền sẵn ô mã, người dùng gõ mật khẩu và báo "xong", mình đọc kết quả. Cách làm chi tiết: `references/safety-and-collaboration.md`.
+2. **Tài khoản test: mình tự nhập cả mật khẩu thật lẫn mật khẩu sai** (người dùng dặn lại 2026-11-20), chỉ trên địa chỉ người dùng nêu có nhãn môi trường thử; không in/ghi mật khẩu. Cách làm chi tiết: `references/safety-and-collaboration.md`.
 3. **Không làm khóa hệ thống hay đổi dữ liệu của người khác.** Thao tác lặp có thể kích hoạt giới hạn → **tối đa 3 lần, kiểm tra từng lần, rồi dừng và hỏi.** *Từng làm nhiều lần đăng nhập sai bằng mã "giả" và bị chặn tạm; "dữ liệu giả thì an toàn" là giả định sai.*
 4. **Hỏi trước** khi tạo/sửa dữ liệu thật, tải file, gây SMS/email, hoặc bấm Đăng xuất làm mất phiên của người dùng.
 5. **Mỗi yêu cầu có bằng chứng truy được**, ghi đúng loại (ảnh / quan sát bằng công cụ / tệp giao diện). Không có ảnh thì nói "không có ảnh" và chỉ cách kiểm lại. *Người dùng từng không truy được các mã nguồn viết tắt.*
 6. **Đọc là hiểu**: tiếng Việt thường, không dùng thuật ngữ kiểm thử/viết tắt khó (Given/When/Then, FR/BR, `NK#`…) làm tên cột hay nhãn.
-7. **Khám phá đầy đủ.** Mục "Chưa khám phá" chỉ chứa ca có **lý do thật** (cần người dùng gõ mật khẩu, chờ thời gian, thiếu tài khoản, có thể gây khóa, **bị công cụ chặn**). "Ngại rủi ro nhỏ / hơi lâu / giá trị thấp" không phải lý do. Thao tác bị công cụ chặn → **không đi đường vòng**, ghi vào "Chưa khám phá" kèm lý do (`references/safety-and-collaboration.md` mục 6).
+7. **Khám phá đầy đủ.** Mục "Chưa khám phá" chỉ chứa ca có **lý do thật** (chờ thời gian, thiếu tài khoản, có thể gây khóa, **bị công cụ chặn**). "Ngại rủi ro nhỏ / hơi lâu / giá trị thấp" không phải lý do. Thao tác bị công cụ chặn → **không đi đường vòng**, ghi vào "Chưa khám phá" kèm lý do (`references/safety-and-collaboration.md` mục 6).
 8. **Làm từng bước nhỏ, hỏi khi chưa rõ.** Từ nghe lệch (người dùng nói bằng giọng nói) → hỏi lại nghĩa, không đoán.
 9. **Đã khám phá rồi thì KHÔNG khám phá lại.** Chỉ mở trình duyệt khám phá lại khi **người dùng nói rõ** "khám phá lại" hoặc "feature đã đổi" (và đổi phần nào). Tự thấy "nên kiểm lại cho chắc" không phải lý do. *Người dùng hết token để chạy lại; khám phá là bước tốn nhất (100–400 lượt gọi, hàng chục ảnh).* Cách kiểm xem đã khám phá chưa: bước 2.
 
@@ -41,9 +41,9 @@ File trên ~30 KB mà chỉ cần một phần: tìm bằng Grep rồi đọc đ
 2. **Cổng khám phá — làm trước khi mở trình duyệt.** Tìm bằng Glob/Grep nhật ký đã có: `evidence/<hệ thống>/features/<feature>/bao-cao.md` và `evidence/<hệ thống>/bao-cao-kham-pha.md` (báo cáo tổng, dò theo tên feature).
    - **Đã có và đủ:** chạy `python -X utf8 .claude/skills/srs-from-website/scripts/kiem-tra-bang-phu.py <bao-cao.md>` (in vài dòng). "Đủ" = **mục 0 "Bảng phủ"** của nhật ký không có ô trống, mọi dòng là Đã làm / Không áp dụng / Chưa làm kèm lý do thật. Báo **ĐỦ** → dùng nhật ký + ảnh sẵn có làm nguồn, **không mở trình duyệt**, viết thẳng SRS (bước 4); ca "Chưa làm" đã có lý do thật thì đưa vào "Chưa khám phá" của SRS. Báo **KHÔNG CÓ** (nhật ký cũ chưa có bảng) → dựng bảng từ các hàng sẵn có, không mở trình duyệt. Báo **CÒN THIẾU** (dòng "Chưa có trong nhật ký", ô trống) → ghi `chưa rõ` kèm lý do, rồi **hỏi người dùng** có muốn khám phá thêm phần đó không; không tự khám phá.
    - **Người dùng nói feature đã đổi / yêu cầu khám phá lại:** chỉ khám phá **phần đổi** (hỏi nếu chưa rõ phần nào), lưu vào nhật ký/ảnh mới, không ghi đè bộ cũ.
-   - **Chưa có gì (feature mới):** khám phá theo `references/exploration-checklist.md` — luồng chính, mọi nhánh lỗi, từng vai trò, biên, ngôn ngữ, phiên, Network, tệp giao diện. Ca cần mật khẩu → phối hợp theo `references/safety-and-collaboration.md`.
+   - **Chưa có gì (feature mới):** khám phá theo `references/exploration-checklist.md` — luồng chính, mọi nhánh lỗi, từng vai trò, biên, ngôn ngữ, phiên, Network, tệp giao diện. Ca cần mật khẩu → tự nhập theo `references/safety-and-collaboration.md`.
 3. **Ghi nhật ký gốc ngay trong lúc làm**: `evidence/<hệ thống>/features/<feature>/bao-cao.md` theo `assets/exploration-log-template.md`, **điền mục 0 "Bảng phủ" khi xong** (cổng ở bước 2 đọc bảng này); copy ảnh sang `screenshots/` và đặt tên `NN-<tài-khoản>-<mô-tả>.jpg`. Nhật ký là nguồn sự thật; SRS dẫn tới nó.
-3b. **Khám phá thật xong thì dựng luôn báo cáo khám phá HTML** (vai trò, ảnh khoanh nút, sơ đồ luồng) bằng skill `feature-exploration-report`, từ nhật ký và ảnh vừa có, không mở trình duyệt lại; không chờ người dùng nhắc (người dùng dặn 2026-11-20 sau khi thấy thiếu). Ảnh có chỗ lộ mật khẩu mẫu của hệ thống thì che trước khi nhúng.
+3b. **Khám phá thật xong thì dựng luôn báo cáo khám phá HTML** (vai trò, ảnh khoanh nút, sơ đồ luồng) bằng skill `feature-exploration-report`, từ nhật ký và ảnh vừa có, không mở trình duyệt lại; không chờ người dùng nhắc (người dùng dặn 2026-11-20 sau khi thấy thiếu). Ảnh có chỗ lộ mật khẩu mẫu của hệ thống thì che trước khi nhúng. Khám phá thêm về sau: cập nhật lại báo cáo (quy tắc 8 của skill đó).
 4. **Viết SRS** `srs/<hệ thống>/<feature>.md`: đọc `srs/_template.md` + `srs/id-and-source-rules.md` (nguồn chuẩn), rồi `references/srs-writing-guide.md`. Thứ tự gợi ý: bảng bằng chứng → story + AC → quy tắc dữ liệu/thông báo → câu hỏi cho team → chưa khám phá → lịch sử thay đổi.
 5. **Soát**:
    ```bash
@@ -55,7 +55,7 @@ File trên ~30 KB mà chỉ cần một phần: tìm bằng Grep rồi đọc đ
 7. **Trả lời người dùng** (bắt buộc có link báo cáo khám phá HTML, người dùng dặn 2026-11-20): đưa **một link** `testing/<dự-án>/index.html#tn-<tính-năng>` và nói rõ bấm nút "Báo cáo khám phá (sơ đồ, ảnh khoanh nút)" trong thẻ tính năng; tự mở thử trang tổng trong khung xem trước để chắc nút hiện. File đã tạo (link), điều đã/chưa kiểm tra và lý do, các câu cần họ trả lời, việc họ cần làm tiếp. Nếu lỡ kích hoạt khóa/giới hạn → nói thẳng ở đầu.
 
 ## Chỉ có tài liệu yêu cầu (không khám phá)
-Người dùng đưa requirement dạng văn bản chưa có mã (Word, PDF, ticket, đoạn dán) và cần mã cố định cho bảng soát, test case, truy vết. **Không mở trình duyệt.** Làm theo `srs/id-and-source-rules.md` mục 2e: lưu bản gốc vào `evidence/<hệ thống>/tai-lieu/`; viết SRS theo khuôn, mỗi ý của tài liệu một AC/quy tắc/thông báo, **chép đúng câu chữ**, nhãn `theo tài liệu`; chỗ tài liệu không rõ → `chưa rõ` + Q (không tự điền); bằng chứng là một dòng E loại `tài liệu yêu cầu` trỏ tới bản gốc. Rồi soát bằng `check-srs.py --them-neo` như bước 5. Xong thì đề nghị bước tiếp là `phan-tich-requirement` trên chính SRS này.
+Người dùng đưa requirement dạng văn bản chưa có mã (Word, PDF, ticket, đoạn dán) và cần mã cố định cho bảng soát, test case, truy vết. **Không mở trình duyệt.** Làm theo `srs/id-and-source-rules.md` mục 2e: lưu bản gốc vào `evidence/<hệ thống>/tai-lieu/`; viết SRS theo khuôn, mỗi ý của tài liệu một AC/quy tắc/thông báo, **chép đúng câu chữ**, nhãn `theo tài liệu`; chỗ tài liệu không rõ → `chưa rõ` + Q (không tự điền); bằng chứng là một dòng E loại `tài liệu yêu cầu` trỏ tới bản gốc. Rồi soát bằng `check-srs.py --them-neo` như bước 5. Xong thì đề nghị bước tiếp là `phan-tich-requirement` trên chính SRS này; nếu đang được gọi từ `phan-tich-requirement` (người dùng nhờ phân tích mà chưa có SRS) thì làm tiếp phân tích luôn, không hỏi.
 
 ## Cập nhật SRS khi feature đổi
 Chỉ khi người dùng nói feature đã đổi. Sửa **tại chỗ**, giữ ID, thêm dòng ở "Lịch sử thay đổi"; khám phá lại **chỉ phần đổi** vào **bộ ảnh/nhật ký mới** (không ghi đè). Đổi ý nghĩa → ID mới, mục cũ `đã bỏ`. Chi tiết: `references/srs-writing-guide.md` mục 6.
@@ -69,7 +69,7 @@ Chỉ khi người dùng nói feature đã đổi. Sửa **tại chỗ**, giữ 
 
 ## Tệp trong skill
 - `references/exploration-checklist.md` — ba loại bằng chứng, kỹ thuật dùng được (Network, tệp giao diện, DOM), ca cần phủ, khi nào được ghi "chưa khám phá".
-- `references/safety-and-collaboration.md` — mật khẩu, giới hạn 3 lần, hỏi trước, trung thực khi báo cáo.
+- `references/safety-and-collaboration.md` — mật khẩu (tự nhập tài khoản test), giới hạn 3 lần, hỏi trước, trung thực khi báo cáo.
 - `references/srs-writing-guide.md` — cách viết AC, văn phong, bằng chứng, cập nhật, số liệu khớp.
 - `assets/exploration-log-template.md` — khuôn nhật ký khám phá.
 - `scripts/check-srs.py` — soát SRS.

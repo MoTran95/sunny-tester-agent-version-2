@@ -11,13 +11,13 @@ Tiếng Việt với người dùng; tên hàm, biến, khóa JSON, lệnh trong
 1. **Viết script ca một lần, chạy lại 0 token.** Ghi lượt, sinh trang, kiểm đều do chương trình; AI chỉ viết script ca, kết luận và bug.
 2. **Chỉ kết luận Đạt/Không đạt khi script chạy trọn.** Script lỗi, chờ quá hạn, phiên hết hạn, điều kiện trước sai, bị bộ đếm từ chối → `Không kết luận`, không bao giờ "Không đạt giả".
 3. **Chỉ tin điều đã quan sát**, không tin quy tắc BA khi thiết kế cơ chế an toàn (bài học bộ đếm nhập sai).
-4. **Không làm hệ thống đang test hỏng:** không chạm ngưỡng chặn, không tạo dữ liệu thật khi chưa được cho phép rõ (hỏi, dừng, không đi đường vòng).
+4. **Không làm hệ thống đang test hỏng:** không chạm ngưỡng chặn, không tạo dữ liệu thật khi chưa được cho phép rõ (hỏi, dừng, không đi đường vòng). **Ngoài hai điều có nguy cơ (khóa tài khoản, sửa dữ liệu người khác) thì tự làm, không hỏi lại**; ca cần ngưỡng chưa có thì bỏ qua, ghi "Chưa làm" kèm lý do.
 5. **Trang HTML là sản phẩm tự sinh, không sửa tay.** Sửa nguồn (md, JSON, bug md) rồi `python -X utf8 scripts/build_docs.py --all`.
 
 ## Giữ token thấp (bắt buộc)
 - Đọc đúng ca cần: `python -X utf8 scripts/truy-vet.py tra <dự-án> <tính-năng> --ma TC-xxx --day-du`; không mở cả `test-case.md`.
 - Chạy lệnh rồi chỉ đọc phần cuối (`| tail`, `| grep "^|\|Tổng"`); không đọc cả log, không dán JSON kết quả vào chat.
-- Xem ảnh (`Read`) chỉ khi kết quả bất ngờ hoặc cần kiểm khung tô; không xem ảnh ca Đạt.
+- Xem ảnh (`Read`) chỉ khi kết quả bất ngờ hoặc cần kiểm khung tô; không xem ảnh ca Đạt. **Luôn lưu ảnh/video cho mọi ca (kể cả Đạt) để người dùng kiểm lại: `references/quy-tac-da-chot.md` mục 7.**
 - Chạy nhóm nhỏ bằng `--case-id`; chạy lại chỉ ca lỗi; không chạy cả bộ "để thử".
 - Ca cùng nhóm dùng chung một file hàm (như `login_common.py`); script ca dựng từ `assets/mau-ca-tu-dong.py`.
 - Kết luận, rủi ro, câu hỏi cho Dev viết **một lần** vào file; trang web sinh từ file đó, không viết lại mỗi lần.

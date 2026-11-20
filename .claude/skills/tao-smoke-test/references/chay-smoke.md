@@ -13,7 +13,9 @@
 3. Ghi lượt: `python -X utf8 scripts/build_report.py add-run --project <slug> --build "<số bản>" --results-files <result-*.json> --status "N=Đạt kèm lỗi đã biết" --bug "N=BUG-nnn" --note "<câu đầy đủ: môi trường, bản, ngày, case nào không kết luận và vì sao>" --conclusion-file <kết-luận.json>` (phần Kết luận và rủi ro **bắt buộc** cho lượt smoke từ 2026-11-19, khuôn ở `chay-test-tu-dong/references/quy-tac-da-chot.md`; thiếu thì không ghi lượt) (N = cột # của bảng smoke). Ca ra `Không kết luận` giữ nguyên, không ép thành Đạt.
 4. Sinh trang: `python -X utf8 scripts/build_docs.py --all`; báo người dùng link `smoke-ket-qua.html`.
 
-## Cách B: chưa có script (chạy tay, AI không gõ mật khẩu)
+## Cách B: chưa có script (chạy tay; tài khoản test thì tự nhập mật khẩu, không in ra)
+**Evidence bắt buộc (2026-11-20):** lượt smoke chính thức phải có ảnh/video cho từng case, kể cả Đạt (`chay-test-tu-dong` mục 7). Cách B (chạy tay bằng trình duyệt tích hợp) không lưu được ảnh vào repo nên chỉ để thăm dò; muốn ghi lượt thì viết script `auto/` và chạy Cách A.
+
 1. Đọc case gốc một lần: `python -X utf8 scripts/truy-vet.py tra <dự-án> <tính-năng> --ma TC-005 --day-du`. Chỉ cần đạt các bước ở cột "Đạt khi" của bảng tiêu chí.
 2. Đọc kết quả bằng văn bản trang trước; chụp ảnh chỉ khi Không đạt hoặc cần bằng chứng.
 3. Chấm theo ý chính: `Đạt`; `Đạt kèm lỗi đã biết` (chỉ khi tiêu chí ghi ngoại lệ cho đúng case và ý được miễn); `Không đạt`; `Bị chặn` (không chạy được vì lý do ngoài case). Ý phụ lệch chỉ ghi nhận.

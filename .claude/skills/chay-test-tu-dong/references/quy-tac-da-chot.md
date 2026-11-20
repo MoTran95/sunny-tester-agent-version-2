@@ -10,6 +10,7 @@ Mỗi dòng là điều người dùng đã xác nhận hoặc bài học đã t
 
 ## 2. Đăng nhập và mật khẩu
 - Chỉ nhập tài khoản test của dự án vào địa chỉ **do người dùng nêu và có nhãn môi trường thử** (staging, dev, test, qa, sandbox, preview). Địa chỉ khác → không nhập, nhờ người dùng tự chạy `auto_login.py`.
+- **Mình tự nhập được cả mật khẩu thật lẫn mật khẩu sai của tài khoản test** (người dùng dặn lại 2026-11-20), trong giới hạn địa chỉ ở trên; không bao giờ in/ghi lại.
 - Mật khẩu chỉ nằm trong `.env`; chỉ thư viện đọc. Script ca, kết quả, ảnh, bug, chat **không bao giờ** chứa mật khẩu; mật khẩu sai dùng chữ giả (`Sai@Matkhau1`). `ctx.sign_in(tài khoản)` và `ctx.submit_login(..., password_of=…, variant=…)` để script không thấy mật khẩu.
 - Phiên sống ngắn (thời hạn khai ở `session_minutes` của dự án): runner kiểm phiên đầu lượt (thoát mã 3 nếu hết). Đăng xuất làm mất phiên phía máy chủ → khai `invalidates_sessions` hoặc dùng `ctx.sign_in` riêng cho ca đó (mỗi lần đăng nhập là phiên riêng).
 
@@ -47,3 +48,9 @@ Lượt theo tính năng chỉ được ghi khi `add-run` kiểm đạt (code, k
 - Windows: chạy Python kèm `-X utf8`; Git Bash đổi `/duong-dan` thành `C:/Program Files/Git/…` (dùng PowerShell hoặc `MSYS_NO_PATHCONV=1`); heredoc làm méo dấu `\` (viết file bằng công cụ Write).
 - Đổi tên hàng loạt: chạy selftest (từng bắt lỗi tên dùng dạng chuỗi, tham số che tên hàm, cờ lệnh lệch tên).
 - Hệ thống mới có thể đổi địa chỉ/bản: kiểm `/api/health` và số bản ở `auto-data.json` trước khi chạy.
+
+## 7. Evidence bắt buộc (người dùng dặn 2026-11-20)
+- **Mọi ca có kết luận đều phải có evidence để người dùng tự kiểm lại**, kể cả ca Đạt và lượt chạy tay: ảnh (ca Đạt có ảnh xanh theo `mark_text`), video nếu có, ghi trong file kết quả (`images`, `videos`) và hiện trên trang kết quả. Chỉ ghi chữ "đã quan sát" thì **không** coi là đủ: không ghi lượt.
+- "Chỉ xem ảnh khi Không đạt" ở mục giữ token là việc **AI đọc** ảnh; không liên quan việc lưu ảnh. Luôn lưu, đừng luôn xem.
+- Trình duyệt tích hợp của app chỉ trả ảnh cho AI, không lưu ra repo: muốn có evidence thì chạy bằng script Playwright của repo (`run_tests.py`). Chạy tay chỉ để khám phá, không dùng để ghi lượt chính thức; ngoại lệ phải ghi rõ trong ghi chú lượt và người dùng đồng ý.
+- Ảnh có mật khẩu mẫu hiện trên trang (khung tài khoản mẫu) phải che trước khi lưu; không có cách che được thì chụp vùng không chứa mật khẩu hoặc dùng ảnh sau khi đăng nhập.

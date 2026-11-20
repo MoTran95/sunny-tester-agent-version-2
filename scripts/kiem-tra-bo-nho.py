@@ -21,7 +21,7 @@ MEM = os.path.join(ROOT, "memories")
 CỐT_LOI = [
     ("user/working-preferences.md", "tiếng Việt", "giao tiếp tiếng Việt"),
     ("user/working-preferences.md", "Không hỏi lại điều đã có câu trả lời", "cách đặt câu hỏi: đủ ngữ cảnh, có lựa chọn, không hỏi lại"),
-    ("user/working-preferences.md", "Không gõ mật khẩu", "không gõ mật khẩu"),
+    ("user/working-preferences.md", "tự nhập cả mật khẩu thật lẫn mật khẩu sai", "tài khoản test thì tự nhập mật khẩu thật và sai, không in/ghi"),
     ("user/working-preferences.md", "không tự đặt con số", "số lần nhập sai do requirement hoặc người test chốt, không tự đặt"),
     ("user/working-preferences.md", "Commit/push chỉ khi người dùng nhờ", "commit khi được nhờ"),
     ("user/working-preferences.md", "hỏi, không suy diễn", "hỏi không suy diễn"),

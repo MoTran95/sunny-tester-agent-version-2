@@ -38,7 +38,7 @@ Mỗi nhóm dưới đây là một dòng trong **mục 0 "Bảng phủ"** của
 
 ## 4. Khi nào được ghi vào mục "Chưa khám phá"
 Chỉ khi có **lý do thật**, ghi kèm lý do:
-- cần **người dùng gõ mật khẩu** mà họ chưa làm / chưa đồng ý;
+- cần nhập mật khẩu của tài khoản mà người dùng **chưa cung cấp**;
 - cần **chờ thời gian** dài (hết hạn phiên) hoặc **trình duyệt/máy thứ hai**;
 - thiếu **tài khoản/dữ liệu** (ví dụ chưa có mật khẩu của một vai trò);
 - **có thể khóa hệ thống / đổi dữ liệu của người khác** → làm tối đa 3 lần rồi hỏi (xem `safety-and-collaboration.md`);

@@ -47,7 +47,7 @@ Trang này để bạn xem lại khi quên. Bạn không cần nhớ tên skill 
 
 | Bước | Việc | Nói với Claude | Bạn cần làm |
 |---|---|---|---|
-| 1 | Hiểu requirement | Có tài liệu: "Phân tích requirement file <đường dẫn>". Tài liệu chỉ là văn bản, chưa có mã: "Chuyển tài liệu yêu cầu này thành SRS". Chưa có tài liệu: "Khám phá tính năng X trên <địa chỉ staging> rồi viết SRS" | Gửi câu hỏi Claude soạn cho BA; BA trả lời thì dán lại: "Ghi câu trả lời BA cho tính năng X. A1: …" |
+| 1 | Hiểu requirement | Có tài liệu (kể cả văn bản chưa có mã, hoặc đã có báo cáo khám phá): "Phân tích requirement file <đường dẫn>". Chưa có SRS thì Claude tự tạo SRS trước để có mã cố định, rồi phân tích luôn; bạn không cần chọn. Chưa có tài liệu: "Khám phá tính năng X trên <địa chỉ staging> rồi viết SRS" | Gửi câu hỏi Claude soạn cho BA; BA trả lời thì dán lại: "Ghi câu trả lời BA cho tính năng X. A1: …" |
 | 2 | Lập test plan | "Lập test plan cho build 1.2.3". Sau bước 4: "Cập nhật test plan" để điền số test case, smoke, regression | Điền phiếu: ngưỡng tiêu chí, tên người, ngày (Claude không tự đặt) |
 | 3 | Viết test case | "Viết test case cho tính năng X" | Duyệt danh sách tình huống Claude in trong chat (gật hoặc sửa) |
 | 4 | Chọn bộ smoke, regression | "Đề xuất bộ smoke test", "Đề xuất regression cho release note này: …" | Chốt các case Claude hỏi |
